@@ -38,6 +38,12 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * changes to the second screen
+     * @param veiw The veiw where this is called from (unused)
+     *
+     *
+     */
     public void changeToScreen2 (View veiw){
         Intent intent = new Intent(this, SecondScreenActivity.class);
         startActivity(intent);
