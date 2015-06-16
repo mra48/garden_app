@@ -2,11 +2,17 @@ package com.cs1530_group1.gardenapp;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    //Log tag, for logging errors
+    private static final String LOG_TAG = "Main Activity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,5 +40,27 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * This is to launch the activity that views all the Species as a ListView
+     *
+     * @param view
+     */
+    public void startSpeciesListActivity(View view){
+        Log.e(LOG_TAG, "startSpeciesListActivity is not yet implemented");
+        Toast.makeText(getApplicationContext(), "This feature is not yet implemented", Toast.LENGTH_SHORT).show();
+
+    }
+
+    /**
+     * This method is called upon a button click from the activity_main screen, and is to launch
+     * the view of the garden.
+     *
+     * @param view
+     */
+    public void startGardenViewActivity(View view){
+        Log.e(LOG_TAG, "startGardenViewActivity is not yet implemented");
+        Toast.makeText(getApplicationContext(), "This feature is not yet implemented", Toast.LENGTH_SHORT).show();
     }
 }
