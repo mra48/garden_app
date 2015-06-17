@@ -6,4 +6,5 @@
     <string name="species_list_activity_button">View Species List</string>
     <string name="garden_view_activity_button">View Garden</string>
     <string name="title_activity_species_list">SpeciesListActivity</string>
+    <string name="filler_text">this is filler text</string>
 </resources>

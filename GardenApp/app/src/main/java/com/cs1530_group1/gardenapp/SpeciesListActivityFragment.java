@@ -2,6 +2,7 @@ package com.cs1530_group1.gardenapp;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,18 +10,23 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
 /**
- * A placeholder fragment containing a simple view.
+ * The Activity Fragment that creates a ListView of all the species.
+ * @author Charles Smith <cas275@pitt.ecu>
  */
 public class SpeciesListActivityFragment extends Fragment {
 
-    ArrayAdapter adapter;
+    private ArrayAdapter adapter; //this is needed to populate the listview
+    private static final String LOG_TAG = "SpeciesListActivityF..."; //for when something needs logged.
 
     public SpeciesListActivityFragment() {
+        //nothing here!
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,20 +36,30 @@ public class SpeciesListActivityFragment extends Fragment {
 
         //TODO replace this
         //fake data is to be used only until the real data is loaded.
+        Log.w(LOG_TAG, "many features are missing and/or populated with fake data");
+
         String[] fakeData = {
                 "Tomato",
                 "Mint",
                 "Red flower",
                 "Trees",
                 "Medicinal herbs",
+                "Another kind of Tree",
+                "That yellow one nobody likes",
+                "Smaller Tomatoes",
+                "Cherry Tomatoes",
+                "Smaller Cherry Tomatoes",
+                "Another item so the fake data scrolls on my large screen",
+                "Are computers a kind of plant?",
+                "What about Android phones?",
+                "Really, they're not?",
+                "Huh, TIL",
                 "Money tree"
         };
 
-        ArrayList<String> fakeDataList = new ArrayList<String>();
+        ArrayList<String> fakeDataList = new ArrayList<>();
         //data needs to be in a list, I only made a string[] to make creating the fake data a little easier
-        for(String s:fakeData){
-            fakeDataList.add(s);
-        }
+        Collections.addAll(fakeDataList, fakeData);
 
         adapter = new ArrayAdapter(getActivity(), R.layout.species_list_textview, R.id.list_item_species_textview,fakeDataList);
 
@@ -54,4 +70,6 @@ public class SpeciesListActivityFragment extends Fragment {
 
         return rootView;
     }
+
+    //TODO create an async task to get the species list and have it update the list upon completion
 }
