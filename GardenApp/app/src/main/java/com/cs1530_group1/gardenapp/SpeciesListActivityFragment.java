@@ -6,8 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -66,6 +68,22 @@ public class SpeciesListActivityFragment extends Fragment {
         ListView speciesList = (ListView) rootView.findViewById(R.id.listview_species);
 
         speciesList.setAdapter(adapter);
+        Log.d(LOG_TAG, "populated list with fake data");
+
+        //kinda gross but i'm makeing a class inside an argument
+        speciesList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            /**
+             * is called upon a click in the speciesList
+             */
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //todo make this bring up a dialog box
+                //for now it's just going to be a toast to see if it was clicked
+                Toast.makeText(getActivity(), (String) adapter.getItem(position), Toast.LENGTH_SHORT).show();
+                Log.v(LOG_TAG, "*click*");
+            }
+        });
 
 
         return rootView;
