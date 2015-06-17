@@ -1,5 +1,6 @@
 package com.cs1530_group1.gardenapp;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 
+@SuppressWarnings("deprecation")
 public class MainActivity extends ActionBarActivity {
 
     //Log tag, for logging errors
@@ -45,19 +47,25 @@ public class MainActivity extends ActionBarActivity {
     /**
      * This is to launch the activity that views all the Species as a ListView
      *
-     * @param view
+     * @param view the view that called this method (currently unused)
      */
     public void startSpeciesListActivity(View view){
+
+        Log.v(LOG_TAG, "Starting SpeciesListActivity");
+        Intent intent = new Intent(this, SpeciesListActivity.class);
+        startActivity(intent);
+
+        /*
         Log.e(LOG_TAG, "startSpeciesListActivity is not yet implemented");
         Toast.makeText(getApplicationContext(), "This feature is not yet implemented", Toast.LENGTH_SHORT).show();
-
+        */
     }
 
     /**
      * This method is called upon a button click from the activity_main screen, and is to launch
      * the view of the garden.
      *
-     * @param view
+     * @param view the view that called this method (currently unused)
      */
     public void startGardenViewActivity(View view){
         Log.e(LOG_TAG, "startGardenViewActivity is not yet implemented");

@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+@SuppressWarnings("deprecation")
 public class SpeciesListActivity extends ActionBarActivity {
 
     @Override
