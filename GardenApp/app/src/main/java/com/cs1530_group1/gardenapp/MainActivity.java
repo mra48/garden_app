@@ -1,4 +1,5 @@
 package com.cs1530_group1.gardenapp;
+<<<<<<< HEAD
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -54,6 +55,7 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+
     }
 
     /**
