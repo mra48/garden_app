@@ -1,5 +1,5 @@
 package com.cs1530_group1.gardenapp;
-<<<<<<< HEAD
+
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -84,5 +84,6 @@ public class MainActivity extends ActionBarActivity {
     public void startGardenViewActivity(View view){
         Log.e(LOG_TAG, "startGardenViewActivity is not yet implemented");
         Toast.makeText(getApplicationContext(), "This feature is not yet implemented", Toast.LENGTH_SHORT).show();
+
     }
 }
