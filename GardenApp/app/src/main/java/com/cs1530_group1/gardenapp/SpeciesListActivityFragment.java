@@ -22,7 +22,7 @@ import java.util.Collections;
  */
 public class SpeciesListActivityFragment extends Fragment {
 
-    private ArrayAdapter adapter; //this is needed to populate the listview
+    private ArrayAdapter<String> adapter; //this is needed to populate the listview
     private static final String LOG_TAG = "SpeciesListActivityF..."; //for when something needs logged.
 
     public SpeciesListActivityFragment() {
@@ -36,42 +36,19 @@ public class SpeciesListActivityFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_species_list, container, false);
 
 
-        //TODO replace this
-        //fake data is to be used only until the real data is loaded.
-        Log.w(LOG_TAG, "many features are missing and/or populated with fake data");
-        /*
-        String[] fakeData = {
-                "Tomato",
-                "Mint",
-                "Red flower",
-                "Trees",
-                "Medicinal herbs",
-                "Another kind of Tree",
-                "That yellow one nobody likes",
-                "Smaller Tomatoes",
-                "Cherry Tomatoes",
-                "Smaller Cherry Tomatoes",
-                "Another item so the fake data scrolls on my large screen",
-                "Are computers a kind of plant?",
-                "What about Android phones?",
-                "Really, they're not?",
-                "Huh, TIL",
-                "Money tree"
-        };
-        */
-
+        /* getting the String[] of all species */
         String[] gardenSpeciesList;
         App app = (App) getActivity().getApplicationContext();
-        gardenSpeciesList = app.getGarden().ListSpecies();
-
+        Garden garden = app.getGarden();
+        gardenSpeciesList = garden.ListSpecies();
 
 
 
         ArrayList<String> dataList = new ArrayList<>();
-        //data needs to be in a list, I only made a string[] to make creating the fake data a little easier
+        //data needs to be in a list
         Collections.addAll(dataList, gardenSpeciesList);
 
-        adapter = new ArrayAdapter(getActivity(), R.layout.species_list_textview, R.id.list_item_species_textview,dataList);
+        adapter = new ArrayAdapter<>(getActivity(), R.layout.species_list_textview, R.id.list_item_species_textview,dataList);
 
 
         ListView speciesList = (ListView) rootView.findViewById(R.id.listview_species);
@@ -79,7 +56,9 @@ public class SpeciesListActivityFragment extends Fragment {
         speciesList.setAdapter(adapter);
         Log.d(LOG_TAG, "populated list with fake data");
 
-        //kinda gross but i'm makeing a class inside an argument
+
+        //kinda gross but i'm making a class inside an argument
+        //this is appears to be standard practice to do this, so I may be crazy, but so is everyone else
         speciesList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             @Override
@@ -89,7 +68,7 @@ public class SpeciesListActivityFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //todo make this bring up a dialog box
                 //for now it's just going to be a toast to see if it was clicked
-                Toast.makeText(getActivity(), (String) adapter.getItem(position), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),  adapter.getItem(position), Toast.LENGTH_SHORT).show();
                 Log.v(LOG_TAG, "*click*");
             }
         });
@@ -98,5 +77,5 @@ public class SpeciesListActivityFragment extends Fragment {
         return rootView;
     }
 
-    //TODO create an async task to get the species list and have it update the list upon completion
+
 }

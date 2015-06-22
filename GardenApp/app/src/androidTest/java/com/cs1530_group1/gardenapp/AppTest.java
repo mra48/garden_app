@@ -5,7 +5,7 @@ import android.test.suitebuilder.annotation.SmallTest;
 import junit.framework.TestCase;
 
 /**
- * Created by cas on 6/22/15.
+ * @author Charles Smith <cas275@pitt.edu>
  */
 public class AppTest extends TestCase {
 
