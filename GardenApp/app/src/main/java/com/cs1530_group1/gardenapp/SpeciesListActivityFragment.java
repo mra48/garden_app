@@ -39,7 +39,7 @@ public class SpeciesListActivityFragment extends Fragment {
         //TODO replace this
         //fake data is to be used only until the real data is loaded.
         Log.w(LOG_TAG, "many features are missing and/or populated with fake data");
-
+        /*
         String[] fakeData = {
                 "Tomato",
                 "Mint",
@@ -58,14 +58,18 @@ public class SpeciesListActivityFragment extends Fragment {
                 "Huh, TIL",
                 "Money tree"
         };
+        */
 
+        String[] gardenSpeciesList;
+        App app = (App) getActivity().getApplicationContext();
+        gardenSpeciesList = app.getGarden().ListSpecies();
 
 
 
 
         ArrayList<String> dataList = new ArrayList<>();
         //data needs to be in a list, I only made a string[] to make creating the fake data a little easier
-        Collections.addAll(dataList, fakeData);
+        Collections.addAll(dataList, gardenSpeciesList);
 
         adapter = new ArrayAdapter(getActivity(), R.layout.species_list_textview, R.id.list_item_species_textview,dataList);
 

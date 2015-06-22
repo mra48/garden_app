@@ -20,6 +20,18 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //here seems like a good place to create the garden
+        App app = (App)getApplication();
+
+        //todo replace this with a call to storage to get the saved garden/create a new one
+        //start fake data
+        String gardenString = "2:tomato:half:23:44:1234:sunflower:full:34:54:1245:1:2:3:sunflower";
+        //end fake data
+
+        Garden garden = new Garden();
+        garden.StringToGarden(gardenString);
+        app.setGarden(garden);
     }
 
     @Override
