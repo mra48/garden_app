@@ -59,11 +59,11 @@ public class SpeciesListActivityFragment extends Fragment {
                 "Money tree"
         };
 
-        ArrayList<String> fakeDataList = new ArrayList<>();
+        ArrayList<String> dataList = new ArrayList<>();
         //data needs to be in a list, I only made a string[] to make creating the fake data a little easier
-        Collections.addAll(fakeDataList, fakeData);
+        Collections.addAll(dataList, fakeData);
 
-        adapter = new ArrayAdapter(getActivity(), R.layout.species_list_textview, R.id.list_item_species_textview,fakeDataList);
+        adapter = new ArrayAdapter(getActivity(), R.layout.species_list_textview, R.id.list_item_species_textview,dataList);
 
         ListView speciesList = (ListView) rootView.findViewById(R.id.listview_species);
 
