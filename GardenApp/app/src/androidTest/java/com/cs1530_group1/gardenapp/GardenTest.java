@@ -5,13 +5,16 @@ package com.cs1530_group1.gardenapp;/*
  */
 
 import android.test.suitebuilder.annotation.SmallTest;
+import android.util.Log;
 
 import junit.framework.TestCase;
 
 //import org.junit.Test;
 //import static org.junit.Assert.*;
 
-import junit.framework.*;
+import junit.*;
+
+
 
 /**
  *
@@ -25,7 +28,7 @@ public class GardenTest extends TestCase{
      */
     @SmallTest
     public void testGardenToString() {
-        System.out.println("GardenToString");
+        //System.out.println("GardenToString");
         String arg = "2:tomato:half:23:44:1234:sunflower:full:34:54:1245:1:2:3:sunflower";
         Garden instance = new Garden();
         String expResult = arg;
@@ -39,7 +42,7 @@ public class GardenTest extends TestCase{
      */
     @SmallTest
     public void testStringToGarden() {
-        System.out.println("StringToGarden");
+        //System.out.println("StringToGarden");
         String garden = "";
         Garden instance = new Garden();
         boolean expResult = true;
@@ -52,12 +55,13 @@ public class GardenTest extends TestCase{
      */
     @SmallTest
     public void testListSpecies() {
-        System.out.println("ListSpecies");
+        //System.out.println("ListSpecies");
         Garden instance = new Garden();
         instance.StringToGarden("2:tomato:half:23:44:1234:sunflower:full:34:54:1245:1:2:3:sunflower");
         String[] expResult = {"tomato", "sunflower"};
         String[] result = instance.ListSpecies();
-        assertTrue(expResult.equals(result));
+        for(int i = 0; i<expResult.length; i++)
+            assertEquals(expResult[i],result[i]);
     }
 
     /**
@@ -65,7 +69,7 @@ public class GardenTest extends TestCase{
      */
     @SmallTest
     public void testGetSpeciesInfo() {
-        System.out.println("GetSpeciesInfo");
+        //System.out.println("GetSpeciesInfo");
         String species = "tomato";
         Garden instance = new Garden();
         instance.StringToGarden("2:tomato:half:23:44:1234:sunflower:full:34:54:1245:1:2:3:sunflower");
@@ -79,7 +83,7 @@ public class GardenTest extends TestCase{
      */
     @SmallTest
     public void testHasPlant_Plant() {
-        System.out.println("HasPlant");
+        //System.out.println("HasPlant");
         Species s = new Species("sunflower", "full", 34, 54, 1245);
         Plant p = new Plant(2,3,s);
         Garden instance = new Garden();
@@ -94,7 +98,7 @@ public class GardenTest extends TestCase{
      */
     @SmallTest
     public void testHasPlant_int_int() {
-        System.out.println("HasPlant");
+        //System.out.println("HasPlant");
         int x = 0;
         int y = 0;
         Garden instance = new Garden();
