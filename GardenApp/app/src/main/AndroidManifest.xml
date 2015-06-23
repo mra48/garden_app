@@ -10,6 +10,11 @@
         android:name="com.cs1530_group1.gardenapp.App">
         <activity
             android:name=".GardenDrawingActivity"
+            android:label="GardenDrawingActivity" >
+
+        </activity>
+        <activity
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
