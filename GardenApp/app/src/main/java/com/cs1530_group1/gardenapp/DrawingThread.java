@@ -1,14 +1,12 @@
 package com.cs1530_group1.gardenapp;
 import android.graphics.Canvas;
 
-/**
- * Created by root on 6/13/15.
- */
-public class GameLoopThread extends Thread {
-    private GameView view;
+
+public class DrawingThread extends Thread {
+    private GardenView view;
     private boolean running = false;
 
-    public GameLoopThread(GameView v)
+    public DrawingThread(GardenView v)
     {
         this.view = v;
     }
