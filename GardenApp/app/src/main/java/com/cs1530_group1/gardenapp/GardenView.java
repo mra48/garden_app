@@ -94,6 +94,40 @@ public class GardenView extends SurfaceView {
     }
 
     /**
+     *
+     * @param delta : the change in position from finger down to finger up (change in x or
+     *              change in y but you must be consistent with the other parameters!)
+     * @param background_pos : the current background position ( x or
+     *              y but you must be consistent with the other parameters!)
+     * @param background_limit : width or height of the background bitmap -- width for x and
+     *                         change in x, height for y and change in y
+     * @param view_limit : width or height of the SurfaceView -- width for x and
+     *                         change in x, height for y and change in y
+     * @return : the amount that the background and all the circles need to move (x or y) based
+     * on the parameters that were passed
+     */
+    protected static int getBackgroundChange(int delta, int background_pos, int background_limit, int view_limit)
+    {
+        int bmp_temp = background_pos + delta;
+
+        // The top left corner is being dragged too far right, which would expose the
+        // blank background -- have to prevent this
+        if (bmp_temp > 0) {
+            return -1 * background_pos;
+        }
+        // Makes sure they cannot drag the image completely off to the left
+        // There will always be background image on the screen
+        else if (bmp_temp < -background_limit + view_limit) {
+
+            return (-background_limit + view_limit - background_pos);
+        }
+        // The happy case
+        else {
+            return delta;
+        }
+    }
+
+    /**
      * GardenHolderCallback : implements SurfaceHolder.Callback. Needed to stop and start the
      * DrawingThread.
      */
@@ -138,7 +172,7 @@ public class GardenView extends SurfaceView {
      * GardenTouchListener : implements OnTouchListener interface. Detects taps for placing plants
      * and also swipes to move the screen around.
      */
-    private class GardenTouchListener implements OnTouchListener
+    class GardenTouchListener implements OnTouchListener
     {
         // (x1, y1) is the coordinate when the user presses down on the screen
         // (x2, y2) is the coordinate when the user lifts up his/her finger from the screen
@@ -179,42 +213,21 @@ public class GardenView extends SurfaceView {
                     // IF the person is not touching the circle and there is a positive delta,
                     // the person is trying to drag/scroll the background
                     if (!collision && Math.abs(deltaX) > 0 && Math.abs(deltaY) > 0) {
-                        int bmp_x_temp = background_x + deltaX;
-                        int bmp_y_temp = background_y + deltaY;
+                        deltaX = getBackgroundChange(deltaX, background_x, background.getWidth(),view_width);
+                        deltaY = getBackgroundChange(deltaY, background_y, background.getHeight(), view_height);
 
-                        // Perform all the x-coordinate adjustments and then the y-coordinate adjustments
+                        // Move the background
+                        background_x += deltaX;
+                        background_y += deltaY;
 
-                        // The top left corner is being dragged too far right, which would expose the
-                        // blank background -- have to prevent this
-                        if (bmp_x_temp > 0) {
-                            if (circleIsDrawn) circle_x -= background_x;
-                            background_x = 0;
-                        }
-                        // Makes sure they cannot drag the image completely off to the left
-                        // There will always be background image on the screen
-                        else if (bmp_x_temp < -background.getWidth() + view_width) {
-                            if (circleIsDrawn)
-                                circle_x += (-background.getWidth() + view_width - background_x);
-                            background_x = -background.getWidth() + view_width;
-                        }
-                        // The happy case
-                        else {
+                        // Move the circle if it is already been drawn
+                        if (circleIsDrawn)
+                        {
                             circle_x += deltaX;
-                            background_x += deltaX;
+                            circle_y += deltaY;
                         }
 
-                        // Same analogous stuff for y
-                        if (bmp_y_temp > 0) {
-                            if (circleIsDrawn) circle_y -= background_y;
-                            background_y = 0;
-                        } else if (bmp_y_temp < -background.getHeight() + view_height) {
-                            if (circleIsDrawn)
-                                circle_y += (-background.getHeight() + view_height - background_y);
-                            background_y = -background.getHeight() + view_height;
-                        } else {
-                            circle_y += deltaY;
-                            background_y += deltaY;
-                        }
+
                     }
                     // This would be the case when a plant is being selected to be moved
                     // The person should be able to tap a plant and then move it with the next tap
@@ -239,7 +252,9 @@ public class GardenView extends SurfaceView {
                 // the circle is centered around where the user tapped
                 circle.setBounds(circle_x - circle_r / 2, circle_y - circle_r / 2, circle_x + circle_r / 2, circle_y + circle_r / 2);
             }
-        return true;
-    }
+            return true;
+        }
+
+
     }
 }
