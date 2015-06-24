@@ -1,5 +1,7 @@
 package com.cs1530_group1.gardenapp;
 
+import android.test.suitebuilder.annotation.SmallTest;
+
 import junit.framework.TestCase;
 
 /**
@@ -13,6 +15,7 @@ public class GardenTouchListenerTest extends TestCase {
      * Change should be -10, this is the happy case
      * @throws Exception
      */
+    @SmallTest
     public void testGetBackgroundChange1() throws Exception {
         int change = GardenView.getBackgroundChange(-10, 0, 1155, 1080);
 
@@ -24,6 +27,7 @@ public class GardenTouchListenerTest extends TestCase {
      * The background should not move in this case.
      * @throws Exception
      */
+    @SmallTest
     public void testGetBackgroundChange2() throws Exception {
         int change = GardenView.getBackgroundChange(10, 0, 1155, 1080);
 
@@ -36,6 +40,7 @@ public class GardenTouchListenerTest extends TestCase {
      * The background should not move in this case.
      * @throws Exception
      */
+    @SmallTest
     public void testGetBackgroundChange3() throws Exception {
         int change = GardenView.getBackgroundChange(-10, -75, 1155, 1080);
 
