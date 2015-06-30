@@ -1,5 +1,6 @@
 package com.cs1530_group1.gardenapp;
 
+
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -54,6 +55,7 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+
     }
 
     /**
@@ -79,8 +81,16 @@ public class MainActivity extends ActionBarActivity {
      *
      * @param view the view that called this method (currently unused)
      */
+    //todo rename this
     public void startGardenViewActivity(View view){
+
+        Log.v(LOG_TAG, "starting GardenDrawingActivity");
+        Intent intent = new Intent(this, GardenDrawingActivity.class);
+        startActivity(intent);
+
+        /*
         Log.e(LOG_TAG, "startGardenViewActivity is not yet implemented");
         Toast.makeText(getApplicationContext(), "This feature is not yet implemented", Toast.LENGTH_SHORT).show();
+        */
     }
 }
