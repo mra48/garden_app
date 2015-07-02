@@ -30,8 +30,7 @@ public class MainActivity extends ActionBarActivity {
         String gardenString = "2:tomato:half:23:44:1234:sunflower:full:34:54:1245:1:2:3:sunflower";
         //end fake data
         //todo this shouldn't happen in the main thread
-        Garden garden = new Garden();
-        garden.StringToGarden(gardenString);
+        Garden garden = Garden.stringToGarden(gardenString);
         app.setGarden(garden);
     }
 
