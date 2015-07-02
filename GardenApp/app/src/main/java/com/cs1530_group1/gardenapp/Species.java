@@ -1,4 +1,6 @@
 package com.cs1530_group1.gardenapp;
+
+import java.util.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,19 +13,25 @@ package com.cs1530_group1.gardenapp;
  */
 public class Species {
  
-    String type;
+    String name;
+    String des;
     String sun;
-    int prune;
-    int water;
-    int fertilize;
+    String type;
+    Date plantDate;
+    Date pruneDate;
+    int color;
+    int size;
     
-    public Species(String type, String sun, int prune, int water, int fertilize)
+    public Species(String name, String des, String sun, String type, Date plantDate, Date pruneDate, int color, int size)
     {
-        this.type = type;
+        this.name = name;
+        this.des = des;
         this.sun = sun;
-        this.prune = prune;
-        this.water = water;
-        this.fertilize = fertilize;
+        this.type = type;
+        this.plantDate = plantDate;
+        this.pruneDate = pruneDate;
+        this.color = color;
+        this.size = size;
     }
     
     
