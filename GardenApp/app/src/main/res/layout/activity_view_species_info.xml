@@ -7,36 +7,36 @@
     tools:context="com.cs1530_group1.gardenapp.ViewSpeciesInfoActivity"
     android:orientation="vertical">
 
-    <TextView android:text="@string/hello_world" android:layout_width="fill_parent"
+    <TextView android:text="Name: " android:layout_width="fill_parent"
         android:layout_height="0db"
         android:layout_weight="1"
         android:id="@+id/species_name"/>
-    <TextView android:text="@string/hello_world" android:layout_width="fill_parent"
+    <TextView android:text="Description: " android:layout_width="fill_parent"
         android:layout_height="0db"
         android:layout_weight="3"
         android:id="@+id/species_descript"/>
-    <TextView android:text="@string/hello_world" android:layout_width="fill_parent"
+    <TextView android:text="Type: " android:layout_width="fill_parent"
         android:layout_height="0db"
         android:layout_weight="1"
         android:id="@+id/species_type"/>
-    <TextView android:text="@string/hello_world" android:layout_width="fill_parent"
+    <TextView android:text="Sun Level: " android:layout_width="fill_parent"
         android:layout_height="0db"
         android:layout_weight="1"
         android:id="@+id/species_sun"/>
-    <TextView android:text="@string/hello_world" android:layout_width="fill_parent"
+    <TextView android:text="Plant Date: " android:layout_width="fill_parent"
         android:layout_height="0db"
         android:layout_weight="1"
         android:id="@+id/species_plant_date"/>
-    <TextView android:text="@string/hello_world" android:layout_width="fill_parent"
+    <TextView android:text="Prune Date" android:layout_width="fill_parent"
         android:layout_height="0db"
         android:layout_weight="1"
         android:id="@+id/species_prune_date"/>
 
-    <TextView android:text="@string/hello_world" android:layout_width="fill_parent"
+    <TextView android:text="Size: " android:layout_width="fill_parent"
         android:layout_height="0db"
         android:layout_weight="1"
         android:id="@+id/species_size"/>
-    <TextView android:text="@string/hello_world" android:layout_width="fill_parent"
+    <TextView android:text="Color: " android:layout_width="fill_parent"
         android:layout_height="0db"
         android:layout_weight="1"
         android:id="@+id/species_color"/>
