@@ -40,7 +40,7 @@ public class SpeciesListActivityFragment extends Fragment {
         String[] gardenSpeciesList;
         App app = (App) getActivity().getApplicationContext();
         Garden garden = app.getGarden();
-        gardenSpeciesList = garden.ListSpecies();
+        gardenSpeciesList = garden.getSpeciesNames();
 
 
 
