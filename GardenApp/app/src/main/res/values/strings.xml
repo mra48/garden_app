@@ -7,4 +7,8 @@
     <string name="garden_view_activity_button">View Garden</string>
     <string name="title_activity_species_list">SpeciesListActivity</string>
     <string name="filler_text">this is filler text</string>
+    <string name="title_activity_view_species_info">ViewSpeciesInfoActivity</string>
+    <string name="button_add">Add to Garden</string>
+    <string name="button_edit">Edit Info</string>
+    <string name="button_del">Delete</string>
 </resources>
