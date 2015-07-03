@@ -8,49 +8,49 @@
     android:orientation="vertical">
 
     <TextView android:text="Name: " android:layout_width="fill_parent"
-        android:layout_height="0db"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/species_name"/>
     <TextView android:text="Description: " android:layout_width="fill_parent"
-        android:layout_height="0db"
+        android:layout_height="wrap_content"
         android:layout_weight="3"
         android:id="@+id/species_descript"/>
     <TextView android:text="Type: " android:layout_width="fill_parent"
-        android:layout_height="0db"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/species_type"/>
     <TextView android:text="Sun Level: " android:layout_width="fill_parent"
-        android:layout_height="0db"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/species_sun"/>
     <TextView android:text="Plant Date: " android:layout_width="fill_parent"
-        android:layout_height="0db"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/species_plant_date"/>
     <TextView android:text="Prune Date" android:layout_width="fill_parent"
-        android:layout_height="0db"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/species_prune_date"/>
 
     <TextView android:text="Size: " android:layout_width="fill_parent"
-        android:layout_height="0db"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/species_size"/>
     <TextView android:text="Color: " android:layout_width="fill_parent"
-        android:layout_height="0db"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/species_color"/>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="0db"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_gravity="center_horizontal">
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="0db"
+            android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="@string/button_add"
@@ -59,7 +59,7 @@
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="0db"
+            android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="@string/button_edit"
@@ -67,7 +67,7 @@
 
         <Button
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="0db"
+            android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="@string/button_del"
