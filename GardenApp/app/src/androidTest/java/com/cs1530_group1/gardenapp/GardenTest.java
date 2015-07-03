@@ -176,7 +176,7 @@ public class GardenTest extends TestCase{
         //Date pruneDate = cal.getTime();
 		
 		
-		assertEquals(type,"Annual");
+		assertEquals(type, "Annual");
 		assertEquals(sun, "high");
 		assertEquals(des, "a tomato species");
 		assertEquals(color, 25);
@@ -186,7 +186,28 @@ public class GardenTest extends TestCase{
 		
 		
 	}
-	
+
+
+	@SmallTest
+	public void testCreateGarden(){
+		Garden garden = new Garden();
+		garden.addSpecies("Mint");
+		garden.setDescription("Mint", "it's a plant");
+		garden.setSize("Mint", 5);
+		garden.setColor("Mint", 0xFFFFFF);
+		garden.setSunLevel("Mint", "half");
+
+		String[] test = {"Mint"};
+		assertEquals(garden.getSpeciesNames(),test);
+
+		assertEquals("it's a plant", garden.getDescription("Mint"));
+
+		assertEquals(5, garden.getSize("Mint"));
+
+		assertEquals(garden.getColor("Mint"), 0xFFFFFF);
+
+		assertEquals(garden.getSunLevel("Mint"), "half");
+	}
 	
 	
 
