@@ -1,11 +1,11 @@
 package com.cs1530_group1.gardenapp;
 
 import android.test.suitebuilder.annotation.SmallTest;
-import android.util.Log;
+//import android.util.Log;
 
 import junit.framework.TestCase;
 //
-import junit.*;
+//import junit.*;
 //
 //import static org.junit.Assert.*;
 //
@@ -82,7 +82,7 @@ public class GardenTest extends TestCase{
 		String garden = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993 21:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980 23:45:12-low-32-12-1-23-43-tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
-		boolean test = g.movePlant(23, 43, 24, 45);
+		g.movePlant(23, 43, 24, 45);
 		ArrayList<Plant> plantList = g.getPlantList();
 		
 		assertEquals(plantList.get(0).x, 24);
@@ -149,8 +149,8 @@ public class GardenTest extends TestCase{
 		String type = g.getSpeciesType("tomato");
 		String sun = g.getSunLevel("tomato");
 		String des = g.getDescription("tomato");
-		Date getPruneDate = g.getPruneDate("tomato");
-		Date getPlantDate = g.getPlantDate("tomato");
+		//Date getPruneDate = g.getPruneDate("tomato");
+		//Date getPlantDate = g.getPlantDate("tomato");
 		int color = g.getColor("tomato");
 		int size = g.getSize("tomato");
 		
@@ -163,7 +163,7 @@ public class GardenTest extends TestCase{
         cal.set(Calendar.MINUTE, 25);
         cal.set(Calendar.SECOND, 12);
         
-        Date plantDate = cal.getTime();
+        //Date plantDate = cal.getTime();
         
         
         cal.set(Calendar.MONTH, 2);
@@ -173,7 +173,7 @@ public class GardenTest extends TestCase{
         cal.set(Calendar.MINUTE, 45);
         cal.set(Calendar.SECOND, 13);
         
-        Date pruneDate = cal.getTime();
+        //Date pruneDate = cal.getTime();
 		
 		
 		assertEquals(type,"Annual");
