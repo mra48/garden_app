@@ -193,13 +193,10 @@ public class Garden implements GardenInterface{
     {
         int listSize = speciesList.size();
         String speciesNames[] = new String[listSize];
-        int i = 0;
-        
-        for (Species s : speciesList)
-        {
-            String newString = s.name;
-            speciesNames[i] = newString;
-            i++;
+
+
+        for(int i =0; i<speciesNames.length; i++) {
+            speciesNames[i] = speciesList.get(i).name;
         }
         
         return speciesNames;
