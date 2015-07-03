@@ -187,7 +187,9 @@ public class GardenTest extends TestCase{
 		
 	}
 
-
+	/*
+		creates a new empty garden
+	 */
 	@SmallTest
 	public void testCreateGarden(){
 		Garden garden = new Garden();
@@ -207,6 +209,32 @@ public class GardenTest extends TestCase{
 		assertEquals(garden.getColor("Mint"), 0xFFFFFF);
 
 		assertEquals(garden.getSunLevel("Mint"), "half");
+	}
+
+	/*
+		starts with an empty string garden
+	 */
+	@SmallTest
+	public void testEmptyStringCreate(){
+		Garden garden = Garden.stringToGarden("");
+		garden.addSpecies("Mint");
+
+		String[] test ={"Mint"};
+
+		assertEquals(garden.getSpeciesNames(),test);
+	}
+
+	/*
+		starts with a null input
+	 */
+	@SmallTest
+	public void testNullStringCreate(){
+		Garden garden = Garden.stringToGarden(null);
+		garden.addSpecies("Mint");
+
+		String[] test ={"Mint"};
+
+		assertEquals(garden.getSpeciesNames(),test);
 	}
 	
 	
