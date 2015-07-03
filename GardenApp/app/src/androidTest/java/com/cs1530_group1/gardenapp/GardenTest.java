@@ -222,7 +222,7 @@ public class GardenTest extends TestCase{
 
 		String[] test ={"Mint"};
 
-		assertEquals(garden.getSpeciesNames(),test);
+		assertEquals(garden.getSpeciesNames()[0],test[0]);
 	}
 
 	/*
@@ -235,7 +235,7 @@ public class GardenTest extends TestCase{
 
 		String[] test ={"Mint"};
 
-		assertEquals(garden.getSpeciesNames(),test);
+		assertEquals(garden.getSpeciesNames()[0],test[0]);
 	}
 	
 	
