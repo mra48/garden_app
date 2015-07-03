@@ -10,12 +10,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends ActionBarActivity {
 
     //Log tag, for logging errors
     private static final String LOG_TAG = "Main Activity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +27,27 @@ public class MainActivity extends ActionBarActivity {
 
         //here seems like a good place to create the garden
         App app = (App)getApplication();
+        Log.v(LOG_TAG, "checking status of garden");
+        if(app.getGarden()==null){ //the garden hasn't been loaded yet
+            Log.d(LOG_TAG, "garden not yet initialized, loading from save");
+            String gardenString;
+            try {
+                gardenString = FileOperation.load(App.SAVEFILE_NAME);
+            }
+            catch (IOException e){
+                //todo change this string, it should stay like this until a save feature is implemented but needs to be changed after
+                gardenString = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993 21:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980 23:45:12-low-32-12-1-23-43-tomato";
+                Log.w(LOG_TAG, "This feature is still using dummy data, this should be updated as soon as possible.");
+                Log.w(LOG_TAG, "file not loaded, using hard coded string param",e);
+            }
 
-        //todo replace this with a call to storage to get the saved garden/create a new one
-        //start fake data
-        String gardenString = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993 21:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980 23:45:12-low-32-12-1-23-43-tomato";
-        //end fake data
-        //todo this shouldn't happen in the main thread
-        Garden garden = Garden.stringToGarden(gardenString);
-        app.setGarden(garden);
+            app.setGarden(Garden.stringToGarden(gardenString));
+
+        }
+        else{
+            Log.v(LOG_TAG, "garden has already been loaded");
+        }
+
     }
 
     @Override
