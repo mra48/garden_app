@@ -2,10 +2,10 @@ package com.cs1530_group1.gardenapp;
 
 import java.io.*;
 import android.os.Environment;
-import android.util.Log;
 
 /**
- * Created by wenchao on 7/2/2015.
+ * FileOperation : a helper class that contains methods to save and load strings to/from extern storage device
+ * @author : wenchao
  */
 public class FileOperation {
 
@@ -52,8 +52,8 @@ public class FileOperation {
         // Close reader
         reader.close();
 
-        // Return read string
-        return sb.toString();
+        // Return read string trimmed
+        return sb.toString().trim();
     }
 
     /**
