@@ -12,14 +12,26 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
-
+/**
+ * The MainActivity of an app is the screen that is first loaded upon a user opening an app.
+ *
+ * @author Charles Smith <cas275@pitt.edu>
+ */
 @SuppressWarnings("deprecation")
 public class MainActivity extends ActionBarActivity {
 
     //Log tag, for logging errors
     private static final String LOG_TAG = "Main Activity";
 
-
+    /**
+     *
+     * This method is called upon the user going to the main screen.
+     * This screen welcomes the user, and shows navigation options.
+     *
+     * While the user is clicking buttons, the garden data structure is being loaded/created
+     *
+     * @param savedInstanceState used for super.onCreate
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
