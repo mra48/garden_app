@@ -8,9 +8,18 @@ import java.util.*;
  *
  */
 public class Garden implements GardenInterface{
-   
+
     private ArrayList<Species> speciesList;
     private ArrayList<Plant> plantList;
+
+    /**
+     * The public default constructor.
+     * Creates an empty Garden
+     */
+    public Garden(){
+        speciesList = new ArrayList<>();
+        plantList = new ArrayList<>();
+    }
         
     
     //format for the string representation of the garden-> #species-speciesName-speciesDescription-speciesType (ex: 0 for annual, 1 for perennial, 2 for tree)-speciesPlantDate(using this format:MM/dd/yyyy HH:mm:ss)-speciesPruneDate(using this format:MM/dd/yyyy HH:mm:ss)-speciesSunLevel-speciesColor-speciesSize-data for next species-#plants-plantx-planty-plantSpecies-data for next plant	

@@ -200,7 +200,8 @@ public class GardenTest extends TestCase{
 		garden.setSunLevel("Mint", "half");
 
 		String[] test = {"Mint"};
-		assertEquals(garden.getSpeciesNames(),test);
+
+		assertEquals(garden.getSpeciesNames()[0],test[0]);
 
 		assertEquals("it's a plant", garden.getDescription("Mint"));
 
