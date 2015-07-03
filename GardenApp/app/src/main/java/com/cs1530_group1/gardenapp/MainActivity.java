@@ -25,7 +25,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //here seems like a good place to create the garden
+        //Loading the garden
         App app = (App)getApplication();
         Log.v(LOG_TAG, "checking status of garden");
         if(app.getGarden()==null){ //the garden hasn't been loaded yet
