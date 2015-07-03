@@ -1,5 +1,6 @@
 package com.cs1530_group1.gardenapp;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,10 +67,14 @@ public class SpeciesListActivityFragment extends Fragment {
              * is called upon a click in the speciesList
              */
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //todo make this bring up a dialog box
-                //for now it's just going to be a toast to see if it was clicked
-                Toast.makeText(getActivity(),  adapter.getItem(position), Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(getActivity(),  adapter.getItem(position), Toast.LENGTH_SHORT).show();
                 Log.v(LOG_TAG, "*click*");
+
+                Intent intent = new Intent(getActivity(),ViewSpeciesInfoActivity.class);
+                intent.putExtra(Intent.EXTRA_TEXT,adapter.getItem(position));
+                startActivity(intent);
+
             }
         });
 
