@@ -1,5 +1,7 @@
 package com.cs1530_group1.gardenapp;
 
+import android.annotation.SuppressLint;
+
 import java.text.*;
 import java.util.*;
 
@@ -30,11 +32,15 @@ public class Garden implements GardenInterface{
         if (g.speciesList.size() > 0)
         {
             int numSpecies = g.speciesList.size();
-            String name = null, des = null, sun = null;
-            String type = null;
-            String plantDate = null, pruneDate = null;
-            String color = null, size = null;
-            DateFormat df = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");            
+            String name;
+            String des;
+            String sun;
+            String type;
+            String plantDate;
+            String pruneDate;
+            String color;
+            String size;
+            @SuppressLint("SimpleDateFormat") DateFormat df = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
 
             garden = String.valueOf(numSpecies) + "-";
             
@@ -81,19 +87,25 @@ public class Garden implements GardenInterface{
         if (g.isEmpty())
             return new Garden();
 
-      Garden newGarden = new Garden();
+        Garden newGarden = new Garden();
       
       String parsedGarden[] = g.split("-");
       
-      int i = 0;
+      int i;
       int numSpecies = Integer.parseInt(parsedGarden[0]);
-      newGarden.speciesList = new ArrayList<Species>(numSpecies);
-      String name = null, des = null, sun = null, type = null;
-      int size = 0, color = 0;
-      Date plantDate = null, pruneDate = null;
-      int x, y;
-      
-      //multiply by 5 and do i+= 5 because there are five items per species
+      newGarden.speciesList = new ArrayList<>(numSpecies);
+      String name;
+        String des;
+        String sun;
+        String type;
+        int size;
+        int color;
+        Date plantDate;
+        Date pruneDate;
+        int x;
+        int y;
+
+        //multiply by 5 and do i+= 5 because there are five items per species
       for (i = 1; i < (numSpecies * 8); i+=8)
       {
     	  
@@ -143,12 +155,12 @@ public class Garden implements GardenInterface{
       
       i++;
       
-      newGarden.plantList = new ArrayList<Plant>(numPlants);
+      newGarden.plantList = new ArrayList<>(numPlants);
       
-      int j = 0;
+      int j;
       int counter = numPlants * 3 + i;
       
-      for (i = i; i < counter; i+= 3)
+      for (; i < counter; i+= 3)
       {
           x = Integer.parseInt(parsedGarden[i]);
           y = Integer.parseInt(parsedGarden[i+1]);
@@ -173,8 +185,8 @@ public class Garden implements GardenInterface{
     
     public ArrayList<Plant> getPlantList()
     {
-    	ArrayList<Plant> newList = new ArrayList<Plant>(plantList);
-        return newList;
+    	return new ArrayList<>(plantList);
+
     }
     
     public String[] getSpeciesNames()
@@ -185,7 +197,7 @@ public class Garden implements GardenInterface{
         
         for (Species s : speciesList)
         {
-            String newString = new String(s.name);
+            String newString = s.name;
             speciesNames[i] = newString;
             i++;
         }
