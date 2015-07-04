@@ -14,9 +14,12 @@ package com.cs1530_group1.gardenapp;
  */
 public class Plant {
     
-    int x, y;
-    Species s;
-    
+    int x, y; //the x and y coordinates of the plant
+    Species s; //the associated species of the plant
+	
+    /**
+		standard constructor to initialize values
+	*/
     public Plant(int x, int y, Species s)
     {
         this.x = x;

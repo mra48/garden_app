@@ -22,6 +22,9 @@ public class Species {
     int color;
     int size;
     
+    /**
+		standard constructor to initialize values
+	*/	
     public Species(String name, String des, String sun, String type, Date plantDate, Date pruneDate, int color, int size)
     {
         this.name = name;
