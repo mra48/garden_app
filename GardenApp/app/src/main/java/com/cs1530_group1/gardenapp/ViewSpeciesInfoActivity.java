@@ -11,7 +11,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
+/**
+ * This activity displays the information about a selected species (passed in with the EXTRA_TEXT from Intent)
+ *
+ * The hierarchical parent is set to SpeciesListActivity, so that is what the 'up' button launches.
+ * 
+ * @author Charles Smith <cas275@pitt.edu>
+ */
 
 @SuppressWarnings("deprecation")
 public class ViewSpeciesInfoActivity extends ActionBarActivity {
