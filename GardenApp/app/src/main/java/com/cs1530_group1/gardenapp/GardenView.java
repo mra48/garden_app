@@ -10,26 +10,31 @@ import android.view.SurfaceHolder;
 import android.view.View;
 import android.graphics.drawable.*;
 import android.view.SurfaceView;
+import java.util.ArrayList;
+import android.graphics.Rect;
 
 /**
  * GardenView : an extension of SurfaceView. Performs the actual drawing of the background
  * garden layout image and the plant circles.
  */
 public class GardenView extends SurfaceView {
-    private Bitmap background; // The background image
+    protected Bitmap background; // The background image
 
     // A note about bitmaps:
     // The left edge of the screen is the line x = 0. To the left of it, x < 0, and to the right of
     // the left edge, x > 0.
     // The top edge of the screen is y = 0. Below it y > 0, and above the top edge, y < 0.
-    private int background_x = 0; // The x-coordinate of the upper left hand corner of the background
-    private int background_y = 0; // The y-coordinate of the upper left hand corner of the background
+    protected int background_x = 0; // The x-coordinate of the upper left hand corner of the background
+    protected int background_y = 0; // The y-coordinate of the upper left hand corner of the background
+
+    // The list of circles that corresponds to the list of plants in the garden
+    protected ArrayList<ShapeDrawable> plantCircles = null;
 
     // The garden that we are going to display
-    private Garden garden;
+    protected Garden garden;
 
 
-    private SurfaceHolder holder; // Need to register callbacks for the holder of this SurfaceView
+    protected SurfaceHolder holder; // Need to register callbacks for the holder of this SurfaceView
 
     // A circle will visually represent a plant
     private ShapeDrawable circle;
@@ -38,14 +43,14 @@ public class GardenView extends SurfaceView {
     private int circle_r = 50; // The radius of the circle
     private boolean circleIsDrawn = false; // Boolean to tell if the circle has been placed yet
 
-    private DrawingThread drawingThread; // The drawing thread
+    protected DrawingThread drawingThread; // The drawing thread
 
     // The height and width of the SurfaceView are still 0 when the constuctor is called
     // because the SurfaceView has not been rendered yet. They are currently being updated in
     // onDraw(). They are needed in the GardenTouchListener and they do change (when buttons are
     // added/displayed dynamically.
-    private int view_height = 0;
-    private int view_width = 0;
+    protected int view_height = 0;
+    protected int view_width = 0;
 
     /**
      * GardenView : constructor
@@ -75,6 +80,74 @@ public class GardenView extends SurfaceView {
         // Open the background image as a bitmap
         background = loadBitmapImage(R.drawable.background);
 
+        // Initially there should be a list of plants -- produce a list of circles from the plants
+        plantCircles = getAllPlantCircles();
+
+    }
+
+    /**
+     * returns a factor by which a plant circle radius should be scaled by based on the device screen
+     * to be implemented
+     * @return
+     */
+    protected double getRadiusScaleFactor()
+    {
+        return 1;
+    }
+
+    /**
+     * Takes the center of the circle (x, y) and the generic size and
+     * produces the bounds of the circle with a radius scaled based on the screen size
+     * @param x
+     * @param y
+     * @param size
+     * @return
+     */
+    protected Rect positionToBounds(int x, int y, int size)
+    {
+        int radius = (int)(size * getRadiusScaleFactor()); // scale the size
+        Rect bounds = new Rect(x - radius, y - radius, x + radius, y + radius); // make (x, y) the center, so offset by the radius
+
+        return bounds;
+    }
+
+    /**
+     * takes a plant and coverts it to a circular shape drawable with the same position,
+     * color and size properties
+     * @param p
+     * @return
+     */
+    protected ShapeDrawable plantToCircle(Plant p)
+    {
+        ShapeDrawable circle = new ShapeDrawable(new OvalShape());
+
+        // Set the color
+        circle.getPaint().setColor(p.s.color);
+
+        // Set the proper bounds
+        // (p.x, p.y) is the center
+        // p.s.size is the species size (unscaled radius)
+        circle.setBounds(positionToBounds(p.x, p.y, p.s.size));
+
+        return circle;
+    }
+
+    /**
+     * takes this class's list of plants and returns a list of circles that will graphically
+     * represent the list of plants
+     * @return
+     */
+    protected ArrayList<ShapeDrawable> getAllPlantCircles()
+    {
+        ArrayList<ShapeDrawable> circles = new ArrayList<ShapeDrawable>();
+        int i = 0;
+
+        // Go through the plant list and make a new circle to represent each plant
+        for (Plant p : garden.getPlantList())
+        {
+            circles.add(i++ , plantToCircle(p));
+        }
+        return circles;
     }
 
     protected Bitmap loadBitmapImage(int imageResourceNumber)
@@ -99,7 +172,7 @@ public class GardenView extends SurfaceView {
         // All circles must be redrawn every time
         try {
             canvas.drawBitmap(background, background_x, background_y, null);
-            circle.draw(canvas);
+
 
         }catch(Exception e){e.printStackTrace();}
     }
