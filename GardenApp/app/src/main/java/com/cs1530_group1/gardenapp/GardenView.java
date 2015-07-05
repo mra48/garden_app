@@ -25,6 +25,9 @@ public class GardenView extends SurfaceView {
     private int background_x = 0; // The x-coordinate of the upper left hand corner of the background
     private int background_y = 0; // The y-coordinate of the upper left hand corner of the background
 
+    // The garden that we are going to display
+    private Garden garden;
+
 
     private SurfaceHolder holder; // Need to register callbacks for the holder of this SurfaceView
 
@@ -48,9 +51,12 @@ public class GardenView extends SurfaceView {
      * GardenView : constructor
      * @param context : passed in automatically
      */
-    public GardenView(Context context)
+    public GardenView(Context context, Garden g)
     {
         super(context);
+
+        // set the garden
+        garden = g;
 
         // Create the drawing thread
         drawingThread = new DrawingThread(this);
@@ -67,10 +73,15 @@ public class GardenView extends SurfaceView {
         holder.addCallback(new GardenHolderCallback());
 
         // Open the background image as a bitmap
-        try {
-            background = BitmapFactory.decodeResource(getResources(), R.drawable.background);
-        }catch(Exception e){e.printStackTrace();}
+        background = loadBitmapImage(R.drawable.background);
 
+    }
+
+    protected Bitmap loadBitmapImage(int imageResourceNumber)
+    {
+        try {
+            return BitmapFactory.decodeResource(getResources(), imageResourceNumber);
+        }catch(Exception e){return null;}
     }
 
     /**
