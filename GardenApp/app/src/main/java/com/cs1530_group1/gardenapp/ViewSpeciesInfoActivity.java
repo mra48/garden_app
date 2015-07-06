@@ -115,16 +115,28 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * called when a user clicks on the 'remove' button
+     * @param view unused
+     */
     public void removeSpecies(View view) {
         Log.e(LOG_TAG,"remove species is not yet implemented");
         Toast.makeText(getApplicationContext(),"This feature is not yet implemented", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * called when a user clicks on the 'edit' button
+     * @param view unused
+     */
     public void editInfo(View view) {
         Log.e(LOG_TAG, "edit info is not yet implemented");
         Toast.makeText(getApplicationContext(),"This feature is not yet implemented", Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * called when a user clicks on the 'add to garden' button
+     * @param view unused
+     */
     public void addToGarden(View view) {
         Log.e(LOG_TAG, "add to Garden is not yet Implemented");
         Toast.makeText(getApplicationContext(),"This feature is not yet implemented", Toast.LENGTH_SHORT).show();
