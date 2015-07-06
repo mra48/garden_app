@@ -25,6 +25,8 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
 
     private static final String LOG_TAG = "Species Info Activity";
 
+    private String speciesName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +37,7 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
         Garden garden = ((App) getApplication()).getGarden();
 
         //get the speciesName passed from the last activity
-        String speciesName = getIntent().getStringExtra(Intent.EXTRA_TEXT);
+        speciesName = getIntent().getStringExtra(Intent.EXTRA_TEXT);
 
 
         if(speciesName == null||speciesName.isEmpty()) {
@@ -117,11 +119,16 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
 
     /**
      * called when a user clicks on the 'remove' button
+     *
+     * this should remove the current species from the garden, and then launch the list species activity.
      * @param view unused
      */
     public void removeSpecies(View view) {
-        Log.e(LOG_TAG,"remove species is not yet implemented");
-        Toast.makeText(getApplicationContext(),"This feature is not yet implemented", Toast.LENGTH_SHORT).show();
+        //Log.e(LOG_TAG, "remove species is not yet implemented");
+        //Toast.makeText(getApplicationContext(), "This feature is not yet implemented", Toast.LENGTH_SHORT).show();
+        ((App)getApplication()).getGarden().removeSpecies(speciesName);
+        Intent intent = new Intent(this,SpeciesListActivity.class);
+        startActivity(intent);
     }
 
     /**
