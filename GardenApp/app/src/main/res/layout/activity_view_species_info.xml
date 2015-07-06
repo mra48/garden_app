@@ -55,6 +55,7 @@
             android:layout_height="match_parent"
             android:text="@string/button_add"
             android:id="@+id/button_add"
+            android:onClick="addToGarden"
             tools:ignore="NestedWeights" />
 
         <Button
@@ -63,6 +64,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="@string/button_edit"
+            android:onClick="editInfo"
             android:id="@+id/button_edit" />
 
         <Button
@@ -71,6 +73,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="@string/button_del"
+            android:onClick="removeSpecies"
             android:id="@+id/button_del" />
     </LinearLayout>
 

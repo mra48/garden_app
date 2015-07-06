@@ -7,6 +7,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -112,5 +113,20 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void removeSpecies(View view) {
+        Log.e(LOG_TAG,"remove species is not yet implemented");
+        Toast.makeText(getApplicationContext(),"This feature is not yet implemented", Toast.LENGTH_SHORT).show();
+    }
+
+    public void editInfo(View view) {
+        Log.e(LOG_TAG, "edit info is not yet implemented");
+        Toast.makeText(getApplicationContext(),"This feature is not yet implemented", Toast.LENGTH_SHORT).show();
+    }
+
+    public void addToGarden(View view) {
+        Log.e(LOG_TAG, "add to Garden is not yet Implemented");
+        Toast.makeText(getApplicationContext(),"This feature is not yet implemented", Toast.LENGTH_SHORT).show();
     }
 }
