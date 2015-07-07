@@ -54,7 +54,7 @@ public class SpeciesListActivityFragment extends Fragment {
         ListView speciesList = (ListView) rootView.findViewById(R.id.listview_species);
 
         speciesList.setAdapter(adapter);
-        Log.d(LOG_TAG, "populated list with fake data");
+
 
 
         //kinda gross but i'm making a class inside an argument

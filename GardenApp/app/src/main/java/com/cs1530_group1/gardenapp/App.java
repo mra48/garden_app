@@ -19,6 +19,11 @@ import android.app.Application;
 public class App extends Application{
     private Garden garden;
 
+    /**
+     * the string filename used for saving/loading
+     */
+    public static final String SAVEFILE_NAME = "Garden-Save.dat";
+
 
     public Garden getGarden() {
         return garden;
