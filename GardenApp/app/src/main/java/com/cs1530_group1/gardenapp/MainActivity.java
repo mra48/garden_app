@@ -89,7 +89,7 @@ public class MainActivity extends ActionBarActivity {
 
         /* try to save the new garden */
         try{
-            FileOperation.save(app.SAVEFILE_NAME,DEFAULT_GARDEN_STRING);
+            FileOperation.save(App.SAVEFILE_NAME,DEFAULT_GARDEN_STRING);
         }
         catch (IOException e){
             Log.e(LOG_TAG,"unable to save default garden", e); //log the error
