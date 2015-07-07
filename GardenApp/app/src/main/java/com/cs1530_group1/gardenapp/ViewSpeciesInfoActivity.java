@@ -29,6 +29,13 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
 
 
     @Override
+    /**
+     * This method is called upon this activity being started.
+     *
+     * In here the screen is setup to display all the user-relevant information of a species.
+     * This is done through several HTML encoded TextView s
+     * Html.fromHtml(String) is used to parse the HTML encoding
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_species_info);
