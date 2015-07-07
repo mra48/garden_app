@@ -11,18 +11,18 @@ public class FileOperation {
 
     private static final String _FOLDERPATH = "/garden_app/files";
 
+    //region Public methods
+
     /**
+     * Saves a string to file
      * @param fileName Name of the file to save to
      * @param string String to be saved
      * @throws IOException
      */
     public static void save(String fileName, String string) throws IOException {
-        File dir = getFolderOnSDCard();
-        // Create file storage folder if it does not exist
-        if (!dir.exists()) dir.mkdirs();
-
+        setUpSdCardFolder();
         // Create output stream for the file
-        FileOutputStream f = new FileOutputStream(getFullFilePath(dir, fileName));
+        FileOutputStream f = new FileOutputStream(getFile(fileName));
         // Write string and flush
         f.write(string.getBytes());
         f.flush();
@@ -30,49 +30,91 @@ public class FileOperation {
     }
 
     /**
+     * Loads a string from file
      * @param fileName Name of the file to read from
      * @return String read from the file
      * @throws IOException
      */
     public static String load(String fileName) throws IOException {
-        File dir = getFolderOnSDCard();
-
         // Use a string builder to build the read string
         StringBuilder sb = new StringBuilder();
-        FileInputStream f = new FileInputStream(getFullFilePath(dir, fileName));
         // Create a buffered reader using the input stream
-        BufferedReader reader = new BufferedReader(new InputStreamReader(f));
-
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(getFile(fileName))));
         // Read line by line
         String line = null;
         while ((line = reader.readLine()) != null) {
             sb.append(line + "\n");
         }
-
         // Close reader
         reader.close();
-
         // Return read string trimmed
         return sb.toString().trim();
     }
 
     /**
-     * @return The folder where the files are stored
-     * @throws IOException
+     * Checks if the file exists
+     * @param fileName Name of the file
+     * @return Returns true if file exists
      */
-    private static File getFolderOnSDCard() throws IOException {
+    public static boolean exists(String fileName)
+    {
+        return getFile(fileName).exists();
+    }
+
+    /**
+     * Deletes a file
+     * @param fileName Name of the file
+     * @return Returns true if file is deleted
+     */
+    public static boolean delete(String fileName)
+    {
+        return getFile(fileName).delete();
+    }
+
+    //endregion
+
+
+    //region Private methods
+
+    /**
+     * Gets the storage folder on SD card
+     * @return The folder where the files are stored
+     */
+    private static File getFolderOnSDCard() {
         File sdCard = Environment.getExternalStorageDirectory();
         File dir = new File (sdCard.getAbsolutePath() + _FOLDERPATH);
         return dir;
     }
 
     /**
+     * Gets the full file path string for the file
      * @param dir The folder where the files are stored
      * @param fileName Name of the file
-     * @return
+     * @return Full file path string
      */
-    private static String getFullFilePath(File dir, String fileName)
-    {
+    private static String getFullFilePath(File dir, String fileName) {
         return dir.getPath() + "/" + fileName;
     }
+
+    /**
+     * Gets the File reference to the file
+     * @param fileName Name of the file
+     * @return File reference to the file
+     */
+    private static File getFile(String fileName)
+    {
+        return new File(getFullFilePath(getFolderOnSDCard(), fileName));
+    }
+
+    /**
+     * Creates storage folder on SD card if such folder does not exist.
+     */
+    private static void setUpSdCardFolder()
+    {
+        // Create file storage folder if it does not exist
+        File dir = getFolderOnSDCard();
+        if (!dir.exists()) dir.mkdirs();
+    }
+
+    //endregion
 }
