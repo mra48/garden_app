@@ -92,9 +92,10 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
         TextView color = (TextView)findViewById(R.id.species_color);
 
         String colorString = "<b>Color:</b><br />"
-                + "<font color=\"0x" + String.format("%06x", garden.getColor(speciesName)) +"\">"  //results to <font color="0xCOLOR">
+                //+ "<font color=\"0x" + String.format("%06x", garden.getColor(speciesName)) +"\">"  //results to <font color="0xCOLOR">
                 + "0x" +  String.format("%06x",garden.getColor(speciesName)) //results to 0xCOLOR
-                + "</font>";
+                //+ "</font>"
+                ;
         
         color.setText(Html.fromHtml(colorString));
 
