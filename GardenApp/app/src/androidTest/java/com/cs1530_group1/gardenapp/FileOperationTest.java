@@ -69,6 +69,10 @@ public class FileOperationTest extends TestCase {
         assertEquals(text, textRead);
     }
 
+    /**
+     * Saves a file twice - see if the file is overwritten
+     * @throws IOException
+     */
     @SmallTest
     public void testFileOpOverwrite() throws IOException {
         String fileName = "testFile3.txt";
@@ -78,25 +82,21 @@ public class FileOperationTest extends TestCase {
         assertEquals(text2, FileOperation.load(fileName));
     }
 
+    /**
+     * Creates a file, check if it exists, and deletes the file
+     * Checks both exists() and delete()
+     * @throws IOException
+     */
     @SmallTest
-    public void testFileOpExists() throws IOException {
+    public void testFileOpDeleteExists() throws IOException {
         String fileName = "testFile4.txt";
-        // File not written yet - it should not exist
-        assertFalse(FileOperation.exists(fileName));
         // Write some data
         FileOperation.save(fileName, "some data");
-        // File should be created
+        // File is created - exists should return true
         assertTrue(FileOperation.exists(fileName));
-    }
-
-    @SmallTest
-    public void testFileOpDelete() throws IOException {
-        String fileName = "testFile5.txt";
-        FileOperation.save(fileName, "some data");
-        // Delete the file - should return true
+        // Delete the file - delete should return true
         assertTrue(FileOperation.delete(fileName));
-
-        // Check if file still exists
+        // File is deleted - exists should return false
         assertFalse(FileOperation.exists(fileName));
     }
 

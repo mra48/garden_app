@@ -56,8 +56,7 @@ public class FileOperation {
      * @param fileName Name of the file
      * @return Returns true if file exists
      */
-    public static boolean exists(String fileName)
-    {
+    public static boolean exists(String fileName) {
         return getFile(fileName).exists();
     }
 
@@ -66,8 +65,7 @@ public class FileOperation {
      * @param fileName Name of the file
      * @return Returns true if file is deleted
      */
-    public static boolean delete(String fileName)
-    {
+    public static boolean delete(String fileName) {
         return getFile(fileName).delete();
     }
 
@@ -101,16 +99,14 @@ public class FileOperation {
      * @param fileName Name of the file
      * @return File reference to the file
      */
-    private static File getFile(String fileName)
-    {
+    private static File getFile(String fileName) {
         return new File(getFullFilePath(getFolderOnSDCard(), fileName));
     }
 
     /**
      * Creates storage folder on SD card if such folder does not exist.
      */
-    private static void setUpSdCardFolder()
-    {
+    private static void setUpSdCardFolder() {
         // Create file storage folder if it does not exist
         File dir = getFolderOnSDCard();
         if (!dir.exists()) dir.mkdirs();
