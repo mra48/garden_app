@@ -445,32 +445,7 @@ public class Garden implements GardenInterface{
             if (s.name.equals(speciesName))
             {
             	
-            	/*
-            	 * these checks are here to make sure that the newSpecies 
-            	 * object does not have a null pointer exception 
-            	 * concerning the prune date or plant date because in some instances, 
-            	 * these fields could be null (such as if the user creates a new species
-            	 *  without setting all of the other fields such as prune date or plant date
-            	 * 
-            	 */
-            	if (s.plantDate == null && s.pruneDate != null) 
-            	{
-                	newSpecies = new Species(s.name, s.des, s.sun, s.type, null, (Date) s.pruneDate.clone(), s.color, s.size);
-            	}
-            	else if (s.plantDate != null && s.pruneDate == null)
-            	{
-                	newSpecies = new Species(s.name, s.des, s.sun, s.type, (Date) s.plantDate.clone(), null, s.color, s.size);
-            	}
-            	else if (s.plantDate == null && s.pruneDate == null)
-            	{
-                	newSpecies = new Species(s.name, s.des, s.sun, s.type, null, null, s.color, s.size);
-            	}
-            	else //neither are null
-            	{
-                	newSpecies = new Species(s.name, s.des, s.sun, s.type, (Date) s.plantDate.clone(), (Date) s.pruneDate.clone(), s.color, s.size);            		
-            	}
-            		
-                break;
+            	return s; //dont return clone because this is private method used to modify s whereas getSpeciesInfo is a public method used to view a particular species
             }
         }
         
