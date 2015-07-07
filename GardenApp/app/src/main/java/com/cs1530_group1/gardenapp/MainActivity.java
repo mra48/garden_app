@@ -104,7 +104,7 @@ public class MainActivity extends ActionBarActivity {
      * @param app the object holding the 'globals' of the application
      */
     private void loadDefaultGarden(App app){
-        Log.v(LOG_TAG, "loading deafualt garden");
+        Log.v(LOG_TAG, "loading default garden");
         app.setGarden(Garden.stringToGarden(DEFAULT_GARDEN_STRING));
 
         /* try to save the new garden */
