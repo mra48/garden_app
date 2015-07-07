@@ -71,6 +71,7 @@ public class MainActivity extends ActionBarActivity {
             }
             else{
                 /* save file does not exist */
+                Log.v(LOG_TAG,"save file does not yet exist");
                 loadDefaultGarden(app);
             }
         }
@@ -109,6 +110,7 @@ public class MainActivity extends ActionBarActivity {
         /* try to save the new garden */
         try{
             FileOperation.save(App.SAVEFILE_NAME,DEFAULT_GARDEN_STRING);
+            Log.v(LOG_TAG, "saving default garden");
         }
         catch (IOException e){
             Log.e(LOG_TAG,"unable to save default garden", e); //log the error
