@@ -45,6 +45,18 @@ public class MainActivity extends ActionBarActivity {
 
         //Loading the garden
         App app = (App)getApplication();
+        setupGarden(app);
+
+
+    }
+
+    /**
+     * this checks the status of garden and either does nothing, loads the garden, or creates a new default garden
+     * depending on the app state
+     *
+     * @param app holds the global state of the application
+     */
+    private void setupGarden(App app){
         Log.v(LOG_TAG, "checking status of garden");
 
         if(app.getGarden()==null) { //the garden hasn't been loaded yet
@@ -65,7 +77,6 @@ public class MainActivity extends ActionBarActivity {
         else{
             Log.v(LOG_TAG, "garden has already been loaded");
         }
-
     }
 
     /**
