@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 import java.io.IOException;
@@ -85,6 +86,15 @@ public class MainActivity extends ActionBarActivity {
     private void loadDefaultGarden(App app){
         Log.v(LOG_TAG, "loading deafualt garden");
         app.setGarden(Garden.stringToGarden(DEFAULT_GARDEN_STRING));
+
+        /* try to save the new garden */
+        try{
+            FileOperation.save(app.SAVEFILE_NAME,DEFAULT_GARDEN_STRING);
+        }
+        catch (IOException e){
+            Log.e(LOG_TAG,"unable to save default garden", e); //log the error
+            Toast.makeText(getApplicationContext(),"There was a problem saving the garden", Toast.LENGTH_SHORT).show(); //alert the user
+        }
     }
 
     @Override
