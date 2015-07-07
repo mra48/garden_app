@@ -1,22 +1,26 @@
 package com.cs1530_group1.gardenapp;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 
 /**
+ * The Plant class represents actual plants currently planted in the garden. Each plant consists
+ * the attributes of an x and y coordinate for its location and a Species of the plant. These
+ * attributes are modified through the Garden class 
  *
  * @author Muneeb
  */
 public class Plant {
     
-    int x, y;
-    Species s;
-    
+    int x, y; //the x and y coordinates of the plant
+    Species s; //the associated species of the plant
+	
+    /**
+		standard constructor to initialize values
+		
+		@param s the associated Species of the plant
+		@param x the x coordinate of the plant
+		@param y the y coordinate of the plant
+	*/
     public Plant(int x, int y, Species s)
     {
         this.x = x;
