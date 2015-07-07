@@ -27,7 +27,7 @@ public class MainActivity extends ActionBarActivity {
     /**
      *  This string should be used to create the garden when a garden cannot be loaded.
      */
-    private static final String DEFAULT_GARDEN_STRING = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993 21:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980 23:45:12-low-32-12-1-23-43-tomato";
+    private static final String DEFAULT_GARDEN_STRING = "2-tomato-a tomato species-Annual-01/23/1993 11:25:12-03/03/1993 09:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 10:42:12-04/12/1980 11:45:12-low-32-12-1-23-43-tomato";
 
     /**
      *
