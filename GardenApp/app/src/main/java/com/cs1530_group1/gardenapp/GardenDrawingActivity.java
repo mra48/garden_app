@@ -14,7 +14,11 @@ public class GardenDrawingActivity extends Activity {
      */
     public void onCreate(Bundle savedInstanceState)
     {
+        // Get the garden so that it can be passed to the GardenView
+        App app = (App)getApplication();
+        Garden g = app.getGarden();
+
         super.onCreate(savedInstanceState);
-        setContentView(new GardenView(this));
+        setContentView(new GardenView(this, g));
     }
 }
