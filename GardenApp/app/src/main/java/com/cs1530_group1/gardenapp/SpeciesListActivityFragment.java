@@ -72,7 +72,7 @@ public class SpeciesListActivityFragment extends Fragment {
              * is called upon a click in the speciesList
              */
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                
+
                 Log.v(LOG_TAG, "*click*");
 
                 Intent intent = new Intent(getActivity(),ViewSpeciesInfoActivity.class);
