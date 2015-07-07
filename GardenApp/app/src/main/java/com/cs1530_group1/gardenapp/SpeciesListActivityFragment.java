@@ -58,8 +58,13 @@ public class SpeciesListActivityFragment extends Fragment {
         Log.d(LOG_TAG, "populated list with fake data");
 
 
-        //kinda gross but i'm making a class inside an argument
-        //this is appears to be standard practice to do this, so I may be crazy, but so is everyone else
+        /*
+        kinda gross but i'm making a class inside an argument
+        this is appears to be standard practice to do this, so I may be crazy, but so is everyone else
+
+        setting the clickListener allows us to specify the action when an item on the list is clicked
+        in this case, we're launching the info activity and passing it the string of what was clicked.
+        */
         speciesList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
 
             @Override
@@ -67,12 +72,11 @@ public class SpeciesListActivityFragment extends Fragment {
              * is called upon a click in the speciesList
              */
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                //Toast.makeText(getActivity(),  adapter.getItem(position), Toast.LENGTH_SHORT).show();
+                
                 Log.v(LOG_TAG, "*click*");
 
                 Intent intent = new Intent(getActivity(),ViewSpeciesInfoActivity.class);
-                intent.putExtra(Intent.EXTRA_TEXT,adapter.getItem(position));
+                intent.putExtra(Intent.EXTRA_TEXT, adapter.getItem(position));
                 startActivity(intent);
 
             }
