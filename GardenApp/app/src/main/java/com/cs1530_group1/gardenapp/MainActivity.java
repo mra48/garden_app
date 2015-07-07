@@ -56,7 +56,7 @@ public class MainActivity extends ActionBarActivity {
      *
      * @param app holds the global state of the application
      */
-    private void setupGarden(App app){
+    protected void setupGarden(App app){
         Log.v(LOG_TAG, "checking status of garden");
 
         if(app.getGarden()==null) { //the garden hasn't been loaded yet
@@ -86,7 +86,7 @@ public class MainActivity extends ActionBarActivity {
      * @param app the class holding the 'globals' of the application
      * @return true if garden is loaded, false otherwise
      */
-    private boolean loadGarden(App app){
+    protected boolean loadGarden(App app){
         Log.d(LOG_TAG, "garden not yet initialized, loading from save");
         String gardenString;
         try {
@@ -103,7 +103,7 @@ public class MainActivity extends ActionBarActivity {
      *
      * @param app the object holding the 'globals' of the application
      */
-    private void loadDefaultGarden(App app){
+    protected void loadDefaultGarden(App app){
         Log.v(LOG_TAG, "loading default garden");
         app.setGarden(Garden.stringToGarden(DEFAULT_GARDEN_STRING));
 
