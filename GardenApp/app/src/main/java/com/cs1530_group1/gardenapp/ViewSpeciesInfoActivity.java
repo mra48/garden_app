@@ -46,11 +46,11 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
         //get the speciesName passed from the last activity
         speciesName = getIntent().getStringExtra(Intent.EXTRA_TEXT);
 
-
+        //if no species name is received, alert user and log the error.
         if(speciesName == null||speciesName.isEmpty()) {
             Toast.makeText(getApplicationContext(),"Error loading information", Toast.LENGTH_SHORT).show();
             Log.e(LOG_TAG, "received a null or empty string, cannot display relevant information");
-            return;
+            return;  //stop trying, nothing was received.
         }
 
         //get the name TextView and append the species name
