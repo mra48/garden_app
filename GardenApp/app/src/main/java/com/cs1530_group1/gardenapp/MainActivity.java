@@ -47,12 +47,20 @@ public class MainActivity extends ActionBarActivity {
         App app = (App)getApplication();
         Log.v(LOG_TAG, "checking status of garden");
 
-        if(app.getGarden()==null){ //the garden hasn't been loaded yet
+        if(app.getGarden()==null) { //the garden hasn't been loaded yet
+            Log.v(LOG_TAG, "garden not yet loaded");
+            if (FileOperation.exists(App.SAVEFILE_NAME)){
 
-            if(!loadGarden(app)) { //try to load the garden.
-                loadDefaultGarden(app); //if the garden doesn't load (file not found etc.) loads the default garden
+                Log.v(LOG_TAG, "save file exists");
+                if (!loadGarden(app)) { //try to load the garden.
+                    Log.wtf(LOG_TAG, "file exists, but cannot be read"); //this shouldn't happen
+                    loadDefaultGarden(app); //if the garden doesn't load loads the default garden
+                }
             }
-
+            else{
+                /* save file does not exist */
+                loadDefaultGarden(app);
+            }
         }
         else{
             Log.v(LOG_TAG, "garden has already been loaded");
