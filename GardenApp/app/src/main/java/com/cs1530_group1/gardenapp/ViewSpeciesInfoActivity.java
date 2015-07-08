@@ -40,8 +40,7 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_species_info);
 
-        //get the garden from App class
-        Garden garden = ((App) getApplication()).getGarden();
+
 
         //get the speciesName passed from the last activity
         speciesName = getIntent().getStringExtra(Intent.EXTRA_TEXT);
@@ -52,6 +51,21 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
             Log.e(LOG_TAG, "received a null or empty string, cannot display relevant information");
             return;  //stop trying, nothing was received.
         }
+
+
+        updateTextViews();
+
+
+    }
+
+    /**
+     * this updates the TextViews displayed to the user with the correct information
+     *
+     */
+    private void updateTextViews(){
+
+        //get the garden from App class
+        Garden garden = ((App) getApplication()).getGarden();
 
         //get the name TextView and append the species name
         TextView name = (TextView) findViewById(R.id.species_name);
@@ -89,6 +103,7 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
         size.setText(Html.fromHtml(sizeString));
 
         //set color TextView
+
         TextView color = (TextView)findViewById(R.id.species_color);
 
         String colorString = "<b>Color:</b><br />"
@@ -96,12 +111,11 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
                 + "0x" +  String.format("%06x",garden.getColor(speciesName)) //results to 0xCOLOR
                 //+ "</font>"
                 ;
-        
+
         color.setText(Html.fromHtml(colorString));
-
-
-
     }
+
+    
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
