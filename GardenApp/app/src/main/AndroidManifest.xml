@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".GardenDrawingActivity"
-            android:label="GardenDrawingActivity" >
+            android:label="GardenDrawingActivity"
+            android:screenOrientation="landscape">
         </activity>
         <activity
             android:name=".MainActivity"
