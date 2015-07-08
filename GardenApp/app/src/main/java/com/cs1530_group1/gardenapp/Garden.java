@@ -250,7 +250,9 @@ public class Garden implements GardenInterface{
     public Species getSpeciesInfo(String speciesName)
     {
     	Species newSpecies = null;
-		
+		Date pruneDate = null;
+		Date plantDate = null;
+    	
 		//go through speciesList looking for the species with the name equal to the parameter
         for (Species s : speciesList)
         {
@@ -262,25 +264,20 @@ public class Garden implements GardenInterface{
             	 * object does not have a null pointer exception 
             	 * concerning the prune date or plant date because in some instances, 
             	 * these fields could be null (such as if the user creates a new species
-            	 *  without setting all of the other fields such as prune date or plant date
+            	 *  without setting all of the fields such as prune date or plant date
             	 * 
             	 */
-            	if (s.plantDate == null && s.pruneDate != null) 
+            	if (s.plantDate != null)
             	{
-                	newSpecies = new Species(s.name, s.des, s.sun, s.type, null, (Date) s.pruneDate.clone(), s.color, s.size);
+            		plantDate = (Date) s.plantDate.clone();
             	}
-            	else if (s.plantDate != null && s.pruneDate == null)
+            	
+            	if (s.pruneDate != null)
             	{
-                	newSpecies = new Species(s.name, s.des, s.sun, s.type, (Date) s.plantDate.clone(), null, s.color, s.size);
+            		pruneDate = (Date) s.pruneDate.clone();
             	}
-            	else if (s.plantDate == null && s.pruneDate == null)
-            	{
-                	newSpecies = new Species(s.name, s.des, s.sun, s.type, null, null, s.color, s.size);
-            	}
-            	else //neither are null
-            	{
-                	newSpecies = new Species(s.name, s.des, s.sun, s.type, (Date) s.plantDate.clone(), (Date) s.pruneDate.clone(), s.color, s.size);            		
-            	}
+            	
+            	newSpecies = new Species(s.name, s.des, s.sun, s.type, plantDate, pruneDate, s.color, s.size);
             		
                 break;
             }
