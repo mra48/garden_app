@@ -67,7 +67,7 @@ public class GardenView extends SurfaceView {
         garden = g;
 
         // Create the drawing thread
-        drawingThread = new DrawingThread(this);
+        createDrawingThread();
 
         // Set the listener
         this.setOnTouchListener(new GardenTouchListener() );
@@ -86,6 +86,13 @@ public class GardenView extends SurfaceView {
         newPlant = new ShapeDrawable(new OvalShape());
         //newPlant.setBounds(positionToBounds(newPlant_x, newPlant_y, newPlant_size));
         newPlant.getPaint().setColor(Color.GREEN);
+    }
+
+    /** createDrawingThread :
+     *  allows inner classes to create the drawing thread during onCreate()
+     */
+    protected void createDrawingThread() {
+        drawingThread = new DrawingThread(this);
     }
 
     /**
@@ -252,12 +259,17 @@ public class GardenView extends SurfaceView {
 
     }
 
-        /**
-         * surfaceCreated : Creates the drawing thread when the application first starts
-          * @param h : passed in automatically
-         */
+    /**
+     * surfaceCreated : Creates the drawing thread when the application first starts
+      * @param h : passed in automatically
+     */
     public void surfaceCreated(SurfaceHolder h)
     {
+        // When the Drawing Activity is minimized, the thread goes to the Terminated state
+        // When it is brought back up, it is still in Terminated state -- just create a new thread
+        // and start it
+        if (drawingThread.getState() == Thread.State.TERMINATED) createDrawingThread();
+
         drawingThread.setRunning(true);
         drawingThread.start();
         return;
