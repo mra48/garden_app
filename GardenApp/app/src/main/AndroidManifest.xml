@@ -6,15 +6,14 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name="com.cs1530_group1.gardenapp.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name="com.cs1530_group1.gardenapp.App">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".GardenDrawingActivity"
             android:label="GardenDrawingActivity" >
-
         </activity>
         <activity
             android:name=".MainActivity"
@@ -32,6 +31,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cs1530_group1.gardenapp.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ViewSpeciesInfoActivity"
+            android:label="@string/title_activity_view_species_info"
+            android:parentActivityName=".SpeciesListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cs1530_group1.gardenapp.SpeciesListActivity" />
         </activity>
     </application>
 
