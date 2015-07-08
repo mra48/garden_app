@@ -62,7 +62,7 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
      * this updates the TextViews displayed to the user with the correct information
      *
      */
-    private void updateTextViews(){
+    protected void updateTextViews(){
 
         //get the garden from App class
         Garden garden = ((App) getApplication()).getGarden();
@@ -110,7 +110,7 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
      * @param id the id of a TextView
      * @param htmlString the String to go into that View
      */
-    private void setText(int id, String htmlString){
+    protected void setText(int id, String htmlString){
         TextView view = (TextView)findViewById(id);
         view.setText(Html.fromHtml(htmlString));
     }
