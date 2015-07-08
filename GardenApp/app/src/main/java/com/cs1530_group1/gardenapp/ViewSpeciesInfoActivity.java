@@ -68,54 +68,52 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
         Garden garden = ((App) getApplication()).getGarden();
 
         //get the name TextView and append the species name
-        TextView name = (TextView) findViewById(R.id.species_name);
         String nameString = "<b>Name:</b><br />"+speciesName;
-        name.setText(Html.fromHtml(nameString)); //Html.fromHtml is needed to set bold strings
+        setText(R.id.species_name,nameString);
 
         //get the description TextView and append info
-        TextView descrpit = (TextView)findViewById(R.id.species_descript);
         String descriptString = "<b>Description:</b><br />" + garden.getDescription(speciesName);
-        descrpit.setText(Html.fromHtml(descriptString));
+        setText(R.id.species_descript,descriptString);
 
         //set type TextView
-        TextView type = (TextView)findViewById(R.id.species_type);
         String typeString = "<b>Type:</b><br />" + garden.getSpeciesType(speciesName);
-        type.setText(Html.fromHtml(typeString));
+        setText(R.id.species_type,typeString);
 
         //set sun TextView
-        TextView sun = (TextView)findViewById(R.id.species_sun);
         String sunString = "<b>Sun Level:</b><br />" + garden.getSunLevel(speciesName);
-        sun.setText(Html.fromHtml(sunString));
+        setText(R.id.species_sun,sunString);
 
         //set plant date TextView
-        TextView plantDate = (TextView)findViewById(R.id.species_plant_date);
         String plantDateString = "<b>Plant Date:</b><br />"+garden.getPlantDate(speciesName);
-        plantDate.setText(Html.fromHtml(plantDateString));
+        setText(R.id.species_plant_date,plantDateString);
 
         //set prune date TextView
-        TextView pruneDate = (TextView)findViewById(R.id.species_prune_date);
         String pruneDateString = "<b>Prune Date:</b><br />"+garden.getPruneDate(speciesName);
-        pruneDate.setText(Html.fromHtml(pruneDateString));
+        setText(R.id.species_prune_date,pruneDateString);
 
         //set size TextView
-        TextView size = (TextView)findViewById(R.id.species_size);
         String sizeString = "<b>Size:</b><br />"  + garden.getSize(speciesName);
-        size.setText(Html.fromHtml(sizeString));
+        setText(R.id.species_size,sizeString);
 
         //set color TextView
-
-        TextView color = (TextView)findViewById(R.id.species_color);
-
         String colorString = "<b>Color:</b><br />"
                 //+ "<font color=\"0x" + String.format("%06x", garden.getColor(speciesName)) +"\">"  //results to <font color="0xCOLOR">
                 + "0x" +  String.format("%06x",garden.getColor(speciesName)) //results to 0xCOLOR
                 //+ "</font>"
                 ;
+        setText(R.id.species_color,colorString);
 
-        color.setText(Html.fromHtml(colorString));
     }
 
-    
+    /**
+     * updates the html parsed text of id
+     * @param id the id of a TextView
+     * @param htmlString the String to go into that View
+     */
+    private void setText(int id, String htmlString){
+        TextView view = (TextView)findViewById(id);
+        view.setText(Html.fromHtml(htmlString));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
