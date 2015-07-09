@@ -188,9 +188,18 @@ public class AdditActivity extends ActionBarActivity {
      */
     protected String getEditTextText(int id){
         EditText editText = (EditText)findViewById(id);
-        //todo remove all symbols from text
-        Log.d(LOG_TAG,"todo: remove all symbols from text");
-        return editText.getText().toString();
+        Log.d(LOG_TAG, "todo: remove all symbols from text");
+        String str = editText.getText().toString();
+        return removeSymbols(str);
+    }
+
+    /**
+     *
+     * @param str original string
+     * @return String with no special char
+     */
+    protected String removeSymbols(String str){
+        return str.replaceAll("[^A-Za-z0-9 ]", "");
     }
 
     protected String evalTypeRadioButtons(){
