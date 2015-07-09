@@ -53,7 +53,7 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
         }
 
 
-        updateTextViews();
+        updateTextViews();  //this is to update all the TextViews on the screen with the species information. 
 
 
     }
