@@ -12,4 +12,5 @@
     <string name="button_edit">Edit Info</string>
     <string name="button_del">Delete</string>
     <string name="title_activity_addit">AdditActivity</string>
+    <string name="species_name_title">Species Name</string>
 </resources>
