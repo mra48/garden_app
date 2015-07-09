@@ -149,8 +149,8 @@ public class AdditActivity extends ActionBarActivity {
      * @param view unused
      */
     public void cancel(View view) {
-        Log.e(LOG_TAG, "cancel is not yet implemented");
-        Toast.makeText(getApplicationContext(), "This feature is not yet implemented", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(),SpeciesListActivity.class);
+        startActivity(intent);
     }
 
     /**

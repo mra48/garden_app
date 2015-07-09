@@ -143,7 +143,7 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
      * @param view unused
      */
     public void editInfo(View view) {
-        
+
         Intent intent = new Intent(getApplicationContext(),AdditActivity.class);
         intent.putExtra(Intent.EXTRA_TEXT,speciesName);
         startActivity(intent);
