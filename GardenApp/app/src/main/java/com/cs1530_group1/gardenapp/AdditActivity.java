@@ -162,8 +162,48 @@ public class AdditActivity extends ActionBarActivity {
      * @param view unused
      */
     public void update(View view) {
-        Log.e(LOG_TAG, "update is not yet implemented");
-        Toast.makeText(getApplicationContext(),"This feature is not yet implemented", Toast.LENGTH_SHORT).show();
+        Garden garden = ((App)getApplication()).getGarden();
+        String speciesName = getEditTextText(R.id.species_name_box);
+        if(!editMode){
+            Log.d(LOG_TAG,"added new species, " + speciesName);
+            garden.addSpecies(speciesName);
+        }
+        garden.setDescription(speciesName,getEditTextText(R.id.description_box));
+        garden.setSize(speciesName,Integer.parseInt(getEditTextText(R.id.size_box)));
+        garden.setSunLevel(speciesName, getEditTextText(R.id.sun_box));
+        garden.setSpeciesType(speciesName,evalTypeRadioButtons());
+        //todo dates
+        //todo colors
+        //todo save
+    }
+
+    /**
+     * gets the text from an EditText
+     * @param id the EditText id
+     * @return the String of the text
+     */
+    protected String getEditTextText(int id){
+        EditText editText = (EditText)findViewById(id);
+        //todo remove all symbols from text
+        Log.d(LOG_TAG,"todo: remove all symbols from text");
+        return editText.getText().toString();
+    }
+
+    protected String evalTypeRadioButtons(){
+        RadioButton annual    = (RadioButton)findViewById(R.id.radio_annual);
+        RadioButton perennial = (RadioButton)findViewById(R.id.radio_perennial);
+        RadioButton tree      = (RadioButton)findViewById(R.id.radio_tree);
+        if(annual.isChecked()){
+            return "annual";
+        }
+        if(perennial.isChecked()){
+            return "perennial";
+        }
+        if(tree.isChecked()){
+            return "tree";
+        }
+        Log.wtf(LOG_TAG, "No radio buttons are checked");
+        return null;
     }
 
     /**
