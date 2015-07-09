@@ -12,6 +12,12 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * This activity handles both the adding of a new plant, and the editing of an existing plant.
+ *
+ * @author Charles Smith <cas275@pitt.edu>
+ *
+ */
 
 @SuppressWarnings("deprecation")
 public class AdditActivity extends ActionBarActivity {
@@ -32,9 +38,6 @@ public class AdditActivity extends ActionBarActivity {
         if(speciesName!=null){
             setupEditMode(speciesName);
         }
-        Log.e(LOG_TAG, "this activity is not yet ready for release");
-
-
 
     }
 
@@ -125,7 +128,7 @@ public class AdditActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
 
-        return false;
+        return false;  //no menu
     }
 
     @Override
