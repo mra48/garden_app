@@ -174,8 +174,9 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:textColor="@android:color/black"
-        android:inputType="text"
-        tools:ignore="TextFields" />
+        android:inputType="number"
+        tools:ignore="TextFields"
+        android:numeric="integer" />
 
     <Button
         android:layout_width="wrap_content"
