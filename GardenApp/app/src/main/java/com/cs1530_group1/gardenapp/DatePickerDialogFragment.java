@@ -39,5 +39,14 @@ public class DatePickerDialogFragment extends DialogFragment implements android.
      */
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         //todo update textview with info
+        //setTextView(R.id.XXX, numDateToString(year,monthOfYear, dayOfMonth);
+    }
+
+    protected void setTextView(int id, String text){
+        //todo
+    }
+
+    protected String numDateToString(int year, int monthOfYear, int dayOfMonth){
+        return monthOfYear + "/" + dayOfMonth + "/" + year;
     }
 }
