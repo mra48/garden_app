@@ -169,12 +169,16 @@ public class AdditActivity extends ActionBarActivity {
             garden.addSpecies(speciesName);
         }
         garden.setDescription(speciesName,getEditTextText(R.id.description_box));
-        garden.setSize(speciesName,Integer.parseInt(getEditTextText(R.id.size_box)));
+        garden.setSize(speciesName, Integer.parseInt(getEditTextText(R.id.size_box)));
         garden.setSunLevel(speciesName, getEditTextText(R.id.sun_box));
         garden.setSpeciesType(speciesName,evalTypeRadioButtons());
         //todo dates
         //todo colors
         //todo save
+        Log.v(LOG_TAG, "Launching view info activity");
+        Intent intent = new Intent(getApplicationContext(),ViewSpeciesInfoActivity.class);
+        intent.putExtra(Intent.EXTRA_TEXT,speciesName);
+        startActivity(intent);
     }
 
     /**
