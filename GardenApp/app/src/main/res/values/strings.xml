@@ -11,4 +11,5 @@
     <string name="button_add">Add to Garden</string>
     <string name="button_edit">Edit Info</string>
     <string name="button_del">Delete</string>
+    <string name="title_activity_addit">AdditActivity</string>
 </resources>
