@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 
@@ -14,6 +15,9 @@ import android.widget.Toast;
 public class AdditActivity extends ActionBarActivity {
 
     private static final String LOG_TAG = "AdditActivity";
+    /**
+     * editMode is needed so the multiple methods know whether it's a new species or edditing one
+     */
     private boolean editMode = false;
 
     @Override
@@ -40,6 +44,25 @@ public class AdditActivity extends ActionBarActivity {
         editMode = true;
         Log.v(LOG_TAG, "we're editing" + speciesName);
 
+    }
+
+    /**
+     *
+     * @param id the id of the EditText
+     * @param str the string to populate it with
+     */
+    protected void setText(int id, String str){
+        EditText textbox = (EditText)findViewById(id);
+        textbox.setText(str);
+    }
+
+    /**
+     * disables a textbox
+     * @param id the id to be disabled
+     */
+    protected void disableEditText(int id){
+        EditText textbox = (EditText)findViewById(id);
+        textbox.setEnabled(false);
     }
 
 
