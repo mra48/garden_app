@@ -146,6 +146,9 @@ public class ViewSpeciesInfoActivity extends ActionBarActivity {
         /* logs and alerts that edit is not yet ready for the user */
         Log.e(LOG_TAG, "edit info is not yet implemented");
         Toast.makeText(getApplicationContext(),"This feature is not yet implemented", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(),AdditActivity.class);
+        intent.putExtra(Intent.EXTRA_TEXT,speciesName);
+        startActivity(intent);
     }
 
     /**
