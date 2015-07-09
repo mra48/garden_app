@@ -62,6 +62,10 @@ public class AdditActivity extends ActionBarActivity {
 
     }
 
+    /**
+     * checks the correct radio based on the string type
+     * @param type the string to compare to the buttons
+     */
     protected void selectTypeRadio(String type){
         if(type.equalsIgnoreCase("annual")){
             setRadioActive(R.id.radio_annual);
