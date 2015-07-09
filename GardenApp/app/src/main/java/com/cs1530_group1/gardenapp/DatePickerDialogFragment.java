@@ -5,16 +5,21 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.widget.DatePicker;
-import android.widget.TextView;
+
 
 import java.util.Calendar;
 
 /**
- * Created by cas275 on 7/9/15.
+ * This DialogFragment can be used for giving the user an easy way to pick dates
+ *
+ * @author Charles Smith <cas275@pitt.edu>
  */
 public class DatePickerDialogFragment extends DialogFragment implements android.app.DatePickerDialog.OnDateSetListener{
 
     @Override
+    /**
+     * called when the dialog is created
+     */
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current date as the default date in the picker
         final Calendar c = Calendar.getInstance();
@@ -29,6 +34,9 @@ public class DatePickerDialogFragment extends DialogFragment implements android.
     }
 
     @Override
+    /**
+     * called when the date is set
+     */
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
         //todo update textview with info
     }
