@@ -1,216 +1,223 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.cs1530_group1.gardenapp.AdditActivity">
+<ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/scrollView"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <RelativeLayout  android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="com.cs1530_group1.gardenapp.AdditActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/species_name_title"
-        android:id="@+id/title_species_name"
-        android:layout_alignParentTop="true"
-        android:layout_alignBottom="@+id/species_name_box"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textColor="@android:color/black"
-        android:gravity="center_vertical" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/species_name_box"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/title_species_name"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:inputType="text"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/description_title"
-        android:id="@+id/description_title"
-        android:layout_below="@+id/title_species_name"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/title_species_name"
-        android:layout_alignEnd="@+id/title_species_name"
-        android:layout_alignBottom="@+id/description_box"
-        android:textColor="@android:color/black"
-        android:gravity="center_vertical" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/description_box"
-        android:layout_below="@+id/title_species_name"
-        android:layout_toRightOf="@+id/title_species_name"
-        android:layout_alignRight="@+id/species_name_box"
-        android:layout_alignEnd="@+id/species_name_box"
-        android:textColor="@android:color/black"
-        android:inputType="text" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/type_title"
-        android:id="@+id/type_title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/description_title"
-        android:layout_toLeftOf="@+id/description_box"
-        android:layout_toStartOf="@+id/description_box"
-        android:textColor="@android:color/black"
-        android:layout_alignBottom="@+id/radioGroup_type"
-        android:gravity="center_vertical" />
-
-    <RadioGroup
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_toRightOf="@+id/description_title"
-        android:layout_below="@+id/description_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:orientation="horizontal"
-        android:id="@+id/radioGroup_type">
-
-        <RadioButton
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/annual_radio"
-            android:id="@+id/radio_annual"
-            android:checked="true" />
+            android:text="@string/species_name_title"
+            android:id="@+id/title_species_name"
+            android:layout_alignParentTop="true"
+            android:layout_alignBottom="@+id/species_name_box"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@android:color/black"
+            android:gravity="center_vertical" />
 
-        <RadioButton
+        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/perennial_title"
-            android:id="@+id/radio_perennial"
-            android:checked="false" />
+            android:id="@+id/species_name_box"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/title_species_name"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:inputType="text"
+            android:textColor="@android:color/black" />
 
-        <RadioButton
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/description_title"
+            android:id="@+id/description_title"
+            android:layout_below="@+id/title_species_name"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/title_species_name"
+            android:layout_alignEnd="@+id/title_species_name"
+            android:layout_alignBottom="@+id/description_box"
+            android:textColor="@android:color/black"
+            android:gravity="center_vertical" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/description_box"
+            android:layout_below="@+id/title_species_name"
+            android:layout_toRightOf="@+id/title_species_name"
+            android:layout_alignRight="@+id/species_name_box"
+            android:layout_alignEnd="@+id/species_name_box"
+            android:textColor="@android:color/black"
+            android:inputType="text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/type_title"
+            android:id="@+id/type_title"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/description_title"
+            android:layout_toLeftOf="@+id/description_box"
+            android:layout_toStartOf="@+id/description_box"
+            android:textColor="@android:color/black"
+            android:layout_alignBottom="@+id/radioGroup_type"
+            android:gravity="center_vertical" />
+
+        <RadioGroup
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_toRightOf="@+id/description_title"
+            android:layout_below="@+id/description_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:id="@+id/radioGroup_type">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/annual_radio"
+                android:id="@+id/radio_annual"
+                android:checked="true" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/perennial_title"
+                android:id="@+id/radio_perennial"
+                android:checked="false" />
+
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tree_radio"
+                android:id="@+id/radio_tree"
+                android:checked="false" />
+
+        </RadioGroup>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sun_title"
+            android:id="@+id/sun_title"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/type_title"
+            android:layout_alignRight="@+id/type_title"
+            android:layout_alignEnd="@+id/type_title"
+            android:textColor="@android:color/black"
+            android:layout_alignBottom="@+id/sun_box"
+            android:gravity="center_vertical" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/sun_box"
+            android:layout_below="@+id/type_title"
+            android:layout_toRightOf="@+id/sun_title"
+            android:layout_alignRight="@+id/radioGroup_type"
+            android:layout_alignEnd="@+id/radioGroup_type"
+            android:inputType="text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/plant_date_title"
+            android:id="@+id/plant_data_title"
+            android:layout_below="@+id/sun_title"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/sun_box"
+            android:layout_toStartOf="@+id/sun_box"
+            android:layout_alignBottom="@+id/plant_date_viewer"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/abc_text_size_display_2_material"
+            android:text="@string/filler_text"
+            android:id="@+id/plant_date_viewer"
+            android:layout_below="@+id/sun_title"
+            android:layout_toRightOf="@+id/sun_title"
+            android:layout_alignRight="@+id/sun_box"
+            android:layout_alignEnd="@+id/sun_box"
+            android:onClick="startDatePicker"
+            android:gravity="center_vertical|center_horizontal"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/size_title"
+            android:id="@+id/size_title"
+            android:layout_below="@+id/plant_data_title"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/plant_date_viewer"
+            android:layout_toStartOf="@+id/plant_date_viewer"
+            android:layout_alignBottom="@+id/size_box"
+            android:textColor="@android:color/black"
+            android:gravity="center_vertical" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/size_box"
+            android:layout_below="@+id/plant_data_title"
+            android:layout_toRightOf="@+id/size_title"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@android:color/black"
+            android:inputType="number"
+            tools:ignore="TextFields"
+            android:numeric="integer" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_color_button"
+            android:id="@+id/select_color_button"
+            android:layout_below="@+id/size_box"
+            android:layout_centerHorizontal="true"
+            android:onClick="startColorPicker" />
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/tree_radio"
-            android:id="@+id/radio_tree"
-            android:checked="false" />
+            android:layout_below="@+id/select_color_button"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
 
-    </RadioGroup>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sun_title"
-        android:id="@+id/sun_title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/type_title"
-        android:layout_alignRight="@+id/type_title"
-        android:layout_alignEnd="@+id/type_title"
-        android:textColor="@android:color/black"
-        android:layout_alignBottom="@+id/sun_box"
-        android:gravity="center_vertical" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/update_button"
+                android:id="@+id/update_button"
+                android:layout_weight="1"
+                android:onClick="update" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sun_box"
-        android:layout_below="@+id/type_title"
-        android:layout_toRightOf="@+id/sun_title"
-        android:layout_alignRight="@+id/radioGroup_type"
-        android:layout_alignEnd="@+id/radioGroup_type"
-        android:inputType="text" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/plant_date_title"
-        android:id="@+id/plant_data_title"
-        android:layout_below="@+id/sun_title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/sun_box"
-        android:layout_toStartOf="@+id/sun_box"
-        android:layout_alignBottom="@+id/plant_date_viewer"
-        android:gravity="center_vertical"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/abc_text_size_display_2_material"
-        android:text="@string/filler_text"
-        android:id="@+id/plant_date_viewer"
-        android:layout_below="@+id/sun_title"
-        android:layout_toRightOf="@+id/sun_title"
-        android:layout_alignRight="@+id/sun_box"
-        android:layout_alignEnd="@+id/sun_box"
-        android:onClick="startDatePicker"
-        android:gravity="center_vertical|center_horizontal"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/size_title"
-        android:id="@+id/size_title"
-        android:layout_below="@+id/plant_data_title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/plant_date_viewer"
-        android:layout_toStartOf="@+id/plant_date_viewer"
-        android:layout_alignBottom="@+id/size_box"
-        android:textColor="@android:color/black"
-        android:gravity="center_vertical" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/size_box"
-        android:layout_below="@+id/plant_data_title"
-        android:layout_toRightOf="@+id/size_title"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textColor="@android:color/black"
-        android:inputType="number"
-        tools:ignore="TextFields"
-        android:numeric="integer" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/select_color_button"
-        android:id="@+id/select_color_button"
-        android:layout_below="@+id/size_box"
-        android:layout_centerHorizontal="true"
-        android:onClick="startColorPicker" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/select_color_button"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/update_button"
-            android:id="@+id/update_button"
-            android:layout_weight="1"
-            android:onClick="update" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cancel_button"
-            android:id="@+id/cancel_button"
-            android:layout_weight="1"
-            android:onClick="cancel" />
-    </LinearLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel_button"
+                android:id="@+id/cancel_button"
+                android:layout_weight="1"
+                android:onClick="cancel" />
+        </LinearLayout>
 
 
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
