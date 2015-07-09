@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -58,8 +59,17 @@ public class AdditActivity extends ActionBarActivity {
 
         String type = garden.getSpeciesType(speciesName);
         selectTypeRadio(type);
+        setDateText(garden.getPlantDate(speciesName).toString());
 
+    }
 
+    /**
+     * sets the string in the plant_date_view to date
+     * @param date the string to be used
+     */
+    protected void setDateText(String date){
+        TextView textView = (TextView)findViewById(R.id.plant_date_viewer);
+        textView.setText(date);
     }
 
     /**
