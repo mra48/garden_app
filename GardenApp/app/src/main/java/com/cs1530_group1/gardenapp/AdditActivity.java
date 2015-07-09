@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 
@@ -41,9 +42,39 @@ public class AdditActivity extends ActionBarActivity {
      * @param speciesName the name of the species to be modified
      */
     protected void setupEditMode(String speciesName){
+
         editMode = true;
         Log.v(LOG_TAG, "we're editing" + speciesName);
 
+        App app = (App)getApplication();
+        Garden garden = app.getGarden();
+
+        disableEditText(R.id.species_name_box);  //can't change this if  you're editing
+
+        setText(R.id.species_name_box, speciesName);  //sets the species name
+        setText(R.id.description_box, garden.getDescription(speciesName));
+        setText(R.id.size_box, garden.getSize(speciesName) + "");
+        setText(R.id.sun_box, garden.getSunLevel(speciesName));
+
+        String type = garden.getSpeciesType(speciesName);
+        selectTypeRadio(type);
+
+
+    }
+
+    protected void selectTypeRadio(String type){
+        if(type.equalsIgnoreCase("annual")){
+            setRadioActive(R.id.radio_annual);
+        }
+        else if(type.equalsIgnoreCase("perennial")){
+            setRadioActive(R.id.radio_perennial);
+        }
+        else if(type.equalsIgnoreCase("tree")){
+            setRadioActive(R.id.radio_tree);
+        }
+        else{
+            Log.w(LOG_TAG,"unexpected species type: " + type);
+        }
     }
 
     /**
@@ -63,6 +94,15 @@ public class AdditActivity extends ActionBarActivity {
     protected void disableEditText(int id){
         EditText textbox = (EditText)findViewById(id);
         textbox.setEnabled(false);
+    }
+
+    /**
+     * set the radio button at id as checked
+     * @param id the id to mark checked
+     */
+    protected void setRadioActive(int id){
+        RadioButton button = (RadioButton)findViewById(id);
+        button.setChecked(true);
     }
 
 
