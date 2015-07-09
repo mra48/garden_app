@@ -13,4 +13,15 @@
     <string name="button_del">Delete</string>
     <string name="title_activity_addit">AdditActivity</string>
     <string name="species_name_title">Species Name</string>
+    <string name="description_title">Description</string>
+    <string name="type_title">Type</string>
+    <string name="annual_radio">Annual</string>
+    <string name="perennial_title">Perennial</string>
+    <string name="tree_radio">Tree</string>
+    <string name="sun_title">Sun Level</string>
+    <string name="plant_date_title">Plant Date</string>
+    <string name="size_title">Size</string>
+    <string name="select_color_button">Select Color</string>
+    <string name="update_button">Update</string>
+    <string name="cancel_button">Cancel</string>
 </resources>
