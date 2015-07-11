@@ -1,4 +1,5 @@
 package com.cs1530_group1.gardenapp;
+import android.annotation.SuppressLint;
 import android.graphics.Canvas;
 
 /**
@@ -29,6 +30,7 @@ public class DrawingThread extends Thread {
     /**
      * run : the drawing thread
      */
+    @SuppressLint("WrongCall")
     public void run() {
         while (running) {
             Canvas c = null;
