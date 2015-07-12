@@ -387,7 +387,7 @@ public class Garden implements GardenInterface{
 	*/						
     public boolean removeSpecies(String speciesName)
     {
-    	boolean found = false; //used to make sure we dont concurrently change the plantList while traversing it
+    	boolean found; //used to make sure we dont concurrently change the plantList while traversing it
     	
 		//look through species list for a match of speciesName
         for(Species s: speciesList)
@@ -409,7 +409,7 @@ public class Garden implements GardenInterface{
                         }
                     }    
     				
-    				if (found == false) //no plant with that speciesName was found in the loop, so break out of while loop
+    				if (!found) //no plant with that speciesName was found in the loop, so break out of while loop
     				{
     					break;
     				}
@@ -434,7 +434,6 @@ public class Garden implements GardenInterface{
 	*/				
     private Species getSpecies(String speciesName)
     {
-    	Species newSpecies = null;
 		
 		//go through speciesList looking for the species with the name equal to the parameter
         for (Species s : speciesList)
@@ -446,7 +445,7 @@ public class Garden implements GardenInterface{
             }
         }
         
-        return newSpecies; //return null if no species found, and a copy of the species object if it is found
+        return null; //return null if no species found, and a copy of the species object if it is found
     }
     
 	/**
