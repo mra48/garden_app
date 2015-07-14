@@ -222,6 +222,7 @@ public class GardenView extends SurfaceView {
                 circle.draw(canvas);
             }
 
+            // Only draw the temporary plant in ADD mode
             if (mode == GardenMode.ADD) {
                 // Draw the new plant
                 newPlant.draw(canvas);

@@ -56,6 +56,23 @@
             android:layout_below="@+id/Remove"
             android:layout_centerHorizontal="true" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Plant Name and Plant Date"
+            android:id="@+id/PlantDescription"
+            android:layout_below="@+id/Cancel"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Species"
+            android:id="@+id/ViewSpecies"
+            android:layout_below="@+id/PlantDescription"
+            android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
 
 

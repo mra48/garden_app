@@ -33,37 +33,38 @@ public class GardenDrawingActivity extends Activity {
         speciesName = "Sunflower";
 
         super.onCreate(savedInstanceState);
-        //setContentView(new GardenView(this, g));
 
+        // Set the layout to the garden drawing activity xml layout
         setContentView(R.layout.activity_garden_drawing);
 
+        // Get the GardenView class instance for modifications
         GardenView view_instance = (GardenView) findViewById(R.id.GardenView);
 
+        // If the speciesName is not null, then this activity is being passed in the species name
+        // of a plant to be added -- We need to set the Button Panel to visible and decrease the
+        // width of the Garden View
         if (speciesName != null) {
+            // Get the screen dimensions
             Display display = getWindowManager().getDefaultDisplay();
             Point size = new Point();
             display.getSize(size);
             int width = size.x;
 
-
+            // Get the Button panel and set it to visible
             RelativeLayout panel_instance = (RelativeLayout) findViewById(R.id.ButtonPanel);
             panel_instance.setVisibility(View.VISIBLE);
 
+            // Get the layout parameters for the GardenView and for the Button Panel
             LayoutParams params = view_instance.getLayoutParams();
             LayoutParams panel_params = panel_instance.getLayoutParams();
 
-
-            Log.v(LOG_TAG, "panel Width " + panel_params.width + " panel Height " + panel_params.height);
-
-            Log.v(LOG_TAG, "Width " + params.width + " Height " + params.height);
+            // Set the GardenView width to the screen width - the Button Panel width
             params.width = width - panel_params.width;
-            //params.height=height;
             view_instance.setLayoutParams(params);
 
-            Log.v(LOG_TAG, "Width " + params.width + " Height " + params.height);
-
+            // Set the mode to ADD so the GardenView knows to render the temporary plant
             view_instance.setMode(GardenMode.ADD);
-        }
+        } // Set the mode to VIEW so that the temporary plant is not rendered
         else view_instance.setMode(GardenMode.VIEW);
     }
 }
