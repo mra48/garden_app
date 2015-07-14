@@ -29,8 +29,10 @@ public class GardenDrawingActivity extends Activity {
         // Get the garden so that it can be passed to the GardenView
         App app = (App)getApplication();
         g = app.getGarden();
+
+        // Retrieve the species name of the plant being added if
+        // this activity is being started from Add Plant
         speciesName = getIntent().getStringExtra(Intent.EXTRA_TEXT);
-        speciesName = "Sunflower";
 
         super.onCreate(savedInstanceState);
 
@@ -44,11 +46,8 @@ public class GardenDrawingActivity extends Activity {
         // of a plant to be added -- We need to set the Button Panel to visible and decrease the
         // width of the Garden View
         if (speciesName != null) {
-            // Get the screen dimensions
-            Display display = getWindowManager().getDefaultDisplay();
-            Point size = new Point();
-            display.getSize(size);
-            int width = size.x;
+            // Get the screen width
+            int width = getScreenWidth();
 
             // Get the Button panel and set it to visible
             RelativeLayout panel_instance = (RelativeLayout) findViewById(R.id.ButtonPanel);
@@ -64,7 +63,26 @@ public class GardenDrawingActivity extends Activity {
 
             // Set the mode to ADD so the GardenView knows to render the temporary plant
             view_instance.setMode(GardenMode.ADD);
-        } // Set the mode to VIEW so that the temporary plant is not rendered
+
+        } // Else: Set the mode to VIEW so that the temporary plant is not rendered
         else view_instance.setMode(GardenMode.VIEW);
+    }
+
+    // Acquires the width of the device screen in pixels
+    private int getScreenWidth()
+    {
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        return size.x;
+    }
+
+    // Acquires the height of the device screen in pixels
+    private int getScreenHeight()
+    {
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        return size.y;
     }
 }
