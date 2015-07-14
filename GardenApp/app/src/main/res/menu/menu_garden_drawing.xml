@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.cs1530_group1.gardenapp.GardenDrawingActivity">
+    <item android:id="@+id/species_list" android:title="@string/species_list_activity_button"
+    android:orderInCategory="100" app:showAsAction="always" />
+</menu>
