@@ -12,12 +12,15 @@ import android.graphics.drawable.*;
 import android.view.SurfaceView;
 import java.util.ArrayList;
 import android.graphics.Rect;
+import android.util.AttributeSet;
 
 /**
  * GardenView : an extension of SurfaceView. Performs the actual drawing of the background
  * garden layout image and the plant circles.
  */
 public class GardenView extends SurfaceView {
+    protected GardenMode mode;
+
     protected Bitmap background; // The background image
 
     // A note about bitmaps:
@@ -59,10 +62,31 @@ public class GardenView extends SurfaceView {
      * GardenView : constructor
      * @param context : passed in automatically
      */
+    public GardenView(Context context, AttributeSet set, int defStyle)
+    {
+        super(context, set ,defStyle);
+        constructor(context, ((GardenDrawingActivity)context).g);
+    }
+    public GardenView(Context context, AttributeSet set)
+    {
+        super(context, set);
+        constructor(context, ((GardenDrawingActivity)context).g);
+    }
+    public GardenView(Context context)
+    {
+        super(context);
+        constructor(context, ((GardenDrawingActivity)context).g);
+    }
+
     public GardenView(Context context, Garden g)
     {
         super(context);
 
+        constructor(context, g);
+    }
+
+    private void constructor(Context c, Garden g)
+    {
         // set the garden
         garden = g;
 
@@ -86,6 +110,11 @@ public class GardenView extends SurfaceView {
         newPlant = new ShapeDrawable(new OvalShape());
         //newPlant.setBounds(positionToBounds(newPlant_x, newPlant_y, newPlant_size));
         newPlant.getPaint().setColor(Color.GREEN);
+    }
+
+    public void setMode(GardenMode m)
+    {
+        mode = m;
     }
 
     /** createDrawingThread :
@@ -193,8 +222,10 @@ public class GardenView extends SurfaceView {
                 circle.draw(canvas);
             }
 
-            // Draw the new plant
-            newPlant.draw(canvas);
+            if (mode == GardenMode.ADD) {
+                // Draw the new plant
+                newPlant.draw(canvas);
+            }
 
 
 
