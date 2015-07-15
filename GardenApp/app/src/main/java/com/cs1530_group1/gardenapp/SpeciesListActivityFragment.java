@@ -1,5 +1,6 @@
 package com.cs1530_group1.gardenapp;
 
+import android.app.Application;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,6 +48,7 @@ public class SpeciesListActivityFragment extends Fragment {
 
         ArrayList<String> dataList = new ArrayList<>();
         //data needs to be in a list
+        dataList.add(0, "Add a new plant species");
         Collections.addAll(dataList, gardenSpeciesList);
 
         adapter = new ArrayAdapter<>(getActivity(), R.layout.species_list_textview, R.id.list_item_species_textview,dataList);
@@ -73,11 +76,15 @@ public class SpeciesListActivityFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Log.v(LOG_TAG, "*click*");
-
-                Intent intent = new Intent(getActivity(),ViewSpeciesInfoActivity.class);
-                intent.putExtra(Intent.EXTRA_TEXT, adapter.getItem(position));
-                startActivity(intent);
-
+                if(position==0){
+                    Log.e(LOG_TAG,"This feature is not yet implemented");
+                    Toast.makeText(getActivity(),"Adding a new plant is not yet implemented",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent = new Intent(getActivity(), ViewSpeciesInfoActivity.class);
+                    intent.putExtra(Intent.EXTRA_TEXT, adapter.getItem(position));
+                    startActivity(intent);
+                }
             }
         });
 
