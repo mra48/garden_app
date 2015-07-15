@@ -10,6 +10,8 @@ import android.view.ViewGroup.LayoutParams;
 import android.graphics.Point;
 import android.view.Display;
 import android.widget.RelativeLayout;
+import android.view.Menu;
+import android.view.MenuItem;
 
 /**
  * GardenDrawingActivity : the graphical front end for drawing plants on top of the
@@ -114,4 +116,6 @@ public class GardenDrawingActivity extends ActionBarActivity {
         display.getSize(size);
         return size.y;
     }
+    
+
 }
