@@ -1,25 +1,28 @@
 package com.cs1530_group1.gardenapp;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.graphics.Point;
 import android.view.Display;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 /**
  * GardenDrawingActivity : the graphical front end for drawing plants on top of the
  * garden layout picture.
  */
+@SuppressWarnings("deprecation")
+public class GardenDrawingActivity extends ActionBarActivity {
+    //Log tag, for logging errors
+    private static final String LOG_TAG = "GardenDrawingActivity";
 
-public class GardenDrawingActivity extends Activity {
+    Garden g; // The garden being drawn
+    String speciesName; // The species of the new plant to be added
 
-    private static final String LOG_TAG = "GardenDrawingActivity"; //for when something needs logged.
-    Garden g;
-    String speciesName;
     /**
      * onCreate : creates a new GardenView
      * @param savedInstanceState
@@ -67,6 +70,31 @@ public class GardenDrawingActivity extends Activity {
 
         } // Else: Set the mode to VIEW so that the temporary plant is not rendered
         else view_instance.setMode(GardenMode.VIEW);
+    }
+    
+
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_garden_drawing, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == R.id.species_list) {
+            Log.v(LOG_TAG, "Starting SpeciesListActivity");
+            Intent intent = new Intent(this, SpeciesListActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     // Acquires the width of the device screen in pixels
