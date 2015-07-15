@@ -1,24 +1,79 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-    android:id="@+id/TopLayerLayout">
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp"
+    android:id="@+id/TopLayerLayout"
+    android:orientation="vertical">
 
-    <SurfaceView
+
+    <com.cs1530_group1.gardenapp.GardenView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/GardenSurface"
-        android:layout_gravity="left|bottom"
-        android:clickable="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:nestedScrollingEnabled="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:scrollbars="vertical"/>
-  </RelativeLayout>
+        android:id="@+id/GardenView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <RelativeLayout
+        android:layout_width="105dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|top"
+        android:id="@+id/ButtonPanel"
+        android:visibility="invisible"
+        android:background="#ffffffff">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirm"
+            android:id="@+id/Confirm"
+            android:layout_gravity="center_horizontal|top" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Another"
+            android:id="@+id/AddAnother"
+            android:layout_below="@+id/Confirm"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Remove"
+            android:id="@+id/Remove"
+            android:layout_below="@+id/AddAnother"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/Cancel"
+            android:layout_below="@+id/Remove"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Plant Name and Plant Date"
+            android:id="@+id/PlantDescription"
+            android:layout_below="@+id/Cancel"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Species"
+            android:id="@+id/ViewSpecies"
+            android:layout_below="@+id/PlantDescription"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+
+</FrameLayout>
