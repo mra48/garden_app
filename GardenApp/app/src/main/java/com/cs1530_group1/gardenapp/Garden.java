@@ -27,10 +27,10 @@ public class Garden implements GardenInterface{
         
     /**
 		This function converts a garden into a string format which can be parsed by users of this class
-		format for the string representation of the garden-> #species-speciesName-speciesDescription-speciesType (ex: 0 for annual, 1 for perennial, 2 for tree)-speciesPlantDate(using this format:MM/dd/yyyy HH:mm:ss)-speciesPruneDate(using this format:MM/dd/yyyy HH:mm:ss)-speciesSunLevel-speciesColor-speciesSize-data for next species-#plants-plantx-planty-plantSpecies-data for next plant		
+		format for the string representation of the garden-> #species-speciesName-speciesDescription-speciesType (ex: 0 for annual, 1 for perennial, 2 for tree)-speciesPlantDate(using this format:MM/dd/yyyy)-speciesPruneDate(using this format:MM/dd/yyyy)-speciesSunLevel-speciesColor-speciesSize-data for next species-#plants-plantx-planty-plantSpecies-data for next plant		
 		
 		@param g The garden that is converted to a string
-		@return The string representation of the garde 
+		@return The string representation of the garden
 	*/
     public static String gardenToString(Garden g)
     {
@@ -50,7 +50,7 @@ public class Garden implements GardenInterface{
             String pruneDate;
             String color;
             String size;
-            @SuppressLint("SimpleDateFormat") DateFormat df = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss");
+            @SuppressLint("SimpleDateFormat") DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
             garden = String.valueOf(numSpecies) + "-"; //the hyphen(-) will be used as a delimitter
             
@@ -93,7 +93,7 @@ public class Garden implements GardenInterface{
     
 	/**
 		This function converts a String into a Garden object
-		format for the string representation of the garden-> #species-speciesName-speciesDescription-speciesType (ex: 0 for annual, 1 for perennial, 2 for tree)-speciesPlantDate(using this format:MM/dd/yyyy HH:mm:ss)-speciesPruneDate(using this format:MM/dd/yyyy HH:mm:ss)-speciesSunLevel-speciesColor-speciesSize-data for next species-#plants-plantx-planty-plantSpecies-data for next plant		
+		format for the string representation of the garden-> #species-speciesName-speciesDescription-speciesType (ex: 0 for annual, 1 for perennial, 2 for tree)-speciesPlantDate(using this format:MM/dd/yyyy)-speciesPruneDate(using this format:MM/dd/yyyy)-speciesSunLevel-speciesColor-speciesSize-data for next species-#plants-plantx-planty-plantSpecies-data for next plant		
 		
 		@param g The string that is parsed and converted into a Garden
 		@return The Garden object
@@ -144,16 +144,12 @@ public class Garden implements GardenInterface{
 		  
           String parsedDate[] = parsedGarden[i+3].split(" "); //parse plant date values
           String parsedDay[] = parsedDate[0].split("/"); //parse month, day, year
-          String parsedTime[] = parsedDate[1].split(":"); //parse  hour, minute, second   
           
 		  //create calendar entry based on month, day, year, hour, minute, and second from parsed string for plant date
           Calendar cal = Calendar.getInstance();
           cal.set(Calendar.MONTH, Integer.parseInt(parsedDay[0])-1);
           cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(parsedDay[1])-1);
           cal.set(Calendar.YEAR, Integer.parseInt(parsedDay[2]));
-          cal.set(Calendar.HOUR, Integer.parseInt(parsedTime[0]));
-          cal.set(Calendar.MINUTE, Integer.parseInt(parsedTime[1]));
-          cal.set(Calendar.SECOND, Integer.parseInt(parsedTime[2]));
           
           plantDate = cal.getTime(); //set plantDate Date object using created calendar object for plant date
           
@@ -167,7 +163,7 @@ public class Garden implements GardenInterface{
       
       int numPlants = Integer.parseInt(parsedGarden[i]);
       
-      i++; //increment i because we need to go to the next parsed token in the string which containes the start of the first plant's information
+      i++; //increment i because we need to go to the next parsed token in the string which contains the start of the first plant's information
       
       newGarden.plantList = new ArrayList<>(numPlants); //create arrayList of plants
       

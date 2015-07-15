@@ -18,7 +18,7 @@ public class GardenTest extends TestCase{
 
 	@SmallTest
 	public void testGetPlantList() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993 21:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980 23:45:12-low-32-12-2-23-43-tomato-12-33-sunflower";
+		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-2-23-43-tomato-12-33-sunflower";
 		Garden g = Garden.stringToGarden(garden);
 		
 		ArrayList<Plant> plantList = g.getPlantList();
@@ -36,7 +36,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testGetSpeciesNames() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993 21:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980 23:45:12-low-32-12-1-23-43-tomato";
+		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		String names[] = g.getSpeciesNames();
@@ -48,7 +48,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testGetSpeciesInfo() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980-low-32-12-1-23-43-tomato";
+		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		Species s = g.getSpeciesInfo("tomato");
@@ -83,7 +83,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testAddPlant() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993 21:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980 23:45:12-low-32-12-1-23-43-tomato";
+		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		boolean test = g.addPlant(34, 12, "sunflower");
@@ -99,7 +99,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testRemovePlant() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993 21:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980 23:45:12-low-32-12-1-23-43-tomato";
+		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		//remove a plant that does exist
@@ -115,7 +115,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testMovePlant() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993 21:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980 23:45:12-low-32-12-1-23-43-tomato";
+		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		boolean test = g.movePlant(23, 43, 24, 45);
@@ -128,7 +128,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testAddSpecies() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993 21:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980 23:45:12-low-32-12-1-23-43-tomato";
+		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		boolean test = g.addSpecies("blueflower");
@@ -143,7 +143,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testRemoveSpecies() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993 21:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980 23:45:12-low-32-12-1-23-43-tomato";
+		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		
@@ -162,7 +162,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testSets() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993 21:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980 23:45:12-low-32-12-1-23-43-tomato";
+		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		boolean test1 = g.addSpecies("blueflower");
@@ -205,7 +205,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testGets() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993 21:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980 23:45:12-low-32-12-1-23-43-tomato";
+		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
 		Garden g = Garden.stringToGarden(garden);
 				
 		String type = g.getSpeciesType("tomato");
@@ -233,7 +233,7 @@ public class GardenTest extends TestCase{
 		assertEquals(des, "a tomato species");
 		assertEquals(color, 25);
 		assertEquals(size, 33);
-		assertEquals(pruneDate,  "03/03/1993 21:22:13");
+		assertEquals(pruneDate,  "03/03/1993");
 		//assertEquals(getPruneDate.getTime(),  pruneDate.getTime()); //this test passes most of the time, but sometimes the milliseconds dont line up
 		
 		g.addSpecies("newSpecies");
