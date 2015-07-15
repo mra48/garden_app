@@ -42,7 +42,7 @@ public class GardenDrawingActivity extends ActionBarActivity {
         // Retrieve the species name of the plant being added if
         // this activity is being started from Add Plant
         speciesName = getIntent().getStringExtra(Intent.EXTRA_TEXT);
-        speciesName = "Sunflower";
+        speciesName = "sunflower";
         
         super.onCreate(savedInstanceState);
 
@@ -74,6 +74,9 @@ public class GardenDrawingActivity extends ActionBarActivity {
 
             // Set the mode to ADD so the GardenView knows to render the temporary plant
             gardenView.setMode(GardenMode.ADD);
+
+            // Set the species to be added
+            gardenView.setNewPlantSpecies(speciesName);
 
         } // Else: Set the mode to VIEW so that the temporary plant is not rendered
         else gardenView.setMode(GardenMode.VIEW);
