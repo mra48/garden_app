@@ -12,13 +12,13 @@ import java.util.*;
  * @author Muneeb
  */
 public class Species {
- 
+	 
     String name;
     String des;
     String sun;
     String type;
     Date plantDate;
-    Date pruneDate;
+    String pruneDate;
     int color;
     int size;
     
@@ -30,12 +30,12 @@ public class Species {
 		@param sun the sun level of the species
 		@param type the growth patterns of the species such as annual
 		@param plantDate the date the species was planted
-		@param pruneDate the recommended prune date of the species based on the plantdate 
+		@param pruneDate the recommended prune date of the species
 		@param color the color of the species when it is represented in the Garden
 		@param size the radius of the species that determines where a Plant with this species can be placed	
 		
 	*/
-    public Species(String name, String des, String sun, String type, Date plantDate, Date pruneDate, int color, int size)
+    public Species(String name, String des, String sun, String type, Date plantDate, String pruneDate, int color, int size)
     {
         this.name = name;
         this.des = des;

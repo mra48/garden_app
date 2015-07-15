@@ -48,7 +48,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testGetSpeciesInfo() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993 21:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980 23:45:12-low-32-12-1-23-43-tomato";
+		String garden = "2-tomato-a tomato species-Annual-01/23/1993 23:25:12-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 22:42:12-04/12/1980-low-32-12-1-23-43-tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		Species s = g.getSpeciesInfo("tomato");
@@ -60,6 +60,7 @@ public class GardenTest extends TestCase{
 		assertEquals(s.sun, "high");
 		assertEquals(s.color, 25);
 		assertEquals(s.size, 33);
+		assertEquals(s.pruneDate, "03/03/1993");
 		
 		g.addSpecies("testspecies");
 		
@@ -172,12 +173,10 @@ public class GardenTest extends TestCase{
 		boolean test6 = g.setSunLevel("blueflower", "high");
 				
 		Calendar cal = Calendar.getInstance();
-		Date pruneDate = cal.getTime();
 		Date plantDate = cal.getTime();
 		
 		boolean test7 = g.setPlantDate("blueflower", plantDate);
-		boolean test8 = g.setPlantDate("blueflower", pruneDate);
-		
+		boolean test8 = g.setPruneDate("blueflower", "01/01/1990");
 
 		boolean test9 = g.setColor("noflower", 25);
 		boolean test10 = g.setDescription("noflower", "A blue flower");
@@ -195,6 +194,7 @@ public class GardenTest extends TestCase{
 		assertTrue(test7);
 		assertTrue(test8);
 		
+		
 		//make sure that sets were unsucessful because noflower does not exist in the speciesList
 		assertFalse(test9);
 		assertFalse(test10);
@@ -211,7 +211,7 @@ public class GardenTest extends TestCase{
 		String type = g.getSpeciesType("tomato");
 		String sun = g.getSunLevel("tomato");
 		String des = g.getDescription("tomato");
-		//Date getPruneDate = g.getPruneDate("tomato");
+		String pruneDate = g.getPruneDate("tomato");
 		//Date getPlantDate = g.getPlantDate("tomato");
 		int color = g.getColor("tomato");
 		int size = g.getSize("tomato");
@@ -226,16 +226,6 @@ public class GardenTest extends TestCase{
       cal.set(Calendar.SECOND, 12);
       
       //Date plantDate = cal.getTime();
-      
-      //set up calendar for prune date test
-      cal.set(Calendar.MONTH, 2);
-      cal.set(Calendar.DAY_OF_MONTH, 2);
-      cal.set(Calendar.YEAR, 1993);
-      cal.set(Calendar.HOUR, 22);
-      cal.set(Calendar.MINUTE, 45);
-      cal.set(Calendar.SECOND, 13);
-      
-      //Date pruneDate = cal.getTime();
 		
 		// make sure correct values are set for the species
 		assertEquals(type,"Annual");
@@ -243,7 +233,7 @@ public class GardenTest extends TestCase{
 		assertEquals(des, "a tomato species");
 		assertEquals(color, 25);
 		assertEquals(size, 33);
-		//assertEquals(getPlantDate.getTime(),  plantDate.getTime()); //this test passes most of the time, but sometimes the milliseconds dont line up
+		assertEquals(pruneDate,  "03/03/1993 21:22:13");
 		//assertEquals(getPruneDate.getTime(),  pruneDate.getTime()); //this test passes most of the time, but sometimes the milliseconds dont line up
 		
 		g.addSpecies("newSpecies");
@@ -254,7 +244,7 @@ public class GardenTest extends TestCase{
 		des = g.getDescription("newSpecies");
 		color = g.getColor("newSpecies");
 		size = g.getSize("newSpecies");
-		//pruneDate = g.getPruneDate("newSpecies");
+		pruneDate = g.getPruneDate("newSpecies");
 		//plantDate = g.getPlantDate("newSpecies");
 		
 		assertEquals(type, null);
@@ -262,7 +252,7 @@ public class GardenTest extends TestCase{
 		assertEquals(des, null);
 		assertEquals(color, 0);
 		assertEquals(size, 0);
-		//assertEquals(pruneDate, null);
+		assertEquals(pruneDate, null);
 		//assertEquals(plantDate, null);
 		
 		//make sure that correct value returned when species does not exist
@@ -272,7 +262,7 @@ public class GardenTest extends TestCase{
 		des = g.getDescription("fakeSpecies");
 		color = g.getColor("fakeSpecies");
 		size = g.getSize("fakeSpecies");
-		//pruneDate = g.getPruneDate("fakeSpecies");
+		pruneDate = g.getPruneDate("fakeSpecies");
 		//plantDate = g.getPlantDate("fakeSpecies");		
 		
 		assertEquals(type, null);
@@ -280,7 +270,7 @@ public class GardenTest extends TestCase{
 		assertEquals(des, null);
 		assertEquals(color, 0);
 		assertEquals(size, 0);
-		//assertEquals(pruneDate, null);
+		assertEquals(pruneDate, null);
 		//assertEquals(plantDate, null);
 		
 	}

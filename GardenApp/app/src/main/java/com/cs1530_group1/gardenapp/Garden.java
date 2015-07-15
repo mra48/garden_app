@@ -66,7 +66,7 @@ public class Garden implements GardenInterface{
                 size = String.valueOf(s.size);
                 
                 plantDate = df.format(s.plantDate);
-                pruneDate = df.format(s.pruneDate);
+                pruneDate = s.pruneDate;
 
                 garden += name + "-" + des + "-" + type + "-" + plantDate + "-" + pruneDate + "-" + sun + "-" + color + "-" + size + "-";
             }
@@ -121,7 +121,7 @@ public class Garden implements GardenInterface{
         int size;
         int color;
         Date plantDate;
-        Date pruneDate;
+        String pruneDate;
 		
 		//fields of a plant
         int x;
@@ -157,21 +157,7 @@ public class Garden implements GardenInterface{
           
           plantDate = cal.getTime(); //set plantDate Date object using created calendar object for plant date
           
-		  
-          String parsedDate2[] = parsedGarden[i+4].split(" "); //used to parse the prune date values
-          String parsedDay2[] = parsedDate2[0].split("/"); //parse month, day, year
-          String parsedTime2[] = parsedDate2[1].split(":"); //parse hour, minute, second
-          
-          //create calendar entry based on month, day, year, hour, minute, and second from parsed string for prune date
-          Calendar cal2 = Calendar.getInstance();
-          cal2.set(Calendar.MONTH, Integer.parseInt(parsedDay2[0])-1);
-          cal2.set(Calendar.DAY_OF_MONTH, Integer.parseInt(parsedDay2[1])-1);
-          cal2.set(Calendar.YEAR, Integer.parseInt(parsedDay2[2]));
-          cal2.set(Calendar.HOUR, Integer.parseInt(parsedTime2[0]));
-          cal2.set(Calendar.MINUTE, Integer.parseInt(parsedTime2[1]));
-          cal2.set(Calendar.SECOND, Integer.parseInt(parsedTime2[2]));        
-          
-          pruneDate = cal2.getTime(); //set pruneDate Date object using created calendar object for plant date
+          pruneDate = parsedGarden[i+4]; //set pruneDate string
           
                     
           Species newSpecies = new Species(name, des,sun,  type, plantDate, pruneDate, color, size);  //create species based on parsed string		
@@ -250,7 +236,7 @@ public class Garden implements GardenInterface{
     public Species getSpeciesInfo(String speciesName)
     {
     	Species newSpecies = null;
-		Date pruneDate = null;
+		String pruneDate = null;
 		Date plantDate = null;
     	
 		//go through speciesList looking for the species with the name equal to the parameter
@@ -262,7 +248,7 @@ public class Garden implements GardenInterface{
             	/*
             	 * these checks are here to make sure that the newSpecies 
             	 * object does not have a null pointer exception 
-            	 * concerning the prune date or plant date because in some instances, 
+            	 * concerning the plant date because in some instances, 
             	 * these fields could be null (such as if the user creates a new species
             	 *  without setting all of the fields such as prune date or plant date
             	 * 
@@ -272,12 +258,7 @@ public class Garden implements GardenInterface{
             		plantDate = (Date) s.plantDate.clone();
             	}
             	
-            	if (s.pruneDate != null)
-            	{
-            		pruneDate = (Date) s.pruneDate.clone();
-            	}
-            	
-            	newSpecies = new Species(s.name, s.des, s.sun, s.type, plantDate, pruneDate, s.color, s.size);
+            	newSpecies = new Species(s.name, s.des, s.sun, s.type, plantDate, s.pruneDate, s.color, s.size);
             		
                 break;
             }
@@ -522,7 +503,7 @@ public class Garden implements GardenInterface{
 		@param pruneDate the desired pruneDate
 		@return true if the species pruneDate was set, false if the species is not in the speciesList
 	*/					
-    public boolean setPruneDate(String speciesName, Date pruneDate)
+    public boolean setPruneDate(String speciesName, String pruneDate)
     {
 		//get the species and make sure it exists in the list
     	Species s = getSpecies(speciesName);
@@ -664,7 +645,7 @@ public class Garden implements GardenInterface{
 		@param speciesName the name of the species whose pruneDate is desired
 		@return a clone of the pruneDate of the species
 	*/					
-    public Date getPruneDate(String speciesName)
+    public String getPruneDate(String speciesName)
     {
 		//get the species and make sure it exists in the list
     	Species s = getSpecies(speciesName);
@@ -672,10 +653,7 @@ public class Garden implements GardenInterface{
 		//if s exists
     	if (s != null)
     	{
-    		if (s.pruneDate != null)
-    		{
-            	return (Date) s.pruneDate.clone(); //return a clone of the prune date    			
-    		}
+    		return s.pruneDate;
     	}
     	
         return null; //return null if the species wasnt found
