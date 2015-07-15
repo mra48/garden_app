@@ -12,6 +12,7 @@ import android.view.Display;
 import android.widget.RelativeLayout;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 /**
  * GardenDrawingActivity : the graphical front end for drawing plants on top of the
@@ -24,6 +25,9 @@ public class GardenDrawingActivity extends ActionBarActivity {
 
     Garden g; // The garden being drawn
     String speciesName; // The species of the new plant to be added
+
+    GardenView gardenView; // The view that does all the drawing
+    RelativeLayout buttonPanel; // The panel that holds all the buttons for adding,removing, cancelling, etc
 
     /**
      * onCreate : creates a new GardenView
@@ -38,15 +42,17 @@ public class GardenDrawingActivity extends ActionBarActivity {
         // Retrieve the species name of the plant being added if
         // this activity is being started from Add Plant
         speciesName = getIntent().getStringExtra(Intent.EXTRA_TEXT);
-        //speciesName = "Sunflower";
+        speciesName = "Sunflower";
         
         super.onCreate(savedInstanceState);
 
         // Set the layout to the garden drawing activity xml layout
         setContentView(R.layout.activity_garden_drawing);
 
-        // Get the GardenView class instance for modifications
-        GardenView view_instance = (GardenView) findViewById(R.id.GardenView);
+        // Get the GardenView class instance and RelativeLayout button panel for modifications
+        gardenView = (GardenView) findViewById(R.id.GardenView);
+        buttonPanel = (RelativeLayout) findViewById(R.id.ButtonPanel);
+
 
         // If the speciesName is not null, then this activity is being passed in the species name
         // of a plant to be added -- We need to set the Button Panel to visible and decrease the
@@ -55,23 +61,22 @@ public class GardenDrawingActivity extends ActionBarActivity {
             // Get the screen width
             int width = getScreenWidth();
 
-            // Get the Button panel and set it to visible
-            RelativeLayout panel_instance = (RelativeLayout) findViewById(R.id.ButtonPanel);
-            panel_instance.setVisibility(View.VISIBLE);
+            // Set the panel to visible
+            buttonPanel.setVisibility(View.VISIBLE);
 
             // Get the layout parameters for the GardenView and for the Button Panel
-            LayoutParams params = view_instance.getLayoutParams();
-            LayoutParams panel_params = panel_instance.getLayoutParams();
+            LayoutParams params = gardenView.getLayoutParams();
+            LayoutParams panel_params = buttonPanel.getLayoutParams();
 
             // Set the GardenView width to the screen width - the Button Panel width
             params.width = width - panel_params.width;
-            view_instance.setLayoutParams(params);
+            gardenView.setLayoutParams(params);
 
             // Set the mode to ADD so the GardenView knows to render the temporary plant
-            view_instance.setMode(GardenMode.ADD);
+            gardenView.setMode(GardenMode.ADD);
 
         } // Else: Set the mode to VIEW so that the temporary plant is not rendered
-        else view_instance.setMode(GardenMode.VIEW);
+        else gardenView.setMode(GardenMode.VIEW);
     }
     
 
@@ -115,6 +120,31 @@ public class GardenDrawingActivity extends ActionBarActivity {
         Point size = new Point();
         display.getSize(size);
         return size.y;
+    }
+
+    public void confirmClicked(View view)
+    {
+        Toast.makeText(this, "Confirm not yet implemented", Toast.LENGTH_SHORT).show();
+    }
+
+    public void addAnotherClicked(View view)
+    {
+        Toast.makeText(this, "Add Another not yet implemented", Toast.LENGTH_SHORT).show();
+    }
+
+    public void cancelClicked(View view)
+    {
+        Toast.makeText(this, "Cancel not yet implemented", Toast.LENGTH_SHORT).show();
+    }
+
+    public void removeClicked(View view)
+    {
+        Toast.makeText(this, "Remove not yet implemented", Toast.LENGTH_SHORT).show();
+    }
+
+    public void viewSpeciesClicked(View view)
+    {
+        Toast.makeText(this, "View Species not yet implemented", Toast.LENGTH_SHORT).show();
     }
     
 

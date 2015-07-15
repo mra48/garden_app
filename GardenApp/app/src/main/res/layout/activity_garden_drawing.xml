@@ -30,7 +30,8 @@
             android:layout_height="wrap_content"
             android:text="Confirm"
             android:id="@+id/Confirm"
-            android:layout_gravity="center_horizontal|top" />
+            android:layout_gravity="center_horizontal|top"
+            android:onClick="confirmClicked" />
 
         <Button
             android:layout_width="match_parent"
@@ -38,7 +39,8 @@
             android:text="Add Another"
             android:id="@+id/AddAnother"
             android:layout_below="@+id/Confirm"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:onClick="addAnotherClicked" />
 
         <Button
             android:layout_width="match_parent"
@@ -46,7 +48,8 @@
             android:text="Remove"
             android:id="@+id/Remove"
             android:layout_below="@+id/AddAnother"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:onClick="removeClicked" />
 
         <Button
             android:layout_width="match_parent"
@@ -54,7 +57,8 @@
             android:text="Cancel"
             android:id="@+id/Cancel"
             android:layout_below="@+id/Remove"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:onClick="cancelClicked" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -71,7 +75,8 @@
             android:text="View Species"
             android:id="@+id/ViewSpecies"
             android:layout_below="@+id/PlantDescription"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:onClick="viewSpeciesClicked" />
 
     </RelativeLayout>
 
