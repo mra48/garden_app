@@ -68,7 +68,7 @@ public class GardenViewTest extends ActivityTestCase {
         GardenView gv = new GardenView(getInstrumentation().getTargetContext(), new Garden());
         int color = Color.RED;
         int size = 50;
-        Species s = new Species("Tomato", "A plump red fruit", "Gracious sunbeams", "annual", new Date(2015, 5, 1), new Date(2015, 6, 1), color, size);
+        Species s = new Species("Tomato", "A plump red fruit", "Gracious sunbeams", "annual", new Date(2015, 5, 1), "06/01/2015", color, size);
         int x = 100;
         int y = 100;
         Plant p = new Plant(x, y, s);
