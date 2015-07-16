@@ -125,6 +125,8 @@ public class GardenDrawingActivity extends ActionBarActivity {
         return size.y;
     }
 
+    // Services the Confirm button on the panel of buttons -- will cause the temporary plant
+    // that has been moved around to be firmly planted in the Garden
     public void confirmClicked(View view)
     {
         //Toast.makeText(this, "Confirm not yet implemented", Toast.LENGTH_SHORT).show();
@@ -132,22 +134,30 @@ public class GardenDrawingActivity extends ActionBarActivity {
 
     }
 
+    // Services the Add Another button on the panel of buttons -- will cause a new temporary plant
+    // to be created so that the user can move it around and ultimately plant it.
     public void addAnotherClicked(View view)
     {
         //Toast.makeText(this, "Add Another not yet implemented", Toast.LENGTH_SHORT).show();
         gardenView.addAnotherPlant();
     }
 
+    // Services the Cancel button on the panel of buttons -- the functionality has not yet been
+    // implemented
     public void cancelClicked(View view)
     {
         Toast.makeText(this, "Cancel not yet implemented", Toast.LENGTH_SHORT).show();
     }
 
+    // Services the Remove button on the panel of buttons -- the functionality has not yet been
+    // implemented
     public void removeClicked(View view)
     {
         Toast.makeText(this, "Remove not yet implemented", Toast.LENGTH_SHORT).show();
     }
 
+    // Servies the View Species button on the panel of buttons -- the functionality has not yet
+    // been implemented
     public void viewSpeciesClicked(View view)
     {
         Toast.makeText(this, "View Species not yet implemented", Toast.LENGTH_SHORT).show();
