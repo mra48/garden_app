@@ -88,8 +88,7 @@ public class GardenView extends SurfaceView {
 
     // Does the real work when the class is instantiated
     // This is the code that was previously in 'public GardenView(Context context, Garden g)'
-    private void constructor(Context c, Garden g)
-    {
+    private void constructor(Context c, Garden g) {
         // set the garden
         garden = g;
 
@@ -97,7 +96,7 @@ public class GardenView extends SurfaceView {
         createDrawingThread();
 
         // Set the listener
-        this.setOnTouchListener(new GardenTouchListener() );
+        this.setOnTouchListener(new GardenTouchListener());
 
         // Register for the callbacks
         holder = getHolder();
@@ -111,9 +110,29 @@ public class GardenView extends SurfaceView {
 
     }
 
+    // Sets up the Garden View so that another plant can be added
+    public void addAnotherPlant()
+    {
+        setNewPlantSpecies(tempPlant.s.name);
+        mode = GardenMode.ADD;
+
+        // Temp hack to make sure that the plant can be seen while debugging new code
+        if (tempPlant.s.color < 255 && tempPlant.s.color > 0) tempPlant.s.color = Color.GREEN;
+    }
+
+    // ConfirmNewPlantLocation : add the plant to the plant list
+    // and make it permanent
     public void confirmNewPlantLocation()
     {
+        // Add to the library
+        garden.addPlant(tempPlant.x, tempPlant.y, tempPlant.s.name);
 
+        // Add to the list of circles
+        plantCircles.add(tempPlantCircle);
+
+        // Exit add mode -- this will not cause the panel to disappear, just causes the
+        // temporary plant not to be drawn
+        setMode(GardenMode.VIEW);
     }
 
     // Allows the species name of the new plant to be passed in when the
@@ -121,11 +140,15 @@ public class GardenView extends SurfaceView {
     public void setNewPlantSpecies(String speciesName)
     {
         tempPlant = new Plant(0, 0, garden.getSpeciesInfo(speciesName));
-        if (tempPlant.s.color == 0) tempPlant.s.color = Color.GREEN;
+
+        // Temp hack to make sure that the plant can be seen while debugging new code
+        if (tempPlant.s.color < 255 && tempPlant.s.color > 0) tempPlant.s.color = Color.GREEN;
 
         // Set the new plant to 0,0 and retrieve its species from the garden interface
         tempPlantCircle = plantToCircle(tempPlant);
-        Log.d("Garden View", "setNewPlantSpecies: size " +  tempPlant.s.size + " color " + tempPlant.s.color + "\n");
+        //tempPlantCircle = new ShapeDrawable(new OvalShape());
+        //tempPlantCircle.getPaint().setColor(Color.GREEN);
+        Log.d("Garden View", "setNewPlantSpecies: size " + tempPlant.s.size + " color " + tempPlant.s.color + " green " + Color.GREEN + "\n");
     }
 
     public void setMode(GardenMode m)
@@ -147,7 +170,7 @@ public class GardenView extends SurfaceView {
      */
     protected double getRadiusScaleFactor()
     {
-        return 4;
+        return 1;
     }
 
     /**

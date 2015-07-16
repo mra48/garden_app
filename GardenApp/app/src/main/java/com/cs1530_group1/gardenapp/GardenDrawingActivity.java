@@ -127,12 +127,15 @@ public class GardenDrawingActivity extends ActionBarActivity {
 
     public void confirmClicked(View view)
     {
-        Toast.makeText(this, "Confirm not yet implemented", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Confirm not yet implemented", Toast.LENGTH_SHORT).show();
+        gardenView.confirmNewPlantLocation();
+
     }
 
     public void addAnotherClicked(View view)
     {
-        Toast.makeText(this, "Add Another not yet implemented", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Add Another not yet implemented", Toast.LENGTH_SHORT).show();
+        gardenView.addAnotherPlant();
     }
 
     public void cancelClicked(View view)
