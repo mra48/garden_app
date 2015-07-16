@@ -2,6 +2,7 @@ package com.cs1530_group1.gardenapp;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * The MainActivity of an app is the screen that is first loaded upon a user opening an app.
@@ -23,11 +25,6 @@ public class MainActivity extends ActionBarActivity {
 
     //Log tag, for logging errors
     private static final String LOG_TAG = "Main Activity";
-
-    /**
-     *  This string should be used to create the garden when a garden cannot be loaded.
-     */
-    private static final String DEFAULT_GARDEN_STRING = "2-tomato-a tomato species-Annual-01/23/1993 11:25:12-03/03/1993 09:22:13-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986 10:42:12-04/12/1980 11:45:12-low-32-12-1-23-43-tomato";
 
     /**
      *
@@ -105,11 +102,31 @@ public class MainActivity extends ActionBarActivity {
      */
     protected void loadDefaultGarden(App app){
         Log.v(LOG_TAG, "loading default garden");
-        app.setGarden(Garden.stringToGarden(DEFAULT_GARDEN_STRING));
+
+        Garden newGarden = new Garden();
+        newGarden.addSpecies("tomato");
+        newGarden.setColor("tomato", Color.RED);
+        newGarden.setDescription("tomato", "my red tomato!");
+        newGarden.setPlantDate("tomato", new Date(1993, 12, 1));
+        newGarden.setSize("tomato", 25);
+        newGarden.setSpeciesType("tomato", "Annual");
+        newGarden.setSunLevel("tomato", "low");
+        newGarden.setPruneDate("tomato", "m0nthly");
+
+        newGarden.addSpecies("sunflower");
+        newGarden.setColor("sunflower", Color.YELLOW);
+        newGarden.setDescription("sunflower", "my yellow sunflower!");
+        newGarden.setPlantDate("sunflower", new Date(1980, 12, 1));
+        newGarden.setSize("sunflower", 50);
+        newGarden.setSpeciesType("sunflower", "Perennial");
+        newGarden.setSunLevel("sunflower", "high");
+        newGarden.setPruneDate("sunflower", "dont need to prune");
+
+        app.setGarden(newGarden);
 
         /* try to save the new garden */
         try{
-            FileOperation.save(App.SAVEFILE_NAME,DEFAULT_GARDEN_STRING);
+            FileOperation.save(App.SAVEFILE_NAME, Garden.gardenToString(app.getGarden()));
             Log.v(LOG_TAG, "saving default garden");
         }
         catch (IOException e){
