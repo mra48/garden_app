@@ -124,15 +124,17 @@ public class GardenView extends SurfaceView {
     // and make it permanent
     public void confirmNewPlantLocation()
     {
-        // Add to the library
-        garden.addPlant(tempPlant.x, tempPlant.y, tempPlant.s.name);
+        if (mode == GardenMode.ADD) {
+            // Add to the library
+            garden.addPlant(tempPlant.x, tempPlant.y, tempPlant.s.name);
 
-        // Add to the list of circles
-        plantCircles.add(tempPlantCircle);
+            // Add to the list of circles
+            plantCircles.add(tempPlantCircle);
 
-        // Exit add mode -- this will not cause the panel to disappear, just causes the
-        // temporary plant not to be drawn
-        setMode(GardenMode.VIEW);
+            // Exit add mode -- this will not cause the panel to disappear, just causes the
+            // temporary plant not to be drawn
+            setMode(GardenMode.VIEW);
+        }
     }
 
     // Allows the species name of the new plant to be passed in when the
@@ -174,8 +176,8 @@ public class GardenView extends SurfaceView {
     }
 
     /**
-     * Takes the center of the circle (x, y) and the generic size and
-     * produces the bounds of the circle with a radius scaled based on the screen size
+     * Takes the center of the circle (x, y) and the scaled size and
+     * produces the bounds of the circle with a radius
      * @param x
      * @param y
      * @param size
@@ -183,8 +185,7 @@ public class GardenView extends SurfaceView {
      */
     protected Rect positionToBounds(int x, int y, int size)
     {
-        int radius = (int)(size * getRadiusScaleFactor()); // scale the size
-        Rect bounds = new Rect(x - radius, y - radius, x + radius, y + radius); // make (x, y) the center, so offset by the radius
+        Rect bounds = new Rect(x - size, y - size, x + size, y + size); // make (x, y) the center, so offset by the radius
 
         return bounds;
     }
@@ -205,7 +206,7 @@ public class GardenView extends SurfaceView {
         // Set the proper bounds
         // (p.x, p.y) is the center
         // p.s.size is the species size (unscaled radius)
-        circle.setBounds(positionToBounds(p.x, p.y, p.s.size));
+        circle.setBounds(positionToBounds(p.x, p.y, (int)(p.s.size*getRadiusScaleFactor())));
 
         return circle;
     }
@@ -413,6 +414,12 @@ public class GardenView extends SurfaceView {
                             tempPlant.y += deltaY;
                         }
 
+                        // Make sure that all the plants stay on the same place in the garden relative to the background
+                        for (ShapeDrawable circle : plantCircles)
+                        {
+
+                            circle.setBounds(positionToBounds(circle.getBounds().centerX() + deltaX, circle.getBounds().centerY() + deltaY, circle.getBounds().width()/2));
+                        }
 
                     }
                     // This would be the case when a plant is being selected to be moved
@@ -437,7 +444,7 @@ public class GardenView extends SurfaceView {
             if (mode == GardenMode.ADD) {
 
                 // Set the bounds for the circle centered around where the user tapped
-                tempPlantCircle.setBounds(positionToBounds(tempPlant.x, tempPlant.y, tempPlant.s.size));
+                tempPlantCircle.setBounds(positionToBounds(tempPlant.x, tempPlant.y, (int)(tempPlant.s.size*getRadiusScaleFactor())));
                 Log.d("Garden View", "onTap: x " + tempPlant.x + " y" + tempPlant.y + "\n");
             }
             return true;
