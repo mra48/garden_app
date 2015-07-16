@@ -43,7 +43,7 @@ public class GardenDrawingActivity extends ActionBarActivity {
         // Retrieve the species name of the plant being added if
         // this activity is being started from Add Plant
         speciesName = getIntent().getStringExtra(Intent.EXTRA_TEXT);
-        //speciesName = "sunflower";
+        speciesName = "sunflower";
         
         super.onCreate(savedInstanceState);
 
@@ -147,7 +147,19 @@ public class GardenDrawingActivity extends ActionBarActivity {
     // implemented
     public void cancelClicked(View view)
     {
-        Toast.makeText(this, "Cancel not yet implemented", Toast.LENGTH_SHORT).show();
+        // Set the panel to visible
+        buttonPanel.setVisibility(View.INVISIBLE);
+
+        // Get the layout parameters for the GardenView and for the Button Panel
+        LayoutParams params = gardenView.getLayoutParams();
+        LayoutParams panel_params = buttonPanel.getLayoutParams();
+
+        // Set the GardenView width to the screen width
+        params.width = getScreenWidth();
+        gardenView.setLayoutParams(params);
+
+        // Set the mode to ADD so the GardenView knows to render the temporary plant
+        gardenView.setMode(GardenMode.VIEW);
     }
 
     // Services the Remove button on the panel of buttons -- the functionality has not yet been

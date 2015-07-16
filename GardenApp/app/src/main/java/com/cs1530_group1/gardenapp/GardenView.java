@@ -113,7 +113,7 @@ public class GardenView extends SurfaceView {
         mode = GardenMode.ADD;
 
         // Temp hack to make sure that the plant can be seen while debugging new code
-        //if (tempPlant.s.color < 255 && tempPlant.s.color > 0) tempPlant.s.color = Color.GREEN;
+        if (tempPlant.s.color < 255 && tempPlant.s.color > 0) tempPlant.s.color = Color.GREEN;
     }
 
     // ConfirmNewPlantLocation : add the plant to the plant list
@@ -140,7 +140,7 @@ public class GardenView extends SurfaceView {
         tempPlant = new Plant(0, 0, garden.getSpeciesInfo(speciesName));
 
         // Temp hack to make sure that the plant can be seen while debugging new code
-        //if (tempPlant.s.color < 255 && tempPlant.s.color > 0) tempPlant.s.color = Color.GREEN;
+        if (tempPlant.s.color < 255 && tempPlant.s.color > 0) tempPlant.s.color = Color.GREEN;
 
         // Set the new plant to 0,0 and retrieve its species from the garden interface
         tempPlantCircle = plantToCircle(tempPlant);
@@ -201,6 +201,8 @@ public class GardenView extends SurfaceView {
 
         // Set the color
         circle.getPaint().setColor(p.s.color);
+        // Temp hack to make sure that the plant can be seen while debugging new code
+        if (circle.getPaint().getColor() < 255 && circle.getPaint().getColor() > 0) circle.getPaint().setColor(Color.GREEN);
 
         // Set the proper bounds
         // (p.x, p.y) is the center
