@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.shapes.OvalShape;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -39,15 +40,9 @@ public class GardenView extends SurfaceView {
 
     protected SurfaceHolder holder; // Need to register callbacks for the holder of this SurfaceView
 
-    // A circle used for adding a new plant
-    private ShapeDrawable newPlant = null;
-    private int newPlant_x = 0; // x-coordinate relative to background_x
-    private int newPlant_y = 0; // y-coordinate relative to background_y
-    private int newPlant_size = 25; // The radius of the circle
-
-    // Boolean to tell if the circle is being placed right now -- if true, then the circle should
-    // be drawn; otherwise, it should not be drawn
-    private boolean addingPlant = false;
+    // A circle used for adding a new plant or moving an existing one
+    protected ShapeDrawable tempPlantCircle = null;
+    protected Plant tempPlant = null;
 
     protected DrawingThread drawingThread; // The drawing thread
 
@@ -89,8 +84,7 @@ public class GardenView extends SurfaceView {
 
     // Does the real work when the class is instantiated
     // This is the code that was previously in 'public GardenView(Context context, Garden g)'
-    private void constructor(Context c, Garden g)
-    {
+    private void constructor(Context c, Garden g) {
         // set the garden
         garden = g;
 
@@ -98,7 +92,7 @@ public class GardenView extends SurfaceView {
         createDrawingThread();
 
         // Set the listener
-        this.setOnTouchListener(new GardenTouchListener() );
+        this.setOnTouchListener(new GardenTouchListener());
 
         // Register for the callbacks
         holder = getHolder();
@@ -110,12 +104,50 @@ public class GardenView extends SurfaceView {
         // Initially there should be a list of plants -- produce a list of circles from the plants
         plantCircles = getAllPlantCircles();
 
-        // Create the temporary circle for adding new plants
-        newPlant = new ShapeDrawable(new OvalShape());
-        //newPlant.setBounds(positionToBounds(newPlant_x, newPlant_y, newPlant_size));
-        newPlant.getPaint().setColor(Color.GREEN);
     }
 
+    // Sets up the Garden View so that another plant can be added
+    public void addAnotherPlant()
+    {
+        setNewPlantSpecies(tempPlant.s.name);
+        mode = GardenMode.ADD;
+
+        // Temp hack to make sure that the plant can be seen while debugging new code
+        //if (tempPlant.s.color < 255 && tempPlant.s.color > 0) tempPlant.s.color = Color.GREEN;
+    }
+
+    // ConfirmNewPlantLocation : add the plant to the plant list
+    // and make it permanent
+    public void confirmNewPlantLocation()
+    {
+        if (mode == GardenMode.ADD) {
+            // Add to the library
+            garden.addPlant(tempPlant.x, tempPlant.y, tempPlant.s.name);
+
+            // Add to the list of circles
+            plantCircles.add(tempPlantCircle);
+
+            // Exit add mode -- this will not cause the panel to disappear, just causes the
+            // temporary plant not to be drawn
+            setMode(GardenMode.VIEW);
+        }
+    }
+
+    // Allows the species name of the new plant to be passed in when the
+    // GardenDrawingActivity determines if a new plant is being added
+    public void setNewPlantSpecies(String speciesName)
+    {
+        tempPlant = new Plant(0, 0, garden.getSpeciesInfo(speciesName));
+
+        // Temp hack to make sure that the plant can be seen while debugging new code
+        //if (tempPlant.s.color < 255 && tempPlant.s.color > 0) tempPlant.s.color = Color.GREEN;
+
+        // Set the new plant to 0,0 and retrieve its species from the garden interface
+        tempPlantCircle = plantToCircle(tempPlant);
+        Log.d("Garden View", "setNewPlantSpecies: size " + tempPlant.s.size + " color " + tempPlant.s.color + " green " + Color.GREEN + "\n");
+    }
+
+    // Sets the mode of the garden -- whether to add new plants or just view, etc
     public void setMode(GardenMode m)
     {
         mode = m;
@@ -139,8 +171,12 @@ public class GardenView extends SurfaceView {
     }
 
     /**
-     * Takes the center of the circle (x, y) and the generic size and
-     * produces the bounds of the circle with a radius scaled based on the screen size
+     * Takes the center of the circle (x, y) and the scaled size/radius and
+     * produces the bounds of the circle. Note -- I changed this function to receive
+     * the scaled radius instead of scaling the radius inside this function because
+     * the scaling only occurs when a new plant is created.
+     * When existing plants are being shifted around during scrolling to be consistent with the
+     * background, the radius is just half of the width of the existing bounds.
      * @param x
      * @param y
      * @param size
@@ -148,8 +184,7 @@ public class GardenView extends SurfaceView {
      */
     protected Rect positionToBounds(int x, int y, int size)
     {
-        int radius = (int)(size * getRadiusScaleFactor()); // scale the size
-        Rect bounds = new Rect(x - radius, y - radius, x + radius, y + radius); // make (x, y) the center, so offset by the radius
+        Rect bounds = new Rect(x - size, y - size, x + size, y + size); // make (x, y) the center, so offset by the radius
 
         return bounds;
     }
@@ -170,7 +205,7 @@ public class GardenView extends SurfaceView {
         // Set the proper bounds
         // (p.x, p.y) is the center
         // p.s.size is the species size (unscaled radius)
-        circle.setBounds(positionToBounds(p.x, p.y, p.s.size));
+        circle.setBounds(positionToBounds(p.x, p.y, (int)(p.s.size*getRadiusScaleFactor())));
 
         return circle;
     }
@@ -229,7 +264,8 @@ public class GardenView extends SurfaceView {
             // Only draw the temporary plant in ADD mode
             if (mode == GardenMode.ADD) {
                 // Draw the new plant
-                newPlant.draw(canvas);
+                tempPlantCircle.draw(canvas);
+                Log.d("Garden View", "onDraw: color" + tempPlantCircle.getPaint().getColor() + " x " + tempPlantCircle.getBounds().centerX() + " y " + tempPlantCircle.getBounds().centerY() + "\n");
             }
 
 
@@ -357,7 +393,8 @@ public class GardenView extends SurfaceView {
                     deltaY = y2 - y1;
 
                     // Determine if the person pressed on the circle
-                    collision = newPlant.getBounds().contains(x1, y1);
+                    //collision = tempPlantCircle.getBounds().contains(x1, y1);
+
 
                     // IF the person is not touching the circle and there is a positive delta,
                     // the person is trying to drag/scroll the background
@@ -370,12 +407,18 @@ public class GardenView extends SurfaceView {
                         background_y += deltaY;
 
                         // Move the circle if it is already been drawn
-                        if (addingPlant)
+                        if (mode == GardenMode.ADD)
                         {
-                            newPlant_x += deltaX;
-                            newPlant_y += deltaY;
+                            tempPlant.x += deltaX;
+                            tempPlant.y += deltaY;
                         }
 
+                        // Make sure that all the plants stay on the same place in the garden relative to the background
+                        for (ShapeDrawable circle : plantCircles)
+                        {
+
+                            circle.setBounds(positionToBounds(circle.getBounds().centerX() + deltaX, circle.getBounds().centerY() + deltaY, circle.getBounds().width()/2));
+                        }
 
                     }
                     // This would be the case when a plant is being selected to be moved
@@ -388,18 +431,20 @@ public class GardenView extends SurfaceView {
                     else
                     {
                         // consider as something else - a screen tap for example
-                        addingPlant = true;
-                        newPlant_x = (int)event.getX();
-                        newPlant_y = (int)event.getY();
+                        if (mode == GardenMode.ADD) {
+                            tempPlant.x = (int) event.getX();
+                            tempPlant.y = (int) event.getY();
+                        }
                     }
                     break;
                 }
             }
 
-            if (addingPlant) {
+            if (mode == GardenMode.ADD) {
 
                 // Set the bounds for the circle centered around where the user tapped
-                newPlant.setBounds(positionToBounds(newPlant_x, newPlant_y, newPlant_size));
+                tempPlantCircle.setBounds(positionToBounds(tempPlant.x, tempPlant.y, (int)(tempPlant.s.size*getRadiusScaleFactor())));
+                Log.d("Garden View", "onTap: x " + tempPlant.x + " y" + tempPlant.y + "\n");
             }
             return true;
         }
