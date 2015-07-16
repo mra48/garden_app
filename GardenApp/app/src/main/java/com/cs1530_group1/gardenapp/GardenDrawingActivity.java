@@ -1,5 +1,6 @@
 package com.cs1530_group1.gardenapp;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -42,7 +43,7 @@ public class GardenDrawingActivity extends ActionBarActivity {
         // Retrieve the species name of the plant being added if
         // this activity is being started from Add Plant
         speciesName = getIntent().getStringExtra(Intent.EXTRA_TEXT);
-        speciesName = "sunflower";
+        //speciesName = "sunflower";
         
         super.onCreate(savedInstanceState);
 

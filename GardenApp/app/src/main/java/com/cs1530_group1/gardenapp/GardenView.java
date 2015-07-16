@@ -41,12 +41,8 @@ public class GardenView extends SurfaceView {
     protected SurfaceHolder holder; // Need to register callbacks for the holder of this SurfaceView
 
     // A circle used for adding a new plant or moving an existing one
-    private ShapeDrawable tempPlantCircle = null;
-    private Plant tempPlant = null;
-
-    // Boolean to tell if the circle is being placed right now -- if true, then the circle should
-    // be drawn; otherwise, it should not be drawn
-    private boolean addingPlant = false;
+    protected ShapeDrawable tempPlantCircle = null;
+    protected Plant tempPlant = null;
 
     protected DrawingThread drawingThread; // The drawing thread
 
@@ -117,7 +113,7 @@ public class GardenView extends SurfaceView {
         mode = GardenMode.ADD;
 
         // Temp hack to make sure that the plant can be seen while debugging new code
-        if (tempPlant.s.color < 255 && tempPlant.s.color > 0) tempPlant.s.color = Color.GREEN;
+        //if (tempPlant.s.color < 255 && tempPlant.s.color > 0) tempPlant.s.color = Color.GREEN;
     }
 
     // ConfirmNewPlantLocation : add the plant to the plant list
@@ -144,15 +140,14 @@ public class GardenView extends SurfaceView {
         tempPlant = new Plant(0, 0, garden.getSpeciesInfo(speciesName));
 
         // Temp hack to make sure that the plant can be seen while debugging new code
-        if (tempPlant.s.color < 255 && tempPlant.s.color > 0) tempPlant.s.color = Color.GREEN;
+        //if (tempPlant.s.color < 255 && tempPlant.s.color > 0) tempPlant.s.color = Color.GREEN;
 
         // Set the new plant to 0,0 and retrieve its species from the garden interface
         tempPlantCircle = plantToCircle(tempPlant);
-        //tempPlantCircle = new ShapeDrawable(new OvalShape());
-        //tempPlantCircle.getPaint().setColor(Color.GREEN);
         Log.d("Garden View", "setNewPlantSpecies: size " + tempPlant.s.size + " color " + tempPlant.s.color + " green " + Color.GREEN + "\n");
     }
 
+    // Sets the mode of the garden -- whether to add new plants or just view, etc
     public void setMode(GardenMode m)
     {
         mode = m;
@@ -176,8 +171,12 @@ public class GardenView extends SurfaceView {
     }
 
     /**
-     * Takes the center of the circle (x, y) and the scaled size and
-     * produces the bounds of the circle with a radius
+     * Takes the center of the circle (x, y) and the scaled size/radius and
+     * produces the bounds of the circle. Note -- I changed this function to receive
+     * the scaled radius instead of scaling the radius inside this function because
+     * the scaling only occurs when a new plant is created.
+     * When existing plants are being shifted around during scrolling to be consistent with the
+     * background, the radius is just half of the width of the existing bounds.
      * @param x
      * @param y
      * @param size
