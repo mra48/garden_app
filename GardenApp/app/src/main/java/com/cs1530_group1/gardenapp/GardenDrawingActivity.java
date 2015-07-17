@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+import android.widget.TextView;
 
 /**
  * GardenDrawingActivity : the graphical front end for drawing plants on top of the
@@ -29,6 +30,7 @@ public class GardenDrawingActivity extends ActionBarActivity {
 
     GardenView gardenView; // The view that does all the drawing
     RelativeLayout buttonPanel; // The panel that holds all the buttons for adding,removing, cancelling, etc
+    TextView plantInfo;
 
     /**
      * onCreate : creates a new GardenView
@@ -53,6 +55,9 @@ public class GardenDrawingActivity extends ActionBarActivity {
         // Get the GardenView class instance and RelativeLayout button panel for modifications
         gardenView = (GardenView) findViewById(R.id.GardenView);
         buttonPanel = (RelativeLayout) findViewById(R.id.ButtonPanel);
+
+        // Get the plant info TextView upfront
+        plantInfo = (TextView) findViewById(R.id.PlantDescription);
 
 
         // If the speciesName is not null, then this activity is being passed in the species name
@@ -79,10 +84,18 @@ public class GardenDrawingActivity extends ActionBarActivity {
             // Set the species to be added
             gardenView.setNewPlantSpecies(speciesName);
 
+            // Set the plant info text to the species name
+            setPlantInfo(speciesName);
+
         } // Else: Set the mode to VIEW so that the temporary plant is not rendered
         else gardenView.setMode(GardenMode.VIEW);
     }
-    
+
+    // Set the string in the Plant Info TextView
+    public void setPlantInfo(String s)
+    {
+        plantInfo.setText(s);
+    }
 
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -169,11 +182,16 @@ public class GardenDrawingActivity extends ActionBarActivity {
         Toast.makeText(this, "Remove not yet implemented", Toast.LENGTH_SHORT).show();
     }
 
-    // Servies the View Species button on the panel of buttons -- the functionality has not yet
-    // been implemented
+    // Services the View Species button on the panel of buttons -- starts the ViewSpeciesInfoActivity
     public void viewSpeciesClicked(View view)
     {
-        Toast.makeText(this, "View Species not yet implemented", Toast.LENGTH_SHORT).show();
+        Log.v(LOG_TAG, "Starting SpeciesListActivity");
+        Intent intent = new Intent(this, ViewSpeciesInfoActivity.class);
+
+        // Pass in the name of the species
+        intent.putExtra(Intent.EXTRA_TEXT, speciesName);
+        
+        startActivity(intent);
     }
     
 
