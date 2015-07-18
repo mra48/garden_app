@@ -68,10 +68,11 @@ public class GardenViewTest extends ActivityTestCase {
         GardenView gv = new GardenView(getInstrumentation().getTargetContext(), new Garden());
         int color = Color.RED;
         int size = 50;
-        Species s = new Species("Tomato", "A plump red fruit", "Gracious sunbeams", "annual", new Date(2015, 5, 1), "06/01/2015", color, size);
+		int matTime = 100; //maturation time
+        Species s = new Species("Tomato", "A plump red fruit", "Gracious sunbeams", "annual", color, size, matTime);
         int x = 100;
         int y = 100;
-        Plant p = new Plant(x, y, s);
+        Plant p = new Plant(x, y, "05/01/2015", "06/01/2015", s);
         // positionToBounds() is already tested
         Rect correctBounds = gv.positionToBounds(x, y, size);
         ShapeDrawable circle = gv.plantToCircle(p);

@@ -18,7 +18,7 @@ public class GardenTest extends TestCase{
 
 	@SmallTest
 	public void testGetPlantList() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-2-23-43-tomato-12-33-sunflower";
+		String garden = "2|tomato|a tomato species|Annual|high|25|33|15|sunflower|a sunny flower|Perennial|low|32|12|10|2|23|43|02/24/1994|04/04/1994|tomato|12|33|01/23/1993|03/03/1993|sunflower";
 		Garden g = Garden.stringToGarden(garden);
 		
 		ArrayList<Plant> plantList = g.getPlantList();
@@ -27,16 +27,20 @@ public class GardenTest extends TestCase{
 		assertEquals(plantList.get(0).x, 23);
 		assertEquals(plantList.get(0).y, 43);
 		assertEquals(plantList.get(0).s.name, "tomato");
+		assertEquals(plantList.get(0).plantDate, "02/24/1994");
+		assertEquals(plantList.get(0).pruneDate, "04/04/1994");
 		
 		//make sure all the values of the second plant were set correctly and that getPlantList returns the correct plants
 		assertEquals(plantList.get(1).x, 12);
 		assertEquals(plantList.get(1).y, 33);
 		assertEquals(plantList.get(1).s.name, "sunflower");
+		assertEquals(plantList.get(1).plantDate, "01/23/1993");
+		assertEquals(plantList.get(1).pruneDate, "03/03/1993");
 	}
 	
 	@SmallTest
 	public void testGetSpeciesNames() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
+		String garden = "2|tomato|a tomato species|Annual|high|25|33|15|sunflower|a sunny flower|Perennial|low|32|12|10|1|23|43|01/23/1993|03/03/1993|tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		String names[] = g.getSpeciesNames();
@@ -48,7 +52,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testGetSpeciesInfo() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
+		String garden = "2|tomato|a tomato species|Annual|high|25|33|15|sunflower|a sunny flower|Perennial|low|32|12|10|1|23|43|01/23/1993|03/03/1993|tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		Species s = g.getSpeciesInfo("tomato");
@@ -60,7 +64,17 @@ public class GardenTest extends TestCase{
 		assertEquals(s.sun, "high");
 		assertEquals(s.color, 25);
 		assertEquals(s.size, 33);
-		assertEquals(s.pruneDate, "03/03/1993");
+		assertEquals(s.matTime, 15);
+		
+		s = g.getSpeciesInfo("sunflower");
+		//make sure correct values set for sunflower species in speciesList structure
+		assertEquals(s.name, "sunflower");
+		assertEquals(s.des, "a sunny flower");
+		assertEquals(s.type, "Perennial");
+		assertEquals(s.sun, "low");
+		assertEquals(s.color, 32);
+		assertEquals(s.size, 12);
+		assertEquals(s.matTime, 10);
 		
 		g.addSpecies("testspecies");
 		
@@ -77,16 +91,15 @@ public class GardenTest extends TestCase{
 		assertEquals(s.sun, null);
 		assertEquals(s.color, 0);
 		assertEquals(s.size, 0);
-		assertEquals(s.plantDate, null);
-		assertEquals(s.pruneDate, null);
+		assertEquals(s.matTime, 0);
 	}
 	
 	@SmallTest
 	public void testAddPlant() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
+		String garden = "2|tomato|a tomato species|Annual|high|25|33|15|sunflower|a sunny flower|Perennial|low|32|12|10|1|23|43|01/23/1993|03/03/1993|tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
-		boolean test = g.addPlant(34, 12, "sunflower");
+		boolean test = g.addPlant(34, 12, "03/03/1993", "03/18/1990", "sunflower");
 		
 		ArrayList<Plant> testList = g.getPlantList();
 		
@@ -95,11 +108,13 @@ public class GardenTest extends TestCase{
 		assertEquals(testList.get(1).x, 34);
 		assertEquals(testList.get(1).y, 12);
 		assertEquals(testList.get(1).s.name, "sunflower");
+		assertEquals(testList.get(1).plantDate, "03/03/1993");
+		assertEquals(testList.get(1).pruneDate, "03/18/1990");
 	}
 	
 	@SmallTest
 	public void testRemovePlant() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
+		String garden = "2|tomato|a tomato species|Annual|high|25|33|15|sunflower|a sunny flower|Perennial|low|32|12|10|1|23|43|01/23/1993|03/03/1993|tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		//remove a plant that does exist
@@ -115,7 +130,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testMovePlant() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
+		String garden = "2|tomato|a tomato species|Annual|high|25|33|15|sunflower|a sunny flower|Perennial|low|32|12|10|1|23|43|01/23/1993|03/03/1993|tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		boolean test = g.movePlant(23, 43, 24, 45);
@@ -128,7 +143,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testAddSpecies() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
+		String garden = "2|tomato|a tomato species|Annual|high|25|33|15|sunflower|a sunny flower|Perennial|low|32|12|10|1|23|43|01/23/1993|03/03/1993|tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		boolean test = g.addSpecies("blueflower");
@@ -143,7 +158,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testRemoveSpecies() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
+		String garden = "2|tomato|a tomato species|Annual|high|25|33|15|sunflower|a sunny flower|Perennial|low|32|12|10|1|23|43|01/23/1993|03/03/1993|tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		
@@ -162,7 +177,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testSets() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
+		String garden = "2|tomato|a tomato species|Annual|high|25|33|15|sunflower|a sunny flower|Perennial|low|32|12|10|1|23|43|01/23/1993|03/03/1993|tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		boolean test1 = g.addSpecies("blueflower");
@@ -171,18 +186,17 @@ public class GardenTest extends TestCase{
 		boolean test4 = g.setSize("blueflower", 20);
 		boolean test5 = g.setSpeciesType("blueflower", "Tree");
 		boolean test6 = g.setSunLevel("blueflower", "high");
-				
-		Calendar cal = Calendar.getInstance();
-		Date plantDate = cal.getTime();
+		boolean test7 = g.setPruneDate(23, 43, "03/01/1993");
+		boolean test8 = g.setPruneDate(23, 43, "12/12/1912");
 		
-		boolean test7 = g.setPlantDate("blueflower", plantDate);
-		boolean test8 = g.setPruneDate("blueflower", "01/01/1990");
-
 		boolean test9 = g.setColor("noflower", 25);
 		boolean test10 = g.setDescription("noflower", "A blue flower");
 		boolean test11 = g.setSize("noflower", 20);
 		boolean test12 = g.setSpeciesType("noflower", "Tree");
 		boolean test13 = g.setSunLevel("noflower", "high");
+		
+		boolean test14 = g.setMatTime("blueflower", 100);
+		boolean test15 = g.setMatTime("noflower", 100);
 		
 		//make sure that sets were successful because blueflower does exist
 		assertTrue(test1);
@@ -193,7 +207,7 @@ public class GardenTest extends TestCase{
 		assertTrue(test6);
 		assertTrue(test7);
 		assertTrue(test8);
-		
+		assertTrue(test14);
 		
 		//make sure that sets were unsucessful because noflower does not exist in the speciesList
 		assertFalse(test9);
@@ -201,31 +215,22 @@ public class GardenTest extends TestCase{
 		assertFalse(test11);
 		assertFalse(test12);
 		assertFalse(test13);
+		assertFalse(test15);
 	}	
 	
 	@SmallTest
 	public void testGets() {
-		String garden = "2-tomato-a tomato species-Annual-01/23/1993-03/03/1993-high-25-33-sunflower-a sunny flower-Perennial-02/21/1986-04/12/1980-low-32-12-1-23-43-tomato";
+		String garden = "2|tomato|a tomato species|Annual|high|25|33|15|sunflower|a sunny flower|Perennial|low|32|12|10|1|23|43|01/23/1993|03/03/1993|tomato";
 		Garden g = Garden.stringToGarden(garden);
 				
 		String type = g.getSpeciesType("tomato");
 		String sun = g.getSunLevel("tomato");
 		String des = g.getDescription("tomato");
-		String pruneDate = g.getPruneDate("tomato");
-		//Date getPlantDate = g.getPlantDate("tomato");
+		String pruneDate = g.getPruneDate(23, 43);
+		String plantDate = g.getPlantDate(23,43);
 		int color = g.getColor("tomato");
 		int size = g.getSize("tomato");
-		
-	  //set up calendar for plant date test
-      Calendar cal = Calendar.getInstance();
-      cal.set(Calendar.MONTH, 0);
-      cal.set(Calendar.DAY_OF_MONTH, 22);
-      cal.set(Calendar.YEAR, 1993);
-      cal.set(Calendar.HOUR, 23);
-      cal.set(Calendar.MINUTE, 25);
-      cal.set(Calendar.SECOND, 12);
-      
-      //Date plantDate = cal.getTime();
+		int matTime = g.getMatTime("tomato");
 		
 		// make sure correct values are set for the species
 		assertEquals(type,"Annual");
@@ -233,8 +238,9 @@ public class GardenTest extends TestCase{
 		assertEquals(des, "a tomato species");
 		assertEquals(color, 25);
 		assertEquals(size, 33);
+		assertEquals(matTime, 15);
 		assertEquals(pruneDate,  "03/03/1993");
-		//assertEquals(getPruneDate.getTime(),  pruneDate.getTime()); //this test passes most of the time, but sometimes the milliseconds dont line up
+		assertEquals(plantDate, "01/23/1993"); //this test passes most of the time, but sometimes the milliseconds dont line up
 		
 		g.addSpecies("newSpecies");
 		
@@ -244,16 +250,14 @@ public class GardenTest extends TestCase{
 		des = g.getDescription("newSpecies");
 		color = g.getColor("newSpecies");
 		size = g.getSize("newSpecies");
-		pruneDate = g.getPruneDate("newSpecies");
-		//plantDate = g.getPlantDate("newSpecies");
+		matTime = g.getMatTime("newSpecies");
 		
 		assertEquals(type, null);
 		assertEquals(sun, null);
 		assertEquals(des, null);
 		assertEquals(color, 0);
 		assertEquals(size, 0);
-		assertEquals(pruneDate, null);
-		//assertEquals(plantDate, null);
+		assertEquals(matTime, 0);
 		
 		//make sure that correct value returned when species does not exist
 		
@@ -261,17 +265,15 @@ public class GardenTest extends TestCase{
 		sun = g.getSunLevel("fakeSpecies");
 		des = g.getDescription("fakeSpecies");
 		color = g.getColor("fakeSpecies");
-		size = g.getSize("fakeSpecies");
-		pruneDate = g.getPruneDate("fakeSpecies");
-		//plantDate = g.getPlantDate("fakeSpecies");		
+		size = g.getSize("fakeSpecies");	
+		matTime = g.getMatTime("fakeSpecies");
 		
 		assertEquals(type, null);
 		assertEquals(sun, null);
 		assertEquals(des, null);
 		assertEquals(color, 0);
 		assertEquals(size, 0);
-		assertEquals(pruneDate, null);
-		//assertEquals(plantDate, null);
+		assertEquals(matTime, 0);
 		
 	}
 

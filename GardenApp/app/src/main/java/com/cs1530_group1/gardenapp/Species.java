@@ -17,10 +17,9 @@ public class Species {
     String des;
     String sun;
     String type;
-    Date plantDate;
-    String pruneDate;
     int color;
     int size;
+    int matTime; //maturation time
     
     /**
 		standard constructor to initialize values
@@ -35,16 +34,15 @@ public class Species {
 		@param size the radius of the species that determines where a Plant with this species can be placed	
 		
 	*/
-    public Species(String name, String des, String sun, String type, Date plantDate, String pruneDate, int color, int size)
+    public Species(String name, String des, String sun, String type, int color, int size, int matTime)
     {
         this.name = name;
         this.des = des;
         this.sun = sun;
         this.type = type;
-        this.plantDate = plantDate;
-        this.pruneDate = pruneDate;
         this.color = color;
         this.size = size;
+        this.matTime = matTime;
     }
     
     

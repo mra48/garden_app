@@ -36,9 +36,11 @@ public interface GardenInterface {
 		@param speciesName the name of the species that will be planted as a plant
 		@param x the desired x location of the plant
 		@param y the desired y location of the plant
+		@param plantDate the desired plant date of the plant
+		@param pruneDate the desired prune date of the plant
 		@return true if the plant was added successfully, false if the species does not exist in the list
 	*/		
-    boolean addPlant(int x, int y, String speciesName);
+    boolean addPlant(int x, int y, String plantDate, String pruneDate, String speciesName);
     /**
 		This function removes a plant from the garden
 		
@@ -81,22 +83,24 @@ public interface GardenInterface {
 	*/
     boolean setDescription(String speciesName, String des);
     boolean setSpeciesType(String speciesName,String speciesType);
-    boolean setPlantDate(String speciesName, Date plantDate);
-    boolean setPruneDate(String speciesName, String pruneDate);
+    boolean setPlantDate(int x, int y, String plantDate);
+    boolean setPruneDate(int x, int y, String pruneDate);
     boolean setSunLevel(String speciesName, String sunLevel);
     boolean setColor(String speciesName, int color);
     boolean setSize(String speciesName, int size);
+    boolean setMatTime(String speciesname, int matTime);
 
 	/**
 		getters for the species fields. The parameter is the species whose field you would like to get the value of
 	*/
     String getDescription(String speciesName);
     String getSpeciesType(String speciesName); //the species type will be 0 for annual, 1 for perennial, and 2 for tree
-    Date getPlantDate(String speciesName);
-    String getPruneDate(String speciesName);
+    String getPlantDate(int x, int y);
+    String getPruneDate(int x, int y);
     String getSunLevel(String speciesName);
     int getColor(String speciesName);
     int getSize(String speciesName);
+    int getMatTime(String speciesName);
     
     	
             

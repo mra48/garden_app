@@ -12,6 +12,8 @@ package com.cs1530_group1.gardenapp;
 public class Plant {
     
     int x, y; //the x and y coordinates of the plant
+    String plantDate; //the plantDate of the plant
+    String pruneDate; //the prune date of the plant
     Species s; //the associated species of the plant
 	
     /**
@@ -21,10 +23,12 @@ public class Plant {
 		@param x the x coordinate of the plant
 		@param y the y coordinate of the plant
 	*/
-    public Plant(int x, int y, Species s)
+    public Plant(int x, int y, String plantDate, String pruneDate, Species s)
     {
         this.x = x;
         this.y = y;
+        this.plantDate = plantDate;
+        this.pruneDate = pruneDate;
         this.s = s;
     }
     

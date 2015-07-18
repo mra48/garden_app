@@ -27,7 +27,7 @@ public class Garden implements GardenInterface{
         
     /**
 		This function converts a garden into a string format which can be parsed by users of this class
-		format for the string representation of the garden-> #species-speciesName-speciesDescription-speciesType (ex: 0 for annual, 1 for perennial, 2 for tree)-speciesPlantDate(using this format:MM/dd/yyyy)-speciesPruneDate(using this format:MM/dd/yyyy)-speciesSunLevel-speciesColor-speciesSize-data for next species-#plants-plantx-planty-plantSpecies-data for next plant		
+		format for the string representation of the garden|> #species|speciesName|speciesDescription|speciesType (ex: 0 for annual, 1 for perennial, 2 for tree)|speciesSunLevel|speciesColor|speciesSize|speciesMatTime|data for next species|#plants|plantx|planty|plantPlantDate(using this format:MM/dd/yyyy)|plantPruneDate(using this format:MM/dd/yyyy)|plantSpeciesName|data for next plant		
 		
 		@param g The garden that is converted to a string
 		@return The string representation of the garden
@@ -46,13 +46,11 @@ public class Garden implements GardenInterface{
             String des;
             String sun;
             String type;
-            String plantDate;
-            String pruneDate;
             String color;
             String size;
-            @SuppressLint("SimpleDateFormat") DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            String matTime;
 
-            garden = String.valueOf(numSpecies) + "-"; //the hyphen(-) will be used as a delimitter
+            garden = String.valueOf(numSpecies) + "|"; //the | will be used as a delimitter
             
 			//create string based on the fields of each species
             for (Species s : g.speciesList)
@@ -64,16 +62,16 @@ public class Garden implements GardenInterface{
                 
                 color = String.valueOf(s.color); 
                 size = String.valueOf(s.size);
-                
-                plantDate = df.format(s.plantDate);
-                pruneDate = s.pruneDate;
+                matTime = String.valueOf(s.matTime);
 
-                garden += name + "-" + des + "-" + type + "-" + plantDate + "-" + pruneDate + "-" + sun + "-" + color + "-" + size + "-";
+                garden += name + "|" + des + "|" + type + "|" + sun + "|" + color + "|" + size + "|" + matTime + "|";
             }
             
 			
             int numPlants = g.plantList.size();
             String x, y;
+            String plantDate;
+            String pruneDate;
             garden += String.valueOf(numPlants);
             
             //append to string based on fields of each plant
@@ -81,9 +79,11 @@ public class Garden implements GardenInterface{
             {
                 x = String.valueOf(p.x);
                 y = String.valueOf(p.y);
+                plantDate = p.plantDate;
+                pruneDate = p.pruneDate;
                 name = p.s.name;
                 
-                garden += "-" + x + "-" + y + "-" + name;
+                garden += "|" + x + "|" + y + "|" + plantDate + "|" + pruneDate + "|" + name;
             }
             
         }
@@ -93,7 +93,7 @@ public class Garden implements GardenInterface{
     
 	/**
 		This function converts a String into a Garden object
-		format for the string representation of the garden-> #species-speciesName-speciesDescription-speciesType (ex: 0 for annual, 1 for perennial, 2 for tree)-speciesPlantDate(using this format:MM/dd/yyyy)-speciesPruneDate(using this format:MM/dd/yyyy)-speciesSunLevel-speciesColor-speciesSize-data for next species-#plants-plantx-planty-plantSpecies-data for next plant		
+		format for the string representation of the garden-> #species|speciesName|speciesDescription|speciesType (ex: 0 for annual, 1 for perennial, 2 for tree)|speciesSunLevel|speciesColor|speciesSize|speciesMatTime|data for next species|#plants|plantx|planty|plantPlantDate(using this format:MM/dd/yyyy)|plantPruneDate(using this format:MM/dd/yyyy)|plantSpeciesName|data for next plant		
 		
 		@param g The string that is parsed and converted into a Garden
 		@return The Garden object
@@ -107,7 +107,7 @@ public class Garden implements GardenInterface{
 
         Garden newGarden = new Garden(); //the garden that will be returned
       
-      String parsedGarden[] = g.split("-"); //split the string on the hyphen (-) character
+      String parsedGarden[] = g.split("\\|"); //split the string on the vertical bar (|) character but use two slashes as escape sequence
       
       int i;
       int numSpecies = Integer.parseInt(parsedGarden[0]);
@@ -120,43 +120,28 @@ public class Garden implements GardenInterface{
         String type;
         int size;
         int color;
-        Date plantDate;
-        String pruneDate;
+        int matTime;
 		
 		//fields of a plant
         int x;
         int y;
-
-        //multiply by 5 and do i+= 5 because there are five items per species
-      for (i = 1; i < (numSpecies * 8); i+=8)
+        String plantDate;
+        String pruneDate;
+        
+        //multiply by 7 and do i+= 7 because there are five items per species
+      for (i = 1; i < (numSpecies * 7); i+=7)
       {
-		  
-		  
 		//parse the string and create values for species and add them to the species list
     	  
           name = parsedGarden[i];
           des= parsedGarden[i+1];
           type = parsedGarden[i+2];
-          sun = parsedGarden[i + 5];
-          color = Integer.parseInt(parsedGarden[i+6]);
-          size = Integer.parseInt(parsedGarden[i + 7]);
-          
-		  
-          String parsedDate[] = parsedGarden[i+3].split(" "); //parse plant date values
-          String parsedDay[] = parsedDate[0].split("/"); //parse month, day, year
-          
-		  //create calendar entry based on month, day, year, hour, minute, and second from parsed string for plant date
-          Calendar cal = Calendar.getInstance();
-          cal.set(Calendar.MONTH, Integer.parseInt(parsedDay[0])-1);
-          cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(parsedDay[1])-1);
-          cal.set(Calendar.YEAR, Integer.parseInt(parsedDay[2]));
-          
-          plantDate = cal.getTime(); //set plantDate Date object using created calendar object for plant date
-          
-          pruneDate = parsedGarden[i+4]; //set pruneDate string
-          
+          sun = parsedGarden[i + 3];
+          color = Integer.parseInt(parsedGarden[i+4]);
+          size = Integer.parseInt(parsedGarden[i + 5]);    
+          matTime = Integer.parseInt(parsedGarden[i+6]);
                     
-          Species newSpecies = new Species(name, des,sun,  type, plantDate, pruneDate, color, size);  //create species based on parsed string		
+          Species newSpecies = new Species(name, des,sun,  type, color, size, matTime);  //create species based on parsed string		
           newGarden.speciesList.add(newSpecies); //add new species to species list
       }
       
@@ -168,21 +153,23 @@ public class Garden implements GardenInterface{
       newGarden.plantList = new ArrayList<>(numPlants); //create arrayList of plants
       
       int j;
-      int counter = numPlants * 3 + i; //multiply by 3 and do i+= 3 because there are 3 fjields (x,y, species) per plant
+      int counter = numPlants * 5 + i; //multiply by 3 and do i+= 3 because there are 3 fields (x,y, species) per plant
       
-      for (; i < counter; i+= 3)
+      for (; i < counter; i+= 5)
       {
 		  //get the x, y, and species name for each plant
           x = Integer.parseInt(parsedGarden[i]);
           y = Integer.parseInt(parsedGarden[i+1]);
-          name = parsedGarden[i+2];
+          plantDate = parsedGarden[i+2];
+          pruneDate = parsedGarden[i+3];
+          name = parsedGarden[i+4];
           j = 0;
           
           while (true) //look for correct species in species list and break out when it is found
           {
               if (newGarden.speciesList.get(j).name.equalsIgnoreCase(name)) //the species is found
               {
-                  Plant newPlant = new Plant(x, y, newGarden.speciesList.get(j)); //create new plant
+                  Plant newPlant = new Plant(x, y, plantDate, pruneDate, newGarden.speciesList.get(j)); //create new plant
                   newGarden.plantList.add(newPlant); //add new plant to plant list
                   break;
               }
@@ -232,29 +219,13 @@ public class Garden implements GardenInterface{
     public Species getSpeciesInfo(String speciesName)
     {
     	Species newSpecies = null;
-		String pruneDate = null;
-		Date plantDate = null;
     	
 		//go through speciesList looking for the species with the name equal to the parameter
         for (Species s : speciesList)
         {
             if (s.name.equals(speciesName))
             {
-            	
-            	/*
-            	 * these checks are here to make sure that the newSpecies 
-            	 * object does not have a null pointer exception 
-            	 * concerning the plant date because in some instances, 
-            	 * these fields could be null (such as if the user creates a new species
-            	 *  without setting all of the fields such as prune date or plant date
-            	 * 
-            	 */
-            	if (s.plantDate != null)
-            	{
-            		plantDate = (Date) s.plantDate.clone();
-            	}
-            	
-            	newSpecies = new Species(s.name, s.des, s.sun, s.type, plantDate, s.pruneDate, s.color, s.size);
+            	newSpecies = new Species(s.name, s.des, s.sun, s.type, s.color, s.size, s.matTime);
             		
                 break;
             }
@@ -269,9 +240,11 @@ public class Garden implements GardenInterface{
 		@param speciesName the name of the species that will be planted as a plant
 		@param x the desired x location of the plant
 		@param y the desired y location of the plant
+		@param plantDate the desired plant date of the plant
+		@param pruneDate the desired prune date of the plant
 		@return true if the plant was added successfully, false if the species does not exist in the list
 	*/				
-    public boolean addPlant(int x, int y, String speciesName)
+    public boolean addPlant(int x, int y, String plantDate, String pruneDate,  String speciesName)
     {
 		//look through species list to make sure that the parameter speciesName is actually in the list of species before adding a plant with that species name
         for(Species s: speciesList)
@@ -280,7 +253,7 @@ public class Garden implements GardenInterface{
             if (s.name.equals(speciesName))
             {
 				//create a new plant and add it to the list
-                Plant newPlant = new Plant(x, y, s);
+                Plant newPlant = new Plant(x, y, plantDate, pruneDate, s);
                 plantList.add(newPlant);
                 return true; //return true for a successful add
             }
@@ -350,7 +323,7 @@ public class Garden implements GardenInterface{
     public boolean addSpecies(String speciesName)
     {
 		//create a new species with default values and let user set them using set methods
-        Species newSpecies = new Species(speciesName, null, null, null, null, null, 0, 0);
+        Species newSpecies = new Species(speciesName, null, null, null, 0, 0, 0);
         speciesList.add(newSpecies); //add new species to list
         
         return true; //return true for successful add of species
@@ -407,7 +380,7 @@ public class Garden implements GardenInterface{
 		This function returns a species object based on its name
 		
 		@param speciesName the name of the species whose object is desired
-		@return a copy of the species object
+		@return a reference to the species object
 	*/				
     private Species getSpecies(String speciesName)
     {
@@ -422,7 +395,7 @@ public class Garden implements GardenInterface{
             }
         }
         
-        return null; //return null if no species found, and a copy of the species object if it is found
+        return null; //return null if no species found, and a reference to the species object if it is found
     }
     
 	/**
@@ -469,50 +442,76 @@ public class Garden implements GardenInterface{
         return false; //return false if the species wasnt found
     }
     
-	/**
-		This function sets the plantDate value for a species
+    
+    /**
+		This function returns a plant object based on its name
 		
-		@param speciesName the name of the species whose plantDate is being set
-		@param plantDate the desired type
-		@return true if the species plantDate was set, false if the species is not in the speciesList
-	*/					
-    public boolean setPlantDate(String speciesName, Date plantDate)
+		@param x the x coordinate of the plant whose object is desired
+		@param y the y coordinate of the plant whose object is desired
+		@return a reference of the plant object
+	*/				
+    private Plant getPlant(int x, int y)
     {
-		//get the species and make sure it exists in the list
-    	Species s = getSpecies(speciesName);
+		
+		//go through plantList looking for the plant with the same x and y fields as the parameters passed in
+        for (Plant p : plantList)
+        {
+            if (p.x == x && p.y == y)
+            {
+            	return p; //dont return clone because this is private method
+            }
+        }
+        
+        return null; //return null if no plant found
+    }    
+    
+    
+	/**
+		This function sets the plantDate value for a plant
+		
+		@param plantDate the desired plantDate for the plant
+		@param x the x coordinate of the plant whose plantDate should be modified
+		@param y the y coordinate of the plant whose plantDate should be modified
+		@return true if the plant plantDate was set, false if the plant is not in the plantList
+	*/					
+    public boolean setPlantDate(int x, int y, String plantDate)
+    {
+		//get the plant and make sure it exists in the list
+    	Plant p = getPlant(x, y);
     	
 		//if s exists
-    	if (s != null)
+    	if (p != null)
     	{
-        	s.plantDate = plantDate; //set the plant date
+        	p.plantDate = plantDate; //set the plant date
         	return true;
     	}
 
     	
-        return false; //return false if the species wasnt found
+        return false; //return false if the plant wasnt found
     }
     
 	/**
-		This function sets the pruneDate value for a species
-		
-		@param speciesName the name of the species whose pruneDate is being set
-		@param pruneDate the desired pruneDate
-		@return true if the species pruneDate was set, false if the species is not in the speciesList
-	*/					
-    public boolean setPruneDate(String speciesName, String pruneDate)
+	This function sets the pruneDate value for a plant
+	
+	@param plantDate the desired pruneDate for the plant
+	@param x the x coordinate of the plant whose pruneDate should be modified
+	@param y the y coordinate of the plant whose pruneDate should be modified
+	@return true if the plant pruneDate was set, false if the plant is not in the plantList
+*/						
+    public boolean setPruneDate(int x, int y, String pruneDate)
     {
-		//get the species and make sure it exists in the list
-    	Species s = getSpecies(speciesName);
+		//get the plant and make sure it exists in the list
+    	Plant p = getPlant(x, y);
     	
 		//if s exists
-    	if (s != null)
+    	if (p != null)
     	{
-        	s.pruneDate = pruneDate; //set the prune date
+        	p.pruneDate = pruneDate; //set the prune date
         	return true;
     	}
 
     	
-        return false; //return false if the species wasnt found
+        return false; //return false if the plant wasnt found
     }
     
 	/**
@@ -583,6 +582,30 @@ public class Garden implements GardenInterface{
     	
         return false; //return false if the species wasnt found
     }
+    
+	/**
+	This function sets the matTime(maturation time) value for a species
+	
+	@param speciesName the name of the species whose size is being set
+	@param matTime the desired matTime
+	@return true if the species matTime was set, false if the species is not in the speciesList
+*/					
+	public boolean setMatTime(String speciesName, int matTime)
+	{
+		//get the species and make sure it exists in the list
+		Species s = getSpecies(speciesName);
+		
+		//if s exists
+		if (s != null)
+		{
+	    	s.matTime = matTime; //set the size
+	    	return true;
+		}
+	
+		
+	    return false; //return false if the species wasnt found
+	}
+    
   
     public String getDescription(String speciesName)
     {
@@ -613,46 +636,45 @@ public class Garden implements GardenInterface{
     }
   
   	/**
-		This function gets the plantDate value for a species
+		This function gets the plantDate value for a plant
 		
-		@param speciesName the name of the species whose plantDate is desired
-		@return a clone of the plantDate of the species
+		@param x the x coordinate of the plant whose plantDate is desired
+		@param y the y coordinate of the plant whose plantDate is desired
+		@return the plantDate
 	*/				
-    public Date getPlantDate(String speciesName)
+    public String getPlantDate(int x, int y)
     {
-		//get the species and make sure it exists in the list
-    	Species s = getSpecies(speciesName);
+		//get the plant and make sure it exists in the list
+    	Plant p = getPlant(x, y);
     	
-		//if s exists
-    	if (s != null)
+		//if p exists
+    	if (p != null)
     	{
-    		if (s.plantDate != null)
-    		{
-            	return (Date) s.plantDate.clone(); //return a clone of the plant date    			
-    		}
+            	return p.plantDate;  			
     	}
     	
-        return null; //return null if the species wasnt found
+        return null; //return null if the plant wasnt found
     }
     
   	/**
-		This function gets the pruneDate value for a species
+		This function gets the pruneDate value for a plant
 		
-		@param speciesName the name of the species whose pruneDate is desired
-		@return a clone of the pruneDate of the species
-	*/					
-    public String getPruneDate(String speciesName)
+		@param x the x coordinate of the plant whose pruneDate is desired
+		@param y the y coordinate of the plant whose pruneDate is desired
+		@return the pruneDate
+	*/				
+    public String getPruneDate(int x, int y)
     {
-		//get the species and make sure it exists in the list
-    	Species s = getSpecies(speciesName);
+		//get the plant and make sure it exists in the list
+    	Plant p = getPlant(x, y);
     	
-		//if s exists
-    	if (s != null)
+		//if p exists
+    	if (p != null)
     	{
-    		return s.pruneDate;
+            	return p.pruneDate;  			
     	}
     	
-        return null; //return null if the species wasnt found
+        return null; //return null if the plant wasnt found
     }
     
   	/**
@@ -714,4 +736,25 @@ public class Garden implements GardenInterface{
     	
         return 0; //return 0 if the species wasnt found
     }  
+    
+  	/**
+		This function gets the matTime value for a species
+		
+		@param speciesName the name of the species whose matTime is desired
+		@return the matTime of the species
+	*/			
+    public int getMatTime(String speciesName)
+    {
+		//get the species and make sure it exists in the list
+    	Species s = getSpecies(speciesName);
+    	
+		//if s exists
+    	if (s != null)
+    	{
+        	return s.matTime; //return the matTime
+    	}
+    	
+        return 0; //return 0 if the species wasnt found
+    }  
+    
 }
