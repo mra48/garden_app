@@ -52,7 +52,7 @@ public class GardenTest extends TestCase{
 	
 	@SmallTest
 	public void testGetSpeciesInfo() {
-		String garden = "2|tomato|a tomato species|Annual|high|25|33|15|sunflower|a sunny flower|Perennial|low|32|12|10|1|23|43|01/23/1993|03/03/1993|tomato";
+		String garden = "3|tomato|a tomato species|Annual|high|-318163969|33|15|sunflower|a sunny flower|Perennial|low|-305001985|12|10|wildflower|a wild flower|Annual|mid|-1511192065|25|14|1|23|43|01/23/1993|03/03/1993|tomato";
 		Garden g = Garden.stringToGarden(garden);
 		
 		Species s = g.getSpeciesInfo("tomato");
@@ -62,7 +62,7 @@ public class GardenTest extends TestCase{
 		assertEquals(s.des, "a tomato species");
 		assertEquals(s.type, "Annual");
 		assertEquals(s.sun, "high");
-		assertEquals(s.color, 25);
+		assertEquals(s.color, -318163969); //red color
 		assertEquals(s.size, 33);
 		assertEquals(s.matTime, 15);
 		
@@ -72,9 +72,20 @@ public class GardenTest extends TestCase{
 		assertEquals(s.des, "a sunny flower");
 		assertEquals(s.type, "Perennial");
 		assertEquals(s.sun, "low");
-		assertEquals(s.color, 32);
+		assertEquals(s.color, -305001985); //yellow color
 		assertEquals(s.size, 12);
 		assertEquals(s.matTime, 10);
+		
+		s = g.getSpeciesInfo("wildflower");
+		//make sure correct values set for wildflower species in speciesList structure
+		assertEquals(s.name, "wildflower");
+		assertEquals(s.des, "a wild flower");
+		assertEquals(s.type, "Annual");
+		assertEquals(s.sun, "mid");
+		assertEquals(s.color, -1511192065); //green color
+		assertEquals(s.size, 25);
+		assertEquals(s.matTime, 14);		
+		
 		
 		g.addSpecies("testspecies");
 		
